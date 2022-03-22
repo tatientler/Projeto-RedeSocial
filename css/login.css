@@ -66,6 +66,10 @@ button:focus {
 	outline: none;
 }
 
+button:hover{
+	cursor: pointer;
+}
+
 button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
