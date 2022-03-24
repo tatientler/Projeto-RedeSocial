@@ -231,6 +231,10 @@ input {
 	width: 40px;
 }
 
+.mobile{
+	opacity: 0;
+}
+
 footer {
     background-color: #222;
     color: #fff;
@@ -245,4 +249,28 @@ footer {
 
 footer p {
     margin: 10px 0;
+}
+
+@media screen and (max-width: 480px){
+	body{
+		padding: 20px;
+	}
+
+	.formulario-container {
+		position: absolute;
+        width: 100%
+    }
+
+	.mobile{
+		opacity: 100%;
+	}
+
+	.mobile > a:active{
+		font-weight: 800;
+		text-decoration: underline;
+	}
+	
+	.overlay-container {
+        display: none;
+    }
 }
