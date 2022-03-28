@@ -131,6 +131,10 @@ section:first-child {
     cursor: pointer;
     width: 50%;
     background-color: #231773;
+}
+
+.btn-exit a{
+    text-decoration: none;
     color: #fefefe;
 }
 
