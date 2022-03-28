@@ -62,7 +62,7 @@ header div input {
 
 section:first-child {
     width: 20%;
-    height: 100%;
+    height: calc(100vh - 105px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +71,6 @@ section:first-child {
     background-color: #ebedf2;
     border-start-end-radius: 10px;
     border-end-end-radius: 10px;
-    
 }
 
 .secUser img {
@@ -146,14 +145,17 @@ section:first-child {
 main {
     display: flex;
     height: 100%;
+    overflow: hidden;
 }
 
 .secPosts {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 1%;
     gap: 20px;
+    overflow-y: scroll;
 
 }
 
