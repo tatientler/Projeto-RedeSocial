@@ -47,9 +47,9 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #955DFF;
-	background-color: #955DFF;
-	color: #FFFFFF;
+	border: 1px solid #6e30f2;
+	background-color: #6e30f2;
+	color: #fefefe;
 	font-size: 12px;
 	font-weight: bold;
 	padding: 12px 45px;
@@ -72,11 +72,16 @@ button:hover{
 
 button.ghost {
 	background-color: transparent;
-	border-color: #FFFFFF;
+	border-color: #fefefe;
+}
+
+.entrar a{
+	text-decoration: none;
+	color: #fefefe;
 }
 
 form {
-	background-color: #FFFFFF;
+	background-color: #fefefe;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,7 +92,7 @@ form {
 }
 
 input {
-	background-color: #eee;
+	background-color: #ebedf2;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
@@ -95,7 +100,7 @@ input {
 }
 
 .container {
-	background-color: #fff;
+	background-color: #fefefe;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
@@ -165,9 +170,9 @@ input {
 }
 
 .overlay {
-	background: #6FAAFF;
-	background: -webkit-linear-gradient(to right, #6FAAFF, #6FAAFF);
-	background: linear-gradient(to right, #955DFF, #6FAAFF);
+	background: #acb0f2;
+	background: -webkit-linear-gradient(to right, #acb0f2, #acb0f2);
+	background: linear-gradient(to right, #6e30f2, #acb0f2);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
