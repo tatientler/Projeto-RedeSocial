@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>feed</title>
-    <link rel="stylesheet" href="./css/feed.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="./css/feed.css">
+    
 </head>
 <body>
     <header>
@@ -34,7 +34,7 @@
                 <button class="btnUser">Market</button>
                 <button class="btnUser">Eventos</button>
             </div>
-                <button class="btn-exit"><a href="index.html">Sair</a></button>
+            <button class="btn-exit"><a href="index.html">Sair</a></button>
         </section>
 
         <section class="secPosts">
@@ -48,9 +48,9 @@
                        - Isaac Newton</p>
                 </div>
                 <div class="interacoes">
-                    <button class="btnInt">Reagir</button>
-                    <button class="btnInt">Comentar</button>
-                    <button class="btnInt">Compartilhar</button>
+                    <button class="btnInt"><i class="material-icons">thumb_up</i>Reagir</button>
+                    <button class="btnInt"><i class="material-icons">comment</i>Comentar</button>
+                    <button class="btnInt"><i class="material-icons">send</i>Compartilhar</button>
                 </div>
             </div>
 
@@ -65,9 +65,9 @@
                     - Albert Einstein</p>
                 </div>
                 <div class="interacoes">
-                    <button class="btnInt">Reagir</button>
-                    <button class="btnInt">Comentar</button>
-                    <button class="btnInt">Compartilhar</button>
+                    <button class="btnInt"><i class="material-icons">thumb_up</i>Reagir</button>
+                    <button class="btnInt"><i class="material-icons">comment</i>Comentar</button>
+                    <button class="btnInt"><i class="material-icons">send</i>Compartilhar</button>
                 </div>
             </div>
 
@@ -83,9 +83,9 @@
                     <code></code>
                 </div>
                 <div class="interacoes">
-                    <button class="btnInt">Reagir</button>
-                    <button class="btnInt">Comentar</button>
-                    <button class="btnInt">Compartilhar</button>
+                    <button class="btnInt"><i class="material-icons">thumb_up</i>Reagir</button>
+                    <button class="btnInt"><i class="material-icons">comment</i>Comentar</button>
+                    <button class="btnInt"><i class="material-icons">send</i>Compartilhar</button>
                 </div>
             </div>
 
@@ -100,55 +100,81 @@
                     Segue o link do meu projeto: https://github.com/johndoejunior/projeto-pessoal</p>
                 </div>
                 <div class="interacoes">
-                    <button class="btnInt">Reagir</button>
-                    <button class="btnInt">Comentar</button>
-                    <button class="btnInt">Compartilhar</button>
+                    <button class="btnInt"><i class="material-icons">thumb_up</i>Reagir</button>
+                    <button class="btnInt"><i class="material-icons">comment</i>Comentar</button>
+                    <button class="btnInt"><i class="material-icons">send</i>Compartilhar</button>
                 </div>
             </div>
         </section>
 
         <div class="chat">
-            <h2>Mensagens</h2>
+            <h2>Mensagens <i class="material-icons msg-icone">keyboard_arrow_down</i></h2>
             <div class="container">
-                <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
+                <div class="msg">
+                    <img class="msg-img" src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Oi. Como você está?</p>
+                    <span class="time-right">11:00</span>
+                </div>
+                
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Hey! Eu estou bem. Obrigada por perguntar!</p>
+                    <span class="time-left">11:01</span>
+                </div>
+                
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Legal! Então, o que você quer fazer hoje?</p>
+                    <span class="time-right">11:02</span>
+                </div>
+                
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Ah, não sei. Jogar futebol.. ou talvez aprender mais sobre códigos?</p>
+                    <span class="time-left">11:05</span>
+                </div>
+
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Huumm.. pode ser. Qual linguagem você gostaria de aprender?</p>
+                    <span class="time-right">11:07</span>
+                </div>
+                
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Por enquanto estou na parte de web.. acho que JS seria melhor!</p>
+                    <span class="time-left">11:10</span>
+                </div>
+                
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Combinado. Nos vemos mais tarde!</p>
+                    <span class="time-right">11:13</span>
+                </div>
+
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Perfeito!</p>
+                    <span class="time-left">11:15</span>
+                </div>
+
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Aproveita e vai dando uma olhada nesses links: https://developer.mozilla.org/en-US/docs/Web/JavaScript<br>https://www.w3schools.com/js/</p>
+                    <span class="time-right">11:18</span>
+                </div>
+
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Adorei.. vai me ajudar muito!</p>
+                    <span class="time-left">11:20</span>
+                </div>
+
+                <div class="mensagem">
+                    <input type="text" name="mensagem" id="mensagem" placeholder="Escreva aqui a sua mensagem...">
+                    <button type="submit"><i class="material-icons envio-icone">send</i></button>
+                </div>
             </div>
-            
-            <div class="container darker">
-                <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
-            </div>
-            
-            <div class="container">
-                <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                <p>Sweet! So, what do you wanna do today?</p>
-                <span class="time-right">11:02</span>
-            </div>
-            
-            <div class="container darker">
-                <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-                <span class="time-left">11:05</span>
-            </div>
-            <div class="container">
-                <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-            </div>
-            
-            <div class="container darker">
-                <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
-            </div>
-            
-            <div class="container">
-                <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-            </div> 
         </div>
     </main>
     

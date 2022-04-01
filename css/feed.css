@@ -229,9 +229,17 @@ main {
     border-radius: 100px;
     background-color: #6e30f2;
     color: white;
-    min-width: 110px;
+    min-width: 150px;
     cursor: pointer;
     margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.material-icons{
+    font-size: 16px;
+    padding-right: 10px;
 }
 
 .btnInt:hover{
@@ -269,32 +277,39 @@ button:active {
 .chat{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 5px;
 }
 
-.container {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
+.container{
+    overflow-y: auto;
+    background-color: #ebedf2;
+    padding: 8px;
+}
+
+.msg{
+    border: 2px solid #6e30f2;
+    background-color: #fefefe;
     border-radius: 5px;
+    color: #000;
     padding: 10px;
     margin: 10px 0;
   }
   
   /* Darker chat container */
-  .darker {
-    border-color: #ccc;
-    background-color: #ddd;
+  .friend {
+    border-color: #231773;
+    background-color: #fefefe;
   }
   
   /* Clear floats */
-  .container::after {
+  .msg::after {
     content: "";
     clear: both;
     display: table;
   }
   
   /* Style images */
-  .container img {
+  .msg img {
     float: left;
     max-width: 60px;
     width: 100%;
@@ -303,7 +318,7 @@ button:active {
   }
   
   /* Style the right image */
-  .container img.right {
+  .msg img.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
@@ -319,4 +334,31 @@ button:active {
   .time-left {
     float: left;
     color: #999;
+  }
+
+  .msg-icone{
+      font-size: 24px;
+  }
+
+  .mensagem input{
+      border: 2px solid #6e30f2;
+      border-radius: 5px;
+      outline: none;
+      padding: 20px 40px;
+      background-color: #acb0f2;
+      color: #fefefe;
+      width: 80%;
+      font-size: 16px;
+      font-weight: 400;
+  }
+
+  .mensagem button{
+    border: 2px solid #6e30f2;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .envio-icone{
+      font-size: 24px;
+      color: #6e30f2;
   }
