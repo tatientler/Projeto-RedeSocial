@@ -44,6 +44,10 @@ header div input {
     height: 70px;
 }
 
+.btnLink{
+    position: relative;
+}
+
 .btnHeader {
     border: none;
     height: 30px;
@@ -52,12 +56,23 @@ header div input {
     background-color: #fefefe;
     color: #231773;
     font-weight: bold;
+    
 }
 
 .btnHeader:hover{
     background-color: #231773;
     color: #fefefe;
     cursor: pointer;
+}
+
+.qtdNotificacao{
+    position: absolute;
+    top: -10px;
+    right: -20px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fefefe;
 }
 
 section:first-child {
@@ -146,6 +161,7 @@ main {
     display: flex;
     height: 100%;
     overflow: hidden;
+    margin: auto;
 }
 
 .secPosts {
@@ -213,9 +229,16 @@ main {
     border-radius: 100px;
     background-color: #6e30f2;
     color: white;
-    min-width: 100px;
+    min-width: 110px;
     cursor: pointer;
     margin: 3px;
+}
+
+.btnInt:hover{
+    border: 2px solid #6e30f2;
+    background-color: #ebedf2;
+    color: #6e30f2;
+    font-weight: bold;
 }
 
 button {
@@ -241,3 +264,59 @@ button:active {
     box-shadow: inset 2px 2px 5px 0 rgba(#ebedf2, 0.5);
     border-radius: 100px;
 }
+
+/* Chat containers */
+.chat{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  /* Darker chat container */
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+  
+  /* Clear floats */
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Style images */
+  .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  /* Style the right image */
+  .container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  /* Style time text */
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+  
+  /* Style time text */
+  .time-left {
+    float: left;
+    color: #999;
+  }
