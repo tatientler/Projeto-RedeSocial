@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+/* Escopo global */
 * {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -13,6 +14,7 @@ body {
     flex-direction: column;
 }
 
+/* Cabeçalho / Navbar */
 header {
     display: flex;
     justify-content: space-between;
@@ -34,10 +36,11 @@ header div {
     padding-right: 2%;
 }
 
-header div input {
+.barra-pesquisar {
     text-align: center;
-    border: none;
-    border-radius: 100px
+    border: 2px solid #6e30f2;
+    border-radius: 100px;
+    outline: none;
 }
 
 .logo{
@@ -50,13 +53,12 @@ header div input {
 
 .btnHeader {
     border: none;
-    height: 30px;
+    height: 35px;
     min-width: 100px;
     border-radius: 100px;
     background-color: #fefefe;
     color: #231773;
     font-weight: bold;
-    
 }
 
 .btnHeader:hover{
@@ -237,7 +239,7 @@ main {
     justify-content: center;
 }
 
-.material-icons{
+.icone-interacoes{
     font-size: 16px;
     padding-right: 10px;
 }
@@ -296,69 +298,77 @@ button:active {
   }
   
   /* Darker chat container */
-  .friend {
+.friend {
     border-color: #231773;
     background-color: #fefefe;
-  }
+}
   
   /* Clear floats */
-  .msg::after {
+.msg::after {
     content: "";
     clear: both;
     display: table;
-  }
+}
   
   /* Style images */
-  .msg img {
+.msg img {
     float: left;
     max-width: 60px;
     width: 100%;
     margin-right: 20px;
     border-radius: 50%;
-  }
+}
   
   /* Style the right image */
-  .msg img.right {
+.msg img.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
-  }
+}
   
   /* Style time text */
-  .time-right {
+.time-right {
     float: right;
     color: #aaa;
-  }
+}
   
   /* Style time text */
-  .time-left {
+.time-left {
     float: left;
     color: #999;
-  }
+}
 
-  .msg-icone{
-      font-size: 24px;
-  }
+.msg-icone{
+    font-size: 24px;
+}
 
-  .mensagem input{
-      border: 2px solid #6e30f2;
-      border-radius: 5px;
-      outline: none;
-      padding: 20px 40px;
-      background-color: #acb0f2;
-      color: #fefefe;
-      width: 80%;
-      font-size: 16px;
-      font-weight: 400;
-  }
+.mensagem{
+    display: flex;
+}
 
-  .mensagem button{
+.mensagem input{
     border: 2px solid #6e30f2;
     border-radius: 5px;
-    padding: 5px;
-  }
+    outline: none;
+    padding: 20px 40px;
+    background-color: #acb0f2;
+    color: #fefefe;
+    width: 90%;
+    font-size: 16px;
+    font-weight: 400;
+}
 
-  .envio-icone{
-      font-size: 24px;
-      color: #6e30f2;
-  }
+.mensagem button{
+    border: none;
+    width: 10%;
+}
+
+.envio-icone{
+    font-size: 30px;
+    color: #6e30f2;
+    cursor: pointer;
+}
+
+.envio-icone:hover, .envio-icone:active{
+    color: #231773;
+}
