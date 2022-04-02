@@ -37,9 +37,18 @@ header div {
 }
 
 .barra-pesquisar {
-    text-align: center;
+    background-color: #fefefe;
     border: 2px solid #6e30f2;
     border-radius: 100px;
+    
+}
+
+.search{
+    padding: 5px;
+}
+
+.pesquisar{
+    border: none;
     outline: none;
 }
 
@@ -230,7 +239,7 @@ main {
     height: 30px;
     border-radius: 100px;
     background-color: #6e30f2;
-    color: white;
+    color: #fefefe;
     min-width: 150px;
     cursor: pointer;
     margin: 3px;
@@ -277,9 +286,35 @@ button:active {
 
 /* Chat containers */
 .chat{
+    border: 2px solid #313131be;
+    border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: column;
     margin: 5px;
+    height: 100%;
+}
+
+.chatBox{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #313131be;
+    border-radius: 5px 5px 0 0;
+}
+
+.chat-titulo{
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.btnChat{
+    border: none;
+    border-radius: 10px;
+    background-color: #fefefe;
+    cursor: pointer;
+}
+
+.msg-icone{
+    padding-right: 10px;
 }
 
 .container{
@@ -329,13 +364,13 @@ button:active {
   /* Style time text */
 .time-right {
     float: right;
-    color: #aaa;
+    color: #6e30f2;
 }
   
   /* Style time text */
 .time-left {
     float: left;
-    color: #999;
+    color: #231773;
 }
 
 .msg-icone{
