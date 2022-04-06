@@ -85,7 +85,8 @@
                 <div class="contentPost2">
                     <p>Seguimos em mais um dia normal na vida de dev...
                     <br>
-                    <img src="imagens/tela_codigo.png" alt=""></p>
+                    </p>
+                    <img src="imagens/tela_codigo.png" alt="">
                 </div>
 
                 <div class="interacoes">
@@ -116,11 +117,11 @@
         </section>
 
         <div class="chat">
-            <div class="chatBox">
+            <div class="chatBox" data-anime-chat="topchat">
                 <h2 class="chat-titulo">Mensagens</h2>
-                <button class="btnChat"><i class="material-icons msg-icone">keyboard_arrow_down</i></button>
+                <button class="btnChat"><i id="btnChat" class="material-icons msg-icone">keyboard_arrow_down</i></button>
             </div>
-            <div class="container">                   
+            <div class="container" data-anime-chat="top">                   
                 <div class="msg">
                     <img class="msg-img" src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
                     <p>Oi. Como você está?</p>
@@ -190,7 +191,7 @@
     </main>
     
 
-    <script src="feed.js"></script>
+    <script src="./js/feed.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 
