@@ -192,7 +192,7 @@ main {
     height: auto;
     border: 2px solid #6e30f2;
     border-radius: 10px;
-    padding: 1%
+    padding: 1%;
 }
 
 .contentPost1, .contentPost2 {
@@ -208,7 +208,11 @@ main {
 
 .contentPost2 img {
     width: 100%;
-    padding-right:2rem ;
+}
+
+.contentPost1, .contentPost2 {
+    padding-right: 3.5rem ;
+
 }
 
 .author {
@@ -299,16 +303,10 @@ button:active {
 }
 
 [data-anime-chat="top"] {
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 96%, 0);
 }
 
 [data-anime-chat] {
-    transition: .5s;
-}
-
-[data-anime-chat="topchat"] {
-    position: relative;
-    top: 95%;
     transition: .5s;
 }
 
