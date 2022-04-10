@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Cabeçalho / Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    background-image: linear-gradient(to right, #231773 10%, #acb0f2 90%);
+    align-items: center;
+}
+
+header div {
+    display: flex;
+    gap: 30px;
+    padding-right: 2%;
+}
+
+.barra-pesquisar {
+    background-color: #fefefe;
+    border: 2px solid #6e30f2;
+    border-radius: 100px;  
+}
+
+.search{
+    padding: 5px;
+}
+
+.pesquisar{
+    border: none;
+    outline: none;
+}
+
+.logo{
+    height: 70px;
+}
+
+.btnLink{
+    position: relative;
+}
+
+.btnHeader {
+    border: none;
+    height: 35px;
+    min-width: 100px;
+    border-radius: 100px;
+    background-color: #fefefe;
+    color: #231773;
+    font-weight: bold;
+}
+
+.btnHeader:hover{
+    background-color: #231773;
+    color: #fefefe;
+    cursor: pointer;
+}
+
+.qtdNotificacao{
+    position: absolute;
+    top: -10px;
+    right: -20px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fefefe;
+}

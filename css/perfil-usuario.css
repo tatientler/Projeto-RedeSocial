@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Perfil do usuário ativo */
+section:first-child {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1% 0;
+    justify-content: space-between;
+    background-color: #ebedf2;
+    border-start-end-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+.secUser img {
+    width: 40%;
+    border-radius: 100%;
+    border: 2px solid #6e30f2;
+    padding: 1%;
+
+}
+
+.secUser p {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
+    font-weight: 510;
+    color: #231773;
+}
+
+.btnsUser {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btnUser {
+    border: none;
+    height: 40px;
+    border-radius: 100px;
+    cursor: pointer;
+    width: 55%;
+    background-color: #231773;
+    color: #fefefe;
+}
+
+.btnUser:hover{
+    background-color: #6e30f2;
+}
+
+.secUser div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secUser div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40%;
+}
+
+.btn-exit {
+    width: 30%;
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    width: 50%;
+    background-color: #231773;
+}
+
+.btn-exit a{
+    text-decoration: none;
+    color: #fefefe;
+}
+
+.btn-exit:hover{
+    background-color: #6e30f2;
+    font-weight: bold;
+}

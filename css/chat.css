@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Chat containers */
+.chat{
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+    margin: 5px;
+    height: 100%;
+    width: auto;
+}
+
+[data-anime-chat="top"] {
+    transform: translate3d(0, 96%, 0);
+}
+
+[data-anime-chat] {
+    transition: .5s;
+}
+
+[data-anime-chat].animate {
+    transition: .5s;
+    transform: translate3d(0, 0, 0);
+    top: 0;
+}
+
+.chatBox{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #313131be;
+    border-radius: 5px 5px 0 0;
+}
+
+.chat-titulo{
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.btnChat{
+    border: none;
+    border-radius: 10px;
+    background-color: #fefefe;
+    cursor: pointer;
+}
+
+.msg-icone{
+    padding-right: 10px;
+    transform: rotate(180deg);
+    transition: .5s;
+}
+
+.msg-icone-g {
+    padding-right: 10px;
+    transform: rotate(0);
+    transition: .5s;
+}
+
+.container{
+    overflow-y: auto;
+    background-color: #ebedf2;
+    padding: 8px;
+}
+
+.msg{
+    border: 2px solid #6e30f2;
+    background-color: #fefefe;
+    border-radius: 5px;
+    color: #000;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  /* Darker chat container */
+.friend {
+    border-color: #231773;
+    background-color: #fefefe;
+}
+  
+  /* Clear floats */
+.msg::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+  
+  /* Style images */
+.msg img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+  
+  /* Style the right image */
+.msg img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+  
+  /* Style time text */
+.time-right {
+    float: right;
+    color: #6e30f2;
+}
+  
+  /* Style time text */
+.time-left {
+    float: left;
+    color: #231773;
+}
+
+.msg-icone{
+    font-size: 24px;
+}
+
+.mensagem{
+    display: flex;
+}
+
+.mensagem input{
+    border: 2px solid #6e30f2;
+    border-radius: 5px;
+    outline: none;
+    padding: 20px 40px;
+    background-color: #acb0f2;
+    color: #fefefe;
+    width: 90%;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.mensagem button{
+    border: none;
+    width: 10%;
+}
+
+.envio-icone{
+    font-size: 30px;
+    color: #6e30f2;
+    cursor: pointer;
+}
+
+.envio-icone:hover, .envio-icone:active{
+    color: #231773;
+}
