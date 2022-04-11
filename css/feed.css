@@ -1,37 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 /* Feed */
-main {
-    display: flex;
-    height: 100%;
-    overflow: hidden;
-    margin: auto;
-    width: auto;
-}
-
 .secPosts {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1%;
     gap: 20px;
+    height: 100%;
     overflow-y: scroll;
+    padding: 1%;
+    width: 100%;
 }
 
 .post1, .post2{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: auto;
     border: 2px solid #6e30f2;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
     padding: 1%;
 }
 
 .contentPost1, .contentPost2 {
-    margin-left: 6%;
     height: 100%;
+    margin-left: 6%;
 }
 
 .contentPost1 p, .contentPost2 p {
@@ -46,20 +38,19 @@ main {
 
 .contentPost1, .contentPost2 {
     padding-right: 3.5rem ;
-
 }
 
 .author {
+    color: #6e30f2;
     display: flex;
     align-items: top;
-    color: #6e30f2;
 }
 
 .author img {
-    width: 5%;
     border-radius: 100%;
     border: 2px solid #6e30f2;
     padding: 0.2%;
+    width: 5%;
 }
 
 .author p {
@@ -69,25 +60,25 @@ main {
 }
 
 .interacoes {
+    display: flex;
+    justify-content: space-between;
     margin-top: 1%;
     margin-left: 6%;
     width: 24%;
-    display: flex;
-    justify-content: space-between;
 }
 
 .btnInt {
-    border: none;
-    height: 30px;
-    border-radius: 100px;
     background-color: #6e30f2;
+    border: none;
+    border-radius: 100px;
     color: #fefefe;
-    min-width: 150px;
     cursor: pointer;
-    margin: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30px;
+    margin: 3px;
+    min-width: 150px;
 }
 
 .icone-interacoes{
@@ -96,8 +87,8 @@ main {
 }
 
 .btnInt:hover{
-    border: 2px solid #6e30f2;
     background-color: #ebedf2;
+    border: 2px solid #6e30f2;
     color: #6e30f2;
     font-weight: bold;
 }

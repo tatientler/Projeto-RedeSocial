@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-/* Chat containers */
+/* Chat */
 .chat{
     border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: column;
-    margin: 5px;
     height: 100%;
-    width: 30%;
-    background-color: #ebedf2;
-
+    margin: 5px;
+    width: auto;
 }
 
 [data-anime-chat="top"] {
@@ -26,22 +24,21 @@
 }
 
 .chatBox{
-    display: flex;
-    justify-content: space-between;
     border: 1px solid #313131be;
     border-radius: 5px 5px 0 0;
-    background-color: #fefefe
+    display: flex;
+    justify-content: space-between;
 }
 
 .chat-titulo{
-    padding-left: 10px;
     padding-bottom: 5px;
+    padding-left: 10px;
 }
 
 .btnChat{
+    background-color: #fefefe;
     border: none;
     border-radius: 10px;
-    background-color: #fefefe;
     cursor: pointer;
 }
 
@@ -56,12 +53,16 @@
     transform: rotate(0);
     transition: .5s;
 }
-.divChat {
-    display: flex;
-    flex-direction: column;
+
+.container{
+    background-color: #ebedf2;
     overflow-y: auto;
     padding: 8px;
 }
+
+.divChat {
+    display: flex;
+    flex-direction: column;
 
 .container .msg {
     margin: 20px 0;
@@ -76,54 +77,53 @@
 }
 
 .msg{
-    border: 2px solid #6e30f2;
+    word-wrap: break-word;
     background-color: #fefefe;
+    border: 2px solid #6e30f2;
     border-radius: 5px;
     color: #000;
-    padding: 10px;
     margin: 10px 0;
-    word-wrap: break-word;
+    padding: 10px;
   }
   
-  /* Darker chat container */
+/* Chat recebido */
 .friend {
-    border-color: #231773;
     background-color: #fefefe;
+    border-color: #231773;
 }
   
-  /* Clear floats */
+/* Clear floats */
 .msg::after {
     content: "";
     clear: both;
     display: table;
 }
   
-  /* Style images */
+/* Estilo das imagens */
 .msg img {
+    border-radius: 50%;
     float: left;
+    margin-right: 20px;
     max-width: 60px;
     width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
 }
   
-  /* Style the right image */
+/* Imagem da direita */
 .msg img.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
 }
   
-  /* Style time text */
+/* Estilo do horário */
 .time-right {
-    float: right;
     color: #6e30f2;
+    float: right;
 }
-  
-  /* Style time text */
+
 .time-left {
-    float: left;
     color: #231773;
+    float: left;
 }
 
 .msg-icone{
@@ -137,15 +137,15 @@
 }
 
 .mensagem input{
+    background-color: #acb0f2;
     border: 2px solid #6e30f2;
     border-radius: 5px;
-    outline: none;
-    padding: 20px 40px;
-    background-color: #acb0f2;
     color: #fefefe;
-    width: 90%;
     font-size: 16px;
     font-weight: 400;
+    outline: none;
+    padding: 20px 40px;
+    width: 90%;
 }
 
 .mensagem button{
@@ -154,9 +154,9 @@
 }
 
 .envio-icone{
-    font-size: 30px;
     color: #6e30f2;
     cursor: pointer;
+    font-size: 30px;
 }
 
 .envio-icone:hover, .envio-icone:active{
