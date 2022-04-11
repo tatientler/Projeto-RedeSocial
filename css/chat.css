@@ -4,15 +4,16 @@
 .chat{
     border-radius: 10px 10px 0 0;
     display: flex;
-    flex-basis: 30%;
     flex-direction: column;
     margin: 5px;
     height: 100%;
-    width: auto;
+    width: 30%;
+    background-color: #ebedf2;
+
 }
 
 [data-anime-chat="top"] {
-    transform: translate3d(0, 96%, 0);
+    transform: translate3d(0, 95%, 0);
 }
 
 [data-anime-chat] {
@@ -22,7 +23,6 @@
 [data-anime-chat].animate {
     transition: .5s;
     transform: translate3d(0, 0, 0);
-    top: 0;
 }
 
 .chatBox{
@@ -30,6 +30,7 @@
     justify-content: space-between;
     border: 1px solid #313131be;
     border-radius: 5px 5px 0 0;
+    background-color: #fefefe
 }
 
 .chat-titulo{
@@ -55,11 +56,23 @@
     transform: rotate(0);
     transition: .5s;
 }
-
-.container{
+.divChat {
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
-    background-color: #ebedf2;
     padding: 8px;
+}
+
+.container .msg {
+    margin: 20px 0;
+}
+
+.container .msg:first-child {
+    margin-top: 10px;
+}
+
+.container .msg:last-child {
+    margin-bottom: 10px;
 }
 
 .msg{
@@ -69,6 +82,7 @@
     color: #000;
     padding: 10px;
     margin: 10px 0;
+    word-wrap: break-word;
   }
   
   /* Darker chat container */
@@ -118,6 +132,8 @@
 
 .mensagem{
     display: flex;
+    margin-bottom: 0.6rem;
+    padding: 0 8px;
 }
 
 .mensagem input{
