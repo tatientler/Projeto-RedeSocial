@@ -4,7 +4,6 @@
 .chat{
     border-radius: 10px 10px 0 0;
     display: flex;
-    flex-basis: 30%;
     flex-direction: column;
     height: 100%;
     margin: 5px;
@@ -12,7 +11,7 @@
 }
 
 [data-anime-chat="top"] {
-    transform: translate3d(0, 96%, 0);
+    transform: translate3d(0, 95%, 0);
 }
 
 [data-anime-chat] {
@@ -22,7 +21,6 @@
 [data-anime-chat].animate {
     transition: .5s;
     transform: translate3d(0, 0, 0);
-    top: 0;
 }
 
 .chatBox{
@@ -62,7 +60,24 @@
     padding: 8px;
 }
 
+.divChat {
+    display: flex;
+    flex-direction: column;
+
+.container .msg {
+    margin: 20px 0;
+}
+
+.container .msg:first-child {
+    margin-top: 10px;
+}
+
+.container .msg:last-child {
+    margin-bottom: 10px;
+}
+
 .msg{
+    word-wrap: break-word;
     background-color: #fefefe;
     border: 2px solid #6e30f2;
     border-radius: 5px;
@@ -117,6 +132,8 @@
 
 .mensagem{
     display: flex;
+    margin-bottom: 0.6rem;
+    padding: 0 8px;
 }
 
 .mensagem input{
