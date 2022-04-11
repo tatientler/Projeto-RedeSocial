@@ -2,47 +2,46 @@
 
 /* Perfil do usuário ativo */
 section:first-child {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1% 0;
-    justify-content: space-between;
     background-color: #ebedf2;
     border-start-end-radius: 10px;
     border-end-end-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1% 0;
+    width: 20%;
 }
 
 .secUser img {
-    width: 40%;
     border-radius: 100%;
     border: 2px solid #6e30f2;
     padding: 1%;
-
+    width: 40%;
 }
 
 .secUser p {
-    text-align: center;
-    margin-top: 5%;
+    color: #231773;
     font-size: 20px;
     font-weight: 510;
-    color: #231773;
+    margin-top: 5%;
+    text-align: center;
 }
 
 .btnsUser {
-    width: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .btnUser {
-    border: none;
-    height: 40px;
-    border-radius: 100px;
-    cursor: pointer;
-    width: 55%;
     background-color: #231773;
+    border: none;
+    border-radius: 100px;
     color: #fefefe;
+    cursor: pointer;
+    height: 40px;
+    width: 55%;
 }
 
 .btnUser:hover{
@@ -51,8 +50,8 @@ section:first-child {
 
 .secUser div:nth-child(1) {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
 }
 
 .secUser div:nth-child(2) {
@@ -63,18 +62,17 @@ section:first-child {
 }
 
 .btn-exit {
-    width: 30%;
+    background-color: #231773;
     border: none;
-    height: 30px;
     border-radius: 100px;
     cursor: pointer;
-    width: 50%;
-    background-color: #231773;
+    height: 30px;
+    width: 55%;
 }
 
 .btn-exit a{
-    text-decoration: none;
     color: #fefefe;
+    text-decoration: none;
 }
 
 .btn-exit:hover{

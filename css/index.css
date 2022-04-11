@@ -9,11 +9,11 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
+	justify-content: center;
 	margin: -20px 0 50px;
 }
 
@@ -29,8 +29,8 @@ h2 {
 p {
 	font-size: 14px;
 	font-weight: 100;
-	line-height: 20px;
 	letter-spacing: 0.5px;
+	line-height: 20px;
 	margin: 20px 0 30px;
 }
 
@@ -41,19 +41,19 @@ span {
 a {
 	color: #333;
 	font-size: 14px;
-	text-decoration: none;
 	margin: 15px 0;
+	text-decoration: none;
 }
 
 button {
+	background-color: #6e30f2;
 	border-radius: 20px;
 	border: 1px solid #6e30f2;
-	background-color: #6e30f2;
 	color: #fefefe;
 	font-size: 12px;
 	font-weight: bold;
-	padding: 12px 45px;
 	letter-spacing: 1px;
+	padding: 12px 45px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 }
@@ -76,26 +76,26 @@ button.ghost {
 }
 
 .entrar a{
-	text-decoration: none;
 	color: #fefefe;
+	text-decoration: none;
 }
 
 form {
 	background-color: #fefefe;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
-	padding: 0 50px;
 	height: 100%;
+	justify-content: center;
+	padding: 0 50px;
 	text-align: center;
 }
 
 input {
 	background-color: #ebedf2;
 	border: none;
-	padding: 12px 15px;
 	margin: 8px 0;
+	padding: 12px 15px;
 	width: 100%;
 }
 
@@ -104,17 +104,17 @@ input {
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
+	overflow: hidden;
+	position: relative;
+	width: 768px;
 }
 
 .formulario-container {
+	height: 100%;
 	position: absolute;
 	top: 0;
-	height: 100%;
 	transition: all 0.6s ease-in-out;
 }
 
@@ -130,16 +130,16 @@ input {
 
 .criar-conta-container {
 	left: 0;
-	width: 50%;
 	opacity: 0;
+	width: 50%;
 	z-index: 1;
 }
 
 .container.right-panel-active .criar-conta-container {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
 	animation: show 0.6s;
+	opacity: 1;
+	transform: translateX(100%);
+	z-index: 5;
 }
 
 @keyframes show {
@@ -155,13 +155,13 @@ input {
 }
 
 .overlay-container {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 50%;
 	height: 100%;
 	overflow: hidden;
+	position: absolute;
+	left: 50%;
+	top: 0;
 	transition: transform 0.6s ease-in-out;
+	width: 50%;
 	z-index: 100;
 }
 
@@ -178,11 +178,11 @@ input {
 	background-position: 0 0;
 	color: #FFFFFF;
 	position: relative;
-	left: -100%;
 	height: 100%;
-	width: 200%;
+	left: -100%;
   	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
+	width: 200%;
 }
 
 .container.right-panel-active .overlay {
@@ -193,15 +193,15 @@ input {
 	position: absolute;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
+	height: 100%;
+	justify-content: center;
 	padding: 0 40px;
 	text-align: center;
 	top: 0;
-	height: 100%;
-	width: 50%;
 	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
+	width: 50%;
 }
 
 .overlay-left {
@@ -229,10 +229,10 @@ input {
 	border: 1px solid #DDDDDD;
 	border-radius: 50%;
 	display: inline-flex;
-	justify-content: center;
 	align-items: center;
-	margin: 0 5px;
 	height: 40px;
+	justify-content: center;
+	margin: 0 5px;
 	width: 40px;
 }
 
@@ -244,8 +244,8 @@ footer {
     background-color: #222;
     color: #fff;
     font-size: 14px;
-    bottom: 0;
     position: fixed;
+	bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
