@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/geral.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/perfil-usuario.css">
     <link rel="stylesheet" href="./css/feed.css">
     <link rel="stylesheet" href="./css/chat.css">
+    <link rel="stylesheet" href="./css/icones.css">
 </head>
 
 <body>
@@ -21,27 +23,65 @@
                 <i class="material-icons search">search</i>
                 <input type="text" class="pesquisar" placeholder="Pesquisar">
             </div>
-            <a href="#" class="btnLink"><button class="btnHeader">Notificações</button><span class="qtdNotificacao">5</span></a>
-            <a href="#" class="btnLink"><button class="btnHeader">Adicionar post</button></a>
-            <a href="#" class="btnLink"><button class="btnHeader">Amigos</button><span class="qtdNotificacao">1</span></a>
+
+            <div>
+                <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-bell-fill"></i><span class="qtdNotificacao">5</span></button></a>
+                <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-bell-fill"></i>Notificações <span class="qtdNotificacao">5</span></button></a>
+            </div>
+            <div>
+                <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-plus-circle-fill"></i></button></a>
+                <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-plus-circle-fill"></i>Adicionar post</button></a>
+            </div>
+            <div>
+                <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-people-fill"></i><span class="qtdNotificacao">1</span></button></a>
+                <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-people-fill"></i>Amigos <span class="qtdNotificacao">1</span></button></a>
+            </div>
         </div>
     </header>
 
     <main>
         <section class="secUser">
             <div>
-                <img src="./imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Foto de perfil do usuário logado">
+                <img src="./imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Perfil do usuário logado">
                 <p>John Doe</p>
             </div>
+            
             <div class="btnsUser">
-                <button class="btnUser">Editar perfil</button>
-                <button class="btnUser">Adicionar post</button>
-                <button class="btnUser">Amigos</button>
-                <button class="btnUser">Códigos</button>
-                <button class="btnUser">Market</button>
-                <button class="btnUser">Eventos</button>
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-pencil-square"></i></button></a>
+                    <a href="#"><button class="btnUser">Editar perfil</button></a>
+                </div>
+
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-plus-circle-fill"></i></button></a>
+                    <a href="#"><button class="btnUser">Adicionar post</button></a>
+                </div>
+
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-people-fill"></i></button></a>
+                    <a href="#"><button class="btnUser">Amigos</button></a>
+                </div>
+
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-file-earmark-code-fill"></i></button></a>
+                    <a href="#"><button class="btnUser">Códigos</button></a>
+                </div>
+
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-bag-check-fill"></i></button></a>
+                    <a href="#"><button class="btnUser">Market</button></a>
+                </div>
+
+                <div class="user">
+                    <a href="#"><button class="btnIconUser"><i class="bi bi-calendar-event"></i></button></a>
+                    <a href="#"><button class="btnUser">Eventos</button></a>
+                </div>
             </div>
-            <button class="btn-exit"><a href="index.html">Sair</a></button>
+            
+            <div>
+                <button class="btn-exit btnIconExit"><a href="index.html"><i class="bi bi-box-arrow-left"></i></a></button>
+                <button class="btn-exit"><a href="index.html">Sair</a></button>
+            </div>
         </section>
 
         <section class="secPosts">

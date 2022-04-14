@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+@media screen and (min-width: 1024px){
+    .bi{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 940px){
+    .bi{
+        display: block;
+    }
+}

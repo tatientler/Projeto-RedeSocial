@@ -11,7 +11,7 @@ header {
 
 header div {
     display: flex;
-    gap: 30px;
+    gap: 10px;
     padding-right: 2%;
 }
 
@@ -38,6 +38,10 @@ header div {
     position: relative;
 }
 
+.btnIcon{
+    display: none;
+}
+
 .btnHeader {
     background-color: #fefefe;
     border: none;
@@ -62,4 +66,32 @@ header div {
     position: absolute;
     right: -20px;
     top: -10px;
+}
+
+@media screen and (max-width: 970px){
+    .btnIcon{
+        background-color: #fefefe;
+        border: none;
+        border-radius: 100px;
+        color: #231773;
+        display: block;
+        font-weight: bold;
+        height: 35px;
+        min-width: 40px; 
+    }
+
+    .btnIcon:hover {
+        background-color: #231773;
+        color: #fefefe;
+        cursor: pointer;
+    }
+
+    .btnHeader{
+        display: none;
+    }
+
+    .pesquisar{
+        border-radius: 20px;
+        width: 80px;
+    }
 }

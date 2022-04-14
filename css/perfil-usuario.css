@@ -34,6 +34,11 @@ section:first-child {
     width: 100%;
 }
 
+.user{
+    display: flex;
+    align-items: center;
+}
+
 .btnUser {
     background-color: #231773;
     border: none;
@@ -41,7 +46,7 @@ section:first-child {
     color: #fefefe;
     cursor: pointer;
     height: 40px;
-    width: 55%;
+    width: 100%;
 }
 
 .btnUser:hover{
@@ -61,13 +66,17 @@ section:first-child {
     margin-bottom: 40%;
 }
 
+.btnIconUser, .btnIconExit{
+    display: none;
+}
+
 .btn-exit {
     background-color: #231773;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     height: 30px;
-    width: 55%;
+    width: 100%;
 }
 
 .btn-exit a{
@@ -78,4 +87,40 @@ section:first-child {
 .btn-exit:hover{
     background-color: #6e30f2;
     font-weight: bold;
+}
+
+@media screen and (max-width: 940px){
+    section:first-child {
+        padding: 1% 0;
+        width: 20%;
+    }
+
+    .btnUser, .btn-exit{
+        display: none;
+    }
+
+    .btnIconUser, .btnIconExit{
+        background-color: #231773;
+        border: none;
+        border-radius: 100px;
+        color: #fefefe;
+        cursor: pointer;
+        display: block;
+        height: 40px;
+        width: 150%;
+    }
+
+    .bi{
+        font-size: 18px;
+    }
+
+    .btnIconUser:hover{
+        background-color: #6e30f2;
+    }
+
+    .btnIconExit:hover{
+        background-color: #6e30f2;
+        font-weight: bold;
+    }
+
 }
