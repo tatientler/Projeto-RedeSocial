@@ -8,7 +8,7 @@
     flex-direction: column;
     height: 100%;
     margin: 5px;
-    width: 30%;
+    width: 250px;
 }
 
 [data-anime-chat="top"] {
@@ -80,7 +80,7 @@
     border: 2px solid #6e30f2;
     border-radius: 5px;
     color: #000;
-    margin: 10px 0;
+    margin: 5px 0;
     padding: 10px;
     word-wrap: break-word;
   }
@@ -100,15 +100,18 @@
   
 /* Estilo das imagens */
 .msg img {
+    border: 2px solid #6e30f2;
     border-radius: 50%;
     float: left;
     margin-right: 20px;
     max-width: 60px;
+    padding: 1px;
     width: 100%;
 }
   
 /* Imagem da direita */
 .msg img.right {
+    border: 2px solid #231773;
     float: right;
     margin-left: 20px;
     margin-right:0;
@@ -149,15 +152,21 @@
 
 .mensagem button{
     border: none;
-    width: 10%;
+    width: 5px;
 }
 
 .envio-icone{
     color: #6e30f2;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .envio-icone:hover, .envio-icone:active{
     color: #231773;
+}
+
+@media screen and (max-width: 640px){
+    .chat{
+        display: none;
+    }
 }

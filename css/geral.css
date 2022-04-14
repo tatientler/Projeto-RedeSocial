@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100%; 
+    width: 100vw; 
 }
 
 main {
@@ -36,4 +36,10 @@ main {
     background-image: linear-gradient(180deg, #231773 0%, #acb0f2 99%);
     box-shadow: inset 2px 2px 5px 0 rgba(#ebedf2, 0.5);
     border-radius: 100px;
+}
+
+@media screen and (max-width: 640px){
+    main {
+        width: 480px;
+    }
 }

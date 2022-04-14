@@ -11,8 +11,8 @@ header {
 
 header div {
     display: flex;
-    gap: 10px;
     padding-right: 2%;
+    margin-right: 15px;
 }
 
 .barra-pesquisar {
@@ -22,7 +22,7 @@ header div {
 }
 
 .search{
-    padding: 5px;
+    padding: 4px;
 }
 
 .pesquisar{
@@ -49,7 +49,7 @@ header div {
     color: #231773;
     font-weight: bold;
     height: 35px;
-    min-width: 100px;
+    width: 100px;
 }
 
 .btnHeader:hover{
@@ -66,6 +66,10 @@ header div {
     position: absolute;
     right: -20px;
     top: -10px;
+}
+
+.invisivel{
+    display: none;
 }
 
 @media screen and (max-width: 970px){
@@ -94,4 +98,31 @@ header div {
         border-radius: 20px;
         width: 80px;
     }
+}
+
+@media screen and (max-width: 640px){
+    header {
+        background-image: linear-gradient(to right, #231773 30%, #acb0f2 70%);
+    }
+
+    .esconder{
+        display: none;
+    }
+
+    .invisivel{
+        display: block;
+    }
+
+    .barra-pesquisar {
+        background-color: #fefefe;
+        border: 2px solid #6e30f2;
+        border-radius: 100px;
+        width: 120px;  
+    }
+    
+    .pesquisar{
+        border: none;
+        outline: none;
+    }
+    
 }

@@ -19,7 +19,7 @@
     <header>
         <img class="logo" src="logos/logo.png" alt="Logo da empresa">
         <div class="navbar">
-            <div class="barra-pesquisar">
+            <div class="barra-pesquisar esconder">
                 <i class="material-icons search">search</i>
                 <input type="text" class="pesquisar" placeholder="Pesquisar">
             </div>
@@ -36,6 +36,33 @@
                 <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-people-fill"></i><span class="qtdNotificacao">1</span></button></a>
                 <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-people-fill"></i>Amigos <span class="qtdNotificacao">1</span></button></a>
             </div>
+
+            <div class="invisivel mobile">
+                <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-chat-square-dots-fill"></i></button></a>
+            </div>
+        </div>
+
+        <div class="mobile">
+            <div class="hamburger-menu">
+                <input id="menu__toggle" type="checkbox" />
+                <label class="menu__btn" for="menu__toggle">
+                  <span></span>
+                </label>
+            
+                <ul class="menu__box">
+                    <li><a class="menu__item" href="#">
+                        <div class="barra-pesquisar menu">
+                        <i class="material-icons search">search</i>
+                        <input type="text" class="pesquisar" placeholder="Pesquisar">
+                        </div>
+                    </a></li>
+                    <li><a class="menu__item" href="#">Perfil</a></li>
+                    <li><a class="menu__item" href="#">Códigos</a></li>
+                    <li><a class="menu__item" href="#">Market</a></li>
+                    <li><a class="menu__item" href="#">Eventos</a></li>
+                    <li><a class="menu__item" href="#">Sair</a></li>
+                </ul>
+              </div>
         </div>
     </header>
 
@@ -84,16 +111,18 @@
             </div>
         </section>
 
-        <section class="secPosts">
+        <section class="secPosts mobile">
             <div class="post1">
                 <div class="author">
                     <img src="./imagens/img3.jpg" alt="">
                     <p>Jane Doe</p>
                 </div>
+
                 <div class="contentPost1">
                     <p>Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos.<br>
                        - Isaac Newton</p>
                 </div>
+
                 <div class="interacoes">
                     <button class="btnInt"><i class="material-icons icone-interacoes">thumb_up</i>Reagir</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">comment</i>Comentar</button>
@@ -229,7 +258,7 @@
                 </div>
 
                 <div class="mensagem">
-                    <input type="text" name="mensagem" id="mensagem" placeholder="Escreva aqui a sua mensagem...">
+                    <input type="text" name="mensagem" id="mensagem" placeholder="Mensagem...">
                     <button type="submit" id="btnMessagem"><i class="material-icons envio-icone">send</i></button>
                 </div>
             </div>
