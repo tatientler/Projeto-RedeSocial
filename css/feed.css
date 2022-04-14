@@ -102,9 +102,15 @@ button:active {
     transition: 80ms;
 }
 
-@media screen and (max-width: 970px) {
-    .secPosts {
-        width: 60%;
+@media screen and (min-width: 970px) {
+    .btnsUser .user:nth-child(2) a:first-child{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    section:first-child {
+        width: 120px;
     }
 
     .contentPost1, .contentPost2 {
@@ -132,9 +138,12 @@ button:active {
 }
 
 @media screen and (max-width: 640px){
+    .contentPost1, .contentPost2 {
+        padding-right: 1.5rem;
+    }
     .secPosts{
         padding: 15px 5px;
-        width: 100%;
+        overflow-y: scroll;
     }
 
     .interacoes {
