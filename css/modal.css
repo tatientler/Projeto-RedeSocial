@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+.modal-content{
+    background-color: #fefefe;
+    border: 5px solid #231773;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px #00000080;
+    padding: 40px;
+    width: 100%;
+}
+
+.btn-close{
+    background-color: #231773;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px #00000080;
+    color: #fefefe;
+    cursor: pointer;
+    font-size: 20px;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+}
+
+.btn-close:hover{
+    background-color: #6e30f2;
+    font-weight: bold;
+}
+
+.btn-close:active{
+    background-color: #6e30f2;
+    font-weight: bold;
+}
+
+.modal-title{
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-body{
+    font-size: 20px;
+    height: 100px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.modal-button{
+    background-color: #231773;
+    border: none;
+    border-radius: 10px;
+    color: #fefefe;
+    height: 40px;
+    width: 100%;
+}
+
+.modal-button:active{
+    background-color: #6e30f2;
+    font-weight: bold;
+}

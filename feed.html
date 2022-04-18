@@ -5,83 +5,107 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/geral.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/perfil-usuario.css">
     <link rel="stylesheet" href="./css/feed.css">
     <link rel="stylesheet" href="./css/chat.css">
     <link rel="stylesheet" href="./css/icones.css">
+    <link rel="stylesheet" href="./css/modal.css">
 </head>
 
 <body>
-    <header>
+    <header class="container-fluid">
+        <!--Logo-->
         <img class="logo" src="logos/logo.png" alt="Logo da empresa">
-        <div class="navbar">
+
+        <div class="navbar-expand-lg">
+            <!--Barra de pesquisa do navbar-->
             <div class="barra-pesquisar esconder">
                 <i class="material-icons search">search</i>
                 <input type="text" class="pesquisar" placeholder="Pesquisar">
             </div>
 
+            <!--Botões com ícones para dispositivos menores e botões com as escritas para desktop-->
             <div>
                 <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-bell-fill"></i><span class="qtdNotificacao">5</span></button></a>
                 <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-bell-fill"></i>Notificações <span class="qtdNotificacao">5</span></button></a>
             </div>
+
             <div>
-                <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-plus-circle-fill"></i></button></a>
-                <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-plus-circle-fill"></i>Adicionar post</button></a>
+                <a href="#" class="btnLink"><button class="btnIcon" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill"></i></button></a>
+                <a href="#" class="btnLink"><button class="btnHeader" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill"></i>Publicar</button></a>
             </div>
+
             <div>
                 <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-people-fill"></i><span class="qtdNotificacao">1</span></button></a>
                 <a href="#" class="btnLink"><button class="btnHeader"><i class="bi bi-people-fill"></i>Amigos <span class="qtdNotificacao">1</span></button></a>
             </div>
 
-            <div class="invisivel mobile">
+            <!--Botão de mensagem - visível somente para dispositivos móveis-->
+            <div class="invisivel reduzido">
                 <a href="#" class="btnLink"><button class="btnIcon"><i class="bi bi-chat-square-dots-fill"></i></button></a>
             </div>
         </div>
 
+        <!--Menu hamburguer para dispositivos móveis-->
         <div class="mobile">
-            <div class="hamburger-menu">
+
+            <div class="navbar-expand-lg">
                 <input id="menu__toggle" type="checkbox" />
                 <label class="menu__btn" for="menu__toggle">
                   <span></span>
                 </label>
             
                 <ul class="menu__box">
+                    <label class="menu__btn" for="menu__toggle">
+                        <span></span>
+                      </label>
                     <li><a class="menu__item" href="#">
                         <div class="barra-pesquisar menu">
                         <i class="material-icons search">search</i>
                         <input type="text" class="pesquisar" placeholder="Pesquisar">
                         </div>
                     </a></li>
-                    <li><a class="menu__item" href="#">Perfil</a></li>
-                    <li><a class="menu__item" href="#">Códigos</a></li>
-                    <li><a class="menu__item" href="#">Market</a></li>
-                    <li><a class="menu__item" href="#">Eventos</a></li>
-                    <li><a class="menu__item" href="#">Sair</a></li>
+
+                    <li><a class="menu__item" href="#"><div class="d-flex align-items-center"><i class="bi bi-person-circle me-2"></i> Perfil</div></a></li>
+
+                    <li><a class="menu__item" href="#"><div class="d-flex align-items-center"><i class="bi bi-file-earmark-code-fill me-2"></i> Códigos</div></a></li>
+
+                    <li><a class="menu__item" href="#"><div class="d-flex align-items-center"><i class="bi bi-bag-check-fill me-2"></i> Market</div></a></li>
+
+                    <li><a class="menu__item" href="#"><div class="d-flex align-items-center"><i class="bi bi-calendar-event me-2"></i>Eventos</div></a></li>
+
+                    <li><a class="menu__item" href="index.html"><div class="d-flex align-items-center"><i class="bi bi-box-arrow-left me-2"></i> Sair</div></a></li>
                 </ul>
               </div>
         </div>
     </header>
 
-    <main>
+    <main class="container">
+        <!--Parte do perfil do usuário ativo-->
         <section class="secUser">
+
+            <!--Imagem e nome usuário ativo-->
             <div>
                 <img src="./imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Perfil do usuário logado">
                 <p>John Doe</p>
             </div>
             
+            <!--Botões da parte do usuário ativo - botões com ícones para dispositivos menores e botões com as escritas para desktop-->
             <div class="btnsUser">
                 <div class="user">
                     <a href="#"><button class="btnIconUser"><i class="bi bi-pencil-square"></i></button></a>
-                    <a href="#"><button class="btnUser">Editar perfil</button></a>
+                    <a href="#"><button class="btnUser">Perfil</button></a>
                 </div>
 
                 <div class="user">
-                    <a href="#"><button class="btnIconUser"><i class="bi bi-plus-circle-fill"></i></button></a>
-                    <a href="#"><button class="btnUser">Adicionar post</button></a>
+                    <a href="#"><button class="btnIconUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill"></i></button></a>
+                    <a href="#"><button class="btnUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Publicar</button></a>
                 </div>
 
                 <div class="user">
@@ -105,25 +129,31 @@
                 </div>
             </div>
             
+            <!--Botão de logout - botão com ícones para dispositivos menores e botão com a escrita para desktop-->
             <div>
                 <button class="btn-exit btnIconExit"><a href="index.html"><i class="bi bi-box-arrow-left"></i></a></button>
                 <button class="btn-exit"><a href="index.html">Sair</a></button>
             </div>
         </section>
 
-        <section class="secPosts mobile">
+        <!--Posts-->
+        <section class="secPosts container mobile">
             <div class="post1">
+
+                <!--Imagem e nome do amigo-->
                 <div class="author">
                     <img src="./imagens/img3.jpg" alt="">
                     <p>Jane Doe</p>
                 </div>
 
+                <!--Post do amigo-->
                 <div class="contentPost1">
                     <p>Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos.<br>
                        - Isaac Newton</p>
                 </div>
 
-                <div class="interacoes">
+                <!--Botões de interações-->
+                <div class="interacoes container">
                     <button class="btnInt"><i class="material-icons icone-interacoes">thumb_up</i>Reagir</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">comment</i>Comentar</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">send</i>Compartilhar</button>
@@ -131,17 +161,20 @@
             </div>
 
             <div class="post2">
+                <!--Imagem e nome do amigo-->
                 <div class="author">
                     <img src="./imagens/img2.jpg" alt="">
                     <p>John Doe Junior</p>
                 </div>
 
+                <!--Post do amigo-->
                 <div class="contentPost2">
                     <p>A imaginação é mais importante que o conhecimento, porque o conhecimento é limitado, ao passo que a imaginação abrange o mundo inteiro.
                     <br>
                     - Albert Einstein</p>
                 </div>
 
+                <!--Botões de interações-->
                 <div class="interacoes">
                     <button class="btnInt"><i class="material-icons icone-interacoes">thumb_up</i>Reagir</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">comment</i>Comentar</button>
@@ -150,11 +183,13 @@
             </div>
 
             <div class="post2">
+                <!--Imagem e nome do amigo-->
                 <div class="author">
                     <img src="./imagens/img3.jpg" alt="">
                     <p>Jane Doe</p>
                 </div>
 
+                <!--Post do amigo-->
                 <div class="contentPost2">
                     <p>Seguimos em mais um dia normal na vida de dev...
                     <br>
@@ -162,6 +197,7 @@
                     <img src="imagens/tela_codigo.png" alt="">
                 </div>
 
+                <!--Botões de interações-->
                 <div class="interacoes">
                     <button class="btnInt"><i class="material-icons icone-interacoes">thumb_up</i>Reagir</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">comment</i>Comentar</button>
@@ -170,17 +206,20 @@
             </div>
 
             <div class="post2">
+                <!--Imagem e nome do amigo-->
                 <div class="author">
                     <img src="./imagens/img2.jpg" alt="">
                     <p>John Doe Junior</p>
                 </div>
 
+                <!--Post do amigo-->
                 <div class="contentPost2">
                     <p>Galera, estou com um bug no meu projeto pessoal e não consigo encontrar uma solução. Será que alguém consegue me dar uma ajuda?
                     <br>
                     Segue o link do meu projeto: https://github.com/johndoejunior/projeto-pessoal</p>
                 </div>
 
+                <!--Botões de interações-->
                 <div class="interacoes">
                     <button class="btnInt"><i class="material-icons icone-interacoes">thumb_up</i>Reagir</button>
                     <button class="btnInt"><i class="material-icons icone-interacoes">comment</i>Comentar</button>
@@ -189,87 +228,127 @@
             </div>
         </section>
 
+        <!--Chat-->
         <div class="chat" data-anime-chat="top">
+
+            <!--Cabeçalho do chat-->
             <div class="chatBox">
                 <h2 class="chat-titulo">Mensagens</h2>
                 <button class="btnChat"><i id="btnChat" class="material-icons msg-icone">keyboard_arrow_down</i></button>
             </div>
+
+            <!--Caixa de conversa-->
             <div class="divChat">
-                    <div class="msg">
-                        <img class="msg-img" src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                        <p>Oi. Como você está?</p>
-                        <span class="time-right">11:00</span>
-                    </div>
+
+                <!--Mensagem enviada pelo usuário ativo-->
+                <div class="msg">
+                    <img class="msg-img" src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Oi. Como você está?</p>
+                    <span class="time-right">11:00</span>
+                </div>
                 
-                    <div class="msg friend">
-                        <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                        <p>Hey! Eu estou bem. Obrigada por perguntar!</p>
-                        <span class="time-left">11:01</span>
-                    </div>
+                <!--Mensagem enviada pelo amigo-->
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Hey! Eu estou bem. Obrigada por perguntar!</p>
+                    <span class="time-left">11:01</span>
+                </div>
                 
-                    <div class="msg">
-                        <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">                            <p>Legal! Então, o que você quer fazer hoje?</p>
-                        <span class="time-right">11:02</span>
-                    </div>
+                <!--Mensagem enviada pelo usuário ativo-->
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">                           <p>Legal! Então, o que você quer fazer hoje?</p>
+                    <span class="time-right">11:02</span>
+                </div>
                 
-                    <div class="msg friend">
-                        <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                        <p>Ah, não sei. Jogar futebol.. ou talvez aprender mais sobre códigos?</p>
-                        <span class="time-left">11:05</span>
-                    </div>
+                <!--Mensagem enviada pelo amigo-->
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Ah, não sei. Jogar futebol.. ou talvez aprender mais sobre códigos?</p>
+                    <span class="time-left">11:05</span>
+                </div>
     
-                    <div class="msg">
-                        <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                        <p>Huumm.. pode ser. Qual linguagem você gostaria de aprender?</p>
-                        <span class="time-right">11:07</span>
-                    </div>
+                <!--Mensagem enviada pelo usuário ativo-->
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Huumm.. pode ser. Qual linguagem você gostaria de aprender?</p>
+                    <span class="time-right">11:07</span>
+                 </div>
                 
-                    <div class="msg friend">
-                        <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                        <p>Por enquanto estou na parte de web.. acho que JS seria melhor!</p>
-                        <span class="time-left">11:10</span>
-                    </div>
+                 <!--Mensagem enviada pelo amigo-->
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Por enquanto estou na parte de web.. acho que JS seria melhor!</p>
+                    <span class="time-left">11:10</span>
+                </div>
                 
-                    <div class="msg">
-                        <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                        <p>Combinado. Nos vemos mais tarde!</p>
-                        <span class="time-right">11:13</span>
-                    </div>
+                <!--Mensagem enviada pelo usuário ativo-->
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Combinado. Nos vemos mais tarde!</p>
+                    <span class="time-right">11:13</span>
+                </div>
     
-                    <div class="msg friend">
-                        <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                        <p>Perfeito!</p>
-                        <span class="time-left">11:15</span>
-                    </div>
+                <!--Mensagem enviada pelo amigo-->
+                 <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Perfeito!</p>
+                    <span class="time-left">11:15</span>
+                </div>
     
-                    <div class="msg">
-                        <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
-                        <p>Aproveita e vai dando uma olhada nesses links: https://developer.mozilla.org/en-US/docs/Web/JavaScript<br>https://www.w3schools.com/js/</p>
-                        <span class="time-right">11:18</span>
-                    </div>
+                <!--Mensagem enviada pelo usuário ativo-->
+                <div class="msg">
+                    <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar">
+                    <p>Aproveita e vai dando uma olhada nesses links: https://developer.mozilla.org/en-US/docs/Web/JavaScript<br>https://www.w3schools.com/js/</p>
+                    <span class="time-right">11:18</span>
+                </div>
     
-                    <div class="msg friend">
-                        <img src="imagens/img3.jpg" alt="Avatar" class="right">
-                        <p>Adorei.. vai me ajudar muito!</p>
-                        <span class="time-left">11:20</span>
-                    </div>
+                <!--Mensagem enviada pelo amigo-->
+                <div class="msg friend">
+                    <img src="imagens/img3.jpg" alt="Avatar" class="right">
+                    <p>Adorei.. vai me ajudar muito!</p>
+                    <span class="time-left">11:20</span>
+                </div>
 
                     <div class="container"></div>
                 </div>
 
+                <!--Campo para o usuário escrever a mensagem que quer enviar e botão de envio-->
                 <div class="mensagem">
                     <input type="text" name="mensagem" id="mensagem" placeholder="Mensagem...">
                     <button type="submit" id="btnMessagem"><i class="material-icons envio-icone">send</i></button>
                 </div>
             </div>
     </main>
-    
+
+    <!--Modal para post-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <!--Cabeçalho do modal com título e botão para fechar o campo-->
+            <div class="modal-header">
+              <h2 class="modal-title" id="staticBackdropLabel">Criar publicação</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!--Corpo do modal - onde o usuário poderá digitar seus posts-->
+            <div class="modal-body">
+              No que está pensando?
+            </div>
+
+            <!--Botão para envio/publicação do post-->
+            <div class="modal-footer">
+              <button type="button" class="modal-button">Publicar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <script src="./js/feed.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       
 </body>
 </html>

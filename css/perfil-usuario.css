@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 /* Perfil do usuário ativo */
+
+/* Definição do container dessa section */
 section:first-child {
     background-color: #ebedf2;
     border-start-end-radius: 10px;
@@ -9,10 +11,11 @@ section:first-child {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px 0;
-    width: 250px;
+    padding: 1.5rem 0;
+    width: 350px;
 }
 
+/* Definição da imagem do usuário ativo */
 .secUser img {
     border-radius: 100%;
     border: 2px solid #6e30f2;
@@ -21,6 +24,7 @@ section:first-child {
     margin: 3px
 }
 
+/* Definição do nome do usuário ativo */
 .secUser p {
     color: #231773;
     font-size: 20px;
@@ -29,6 +33,7 @@ section:first-child {
     text-align: center;
 }
 
+/* Estilização dos botões do usuário */
 .btnsUser {
     display: flex;
     align-items: center;
@@ -41,7 +46,8 @@ section:first-child {
     border-radius: 100px;
     color: #fefefe;
     cursor: pointer;
-    height: 40px;
+    font-size: 14px;
+    height: 50px;
     width: 85px;
 }
 
@@ -61,6 +67,7 @@ section:first-child {
     gap: 15px;
 }
 
+/* Classes de botões de dispositivos móveis */
 .btnIconUser, .btnIconExit{
     display: none;
 }
@@ -69,6 +76,7 @@ section:first-child {
     display: none;
 }
 
+/* Definição do botão de logout */
 .btn-exit {
     background-color: #231773;
     border: none;
@@ -88,7 +96,9 @@ section:first-child {
     font-weight: bold;
 }
 
-@media screen and (max-width: 970px){
+/* Media query para alteração dos botões em telas menores */
+@media screen and (max-width: 1024px){
+    /* Configuração da section do usuário ativo */
     section:first-child {
         justify-content: space-around;
         padding: 0;
@@ -99,28 +109,32 @@ section:first-child {
         display: none;
     }
 
+    /* Tamanho da imagem do usuário ativo em telas menores */
     .secUser img {
-        padding: 2px;
-        width: 70px;
+        padding: .12em;
+        width: 5em;
     }
 
+    /* Botões com escritas */
     .btnUser, .btn-exit{
         display: none;
     }
 
+    /* Definição dos botões com ícones */
     .btnIconUser, .btnIconExit{
         background-color: #231773;
         border: none;
-        border-radius: 100px;
+        border-radius: 3em;
         color: #fefefe;
         cursor: pointer;
         display: block;
-        height: 40px;
-        width: 40px;
+        height: 2.5em;
+        width: 2.5em;
     }
 
+    /* Tamanho dos ícones */
     .bi{
-        font-size: 18px;
+        font-size: 1.3em;
     }
 
     .btnIconUser:hover{
@@ -134,40 +148,29 @@ section:first-child {
 
 }
 
-@media screen and (max-width: 640px){
-    .mobile{
+/* Alteração para celulares - colocando os botões do usuário em um menu superior no canto direito no formato hamburguer */
+@media screen and (max-width: 770px){
+    /* Configuração do menu hamburguer para dispositivos móveis*/
+   .mobile{
         display: block;
     }
 
+    /* Definição do menu hamburguer aberto*/
     #menu__toggle {
         opacity: 0;
     }
     
-    #menu__toggle:checked + .menu__btn > span {
-        transform: rotate(45deg);
-    }
-
-    #menu__toggle:checked + .menu__btn > span::before {
-        top: 0;
-        transform: rotate(0deg);
-    }
-
-    #menu__toggle:checked + .menu__btn > span::after {
-        top: 0;
-        transform: rotate(90deg);
-    }
-
     #menu__toggle:checked ~ .menu__box {
-        left: 0 !important;
-        z-index: 1;
+        right: 0;
+        opacity: 1;
     }
-
+    
     .menu__btn {
         position: fixed;
-        top: 38px;
-        right: 50px;
-        width: 26px;
-        height: 26px;
+        top: 2.7em;
+        right: 4em;
+        width: 2em;
+        height: 1em;
         cursor: pointer;
         z-index: 1;
     }
@@ -178,27 +181,28 @@ section:first-child {
         display: block;
         position: absolute;
         width: 100%;
-        height: 2px;
-        background-color: #fefefe;
+        height: .2em;
+        background-color: #231773;
         transition-duration: .25s;
+        z-index: 1;
     }
 
     .menu__btn > span::before {
         content: '';
-        top: -8px;
+        top: -.5em;
     }
       
     .menu__btn > span::after {
         content: '';
-        top: 8px;
+        top: .5em;
     }
 
     .menu__box {
         display: block;
         position: fixed;
         top: 0;
-        left: -100%;
-        width: 150px;
+        right: -100%;
+        width: 15em;
         height: 100%;
         margin: 0;
         padding: 80px 0;
@@ -223,7 +227,8 @@ section:first-child {
         background-color: #6e30f2;
         color: #fefefe;
     }
-
+    
+    /* Encondendo a section do perfil do usuário */
     section:first-child {
         display: none;
     }

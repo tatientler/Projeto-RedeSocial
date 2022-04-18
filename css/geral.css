@@ -4,6 +4,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
     margin: 0;
 }
 
@@ -40,6 +41,6 @@ main {
 
 @media screen and (max-width: 640px){
     main {
-        width: 480px;
+        width: 400px;
     }
 }

@@ -33,6 +33,7 @@
 }
 
 .chat-titulo{
+    font-size: 1.5em;
     padding-bottom: 5px;
     padding-left: 10px;
 }
@@ -64,7 +65,7 @@
 }
 
 .container .msg {
-    margin: 20px 0;
+    margin: .5rem 0;
 }
 
 .container .msg:first-child {
@@ -165,7 +166,7 @@
     color: #231773;
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 1024px){
     .chat{
         display: none;
     }
