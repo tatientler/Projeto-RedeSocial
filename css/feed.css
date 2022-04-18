@@ -103,7 +103,7 @@
     font-weight: bold;
 }
 
-.btnInteracoes{
+.btnInteracoes .btnAction{
     display: none;
 }
 
@@ -147,6 +147,10 @@ button:active {
         color: #6e30f2;
         font-weight: bold;
     }
+
+    .btnInteracoes .btnAction{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 990px){
@@ -161,6 +165,10 @@ button:active {
 
     .btnInt {
         width: 150px;
+    }
+
+    .btnInteracoes .btnAction{
+        display: none;
     }
 }
 
