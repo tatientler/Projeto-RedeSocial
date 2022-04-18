@@ -126,13 +126,18 @@ header div {
         background-image: linear-gradient(to right, #231773 30%, #acb0f2 70%);
     }
 
+    header div {
+        padding-right: .8rem;
+        margin-right: .4rem;
+    }
+
     .qtdNotificacao{
         background-color: red;
         border-radius: 3em;
         color: #fefefe;
-        padding: 3px 10px;
+        padding: 1px 5px;
         position: absolute;
-        right: -20px;
+        right: -10px;
         top: -10px;
     }
     
