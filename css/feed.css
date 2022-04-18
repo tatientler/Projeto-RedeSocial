@@ -103,6 +103,10 @@
     font-weight: bold;
 }
 
+.btnInteracoes{
+    display: none;
+}
+
 button {
     transition: 80ms;
 }
@@ -161,27 +165,60 @@ button:active {
 }
 
 @media screen and (max-width: 640px){
-    .contentPost1, .contentPost2 {
-        padding-right: 1.5rem;
-    }
     .secPosts{
-        padding: 15px 5px;
-        overflow-y: scroll;
+        margin: 3px 0;
+        padding: 15px 0;
+        overflow-y: auto;
+        width: 26rem;
+    }
+
+    .contentPost1, .contentPost2 {
+        margin-left: 0%;
+        padding: 0 1rem;
     }
 
     .interacoes {
-        width: 400px;
+        display: none;
     }
     
-    .btnInt {
-        width: 200px;
+    .btnInteracoes{
+        display: flex;
+        margin-top: 1rem;
+        width: 350px;
+    }
+    
+    .btnAction {
+        width: 250px;
     }
 
-    .btnInt:active{
+    .btnAction {
+        background-color: #6e30f2;
+        border: none;
+        border-radius: 1rem;
+        color: #fefefe;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2em;
+        margin: 8px;
+        padding: 10px;
+        width: 250px;
+    }
+
+    .btnAction:last-child{
+        margin-right: 6%;
+    }
+
+    .btnAction:active{
         background-color: #ebedf2;
         border: 2px solid #6e30f2;
         color: #6e30f2;
         font-weight: bold;
     }
 
+    /* Ícones dos botões de postagens*/
+    .icone-interacoes{
+        padding-right: 0;
+    }
 }

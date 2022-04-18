@@ -131,6 +131,11 @@ header div {
         margin-right: .4rem;
     }
 
+    .btnIcon{
+        height: 30px;
+        min-width: 30px; 
+    }
+
     .qtdNotificacao{
         background-color: red;
         border-radius: 3em;
@@ -140,7 +145,6 @@ header div {
         right: -10px;
         top: -10px;
     }
-    
 
     /* Barra de pesquisa em dispositivos móveis*/
     .esconder{
