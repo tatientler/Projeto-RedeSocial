@@ -189,7 +189,7 @@ button:active {
         display: none;
     }
     
-    .btnInteracoes{
+    .btnInteracoes .btnAction{
         display: flex;
         margin-top: 1rem;
         width: 350px;

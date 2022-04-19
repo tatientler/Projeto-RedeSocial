@@ -4,7 +4,7 @@ let iconChat = document.querySelector('#btnChat')
 
 let inputMensagem = document.querySelector('#mensagem')
 let btnMessagem = document.querySelector('#btnMessagem')
-let containerChat = document.querySelector('.container')
+let containerChat = document.querySelector('.novaMensagem')
 let divChat = document.querySelector('.divChat')
 
 // Função que oculta chat

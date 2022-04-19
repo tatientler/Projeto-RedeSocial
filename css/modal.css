@@ -46,6 +46,11 @@
     width: 100%;
 }
 
+.inputModal{
+    border: none;
+    outline: none;
+}
+
 .modal-button{
     background-color: #231773;
     border: none;

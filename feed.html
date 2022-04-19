@@ -137,7 +137,7 @@
         </section>
 
         <!--Posts-->
-        <section class="secPosts container mobile">
+        <section class="secPosts container mobile" id="posts">
             <div class="post1">
 
                 <!--Imagem e nome do amigo-->
@@ -337,7 +337,7 @@
                     <span class="time-left">11:20</span>
                 </div>
 
-                    <div class="container"></div>
+                    <div class="novaMensagem"></div>
                 </div>
 
                 <!--Campo para o usuário escrever a mensagem que quer enviar e botão de envio-->
@@ -361,12 +361,12 @@
 
             <!--Corpo do modal - onde o usuário poderá digitar seus posts-->
             <div class="modal-body">
-              No que está pensando?
+              <input class="inputModal" type="text" id="bodyModal" placeholder="No que está pensando?"></input>
             </div>
 
             <!--Botão para envio/publicação do post-->
             <div class="modal-footer">
-              <button type="button" class="modal-button">Publicar</button>
+              <button type="button" class="modal-button" id="btnPublicar">Publicar</button>
             </div>
           </div>
         </div>
@@ -377,6 +377,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="js/modal.js"></script>
       
 </body>
 </html>
