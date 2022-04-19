@@ -55,3 +55,19 @@ inputMensagem.addEventListener('keypress', function(e) { // Para enviar mensagem
 })
 
 btnMessagem.addEventListener('click', newMessage)
+
+// Programação chat mobile
+
+let btnChatMobile = document.querySelector('.bi-chat-square-dots-fill')
+
+if(window.screen.width < 1024) { // Para adicionar "display: none" na div chat quando o tamanho da tela for menor que 1024.
+    chat.style.display = 'none'
+}
+function exibirChatMobile () { // Função para exibir o chat mobile ao clicar no botão
+    if(chat.style.display === 'none') {
+        chat.style.display = 'inherit'
+        divChat.scrollTop = divChat.scrollHeight * 100 // Para mostrar as últimas mensagens ao abrir o chat
+    } else {chat.style.display = 'none'}
+}
+
+btnChatMobile.addEventListener('click', exibirChatMobile) // Evento que permite que o botão funcione
