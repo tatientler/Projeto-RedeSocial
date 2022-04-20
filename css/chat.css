@@ -167,7 +167,27 @@
 }
 
 @media screen and (max-width: 1024px){
-    .chat{
+    /* main {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    } */
+    /* .secUser {
+        margin-left: 15%;
+    } */
+    .chatBox{
         display: none;
+    }
+    .chat{
+        margin: 0;
+        position: absolute;
+        left: 0;
+        transform: translate3d(0,0,0);
+        width: 100vw;
+        height: 90vh;
+        z-index: 1000;
+    }
+
+    #btnMessagem {
+        padding-left: 4%;
     }
 }
