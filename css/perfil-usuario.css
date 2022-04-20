@@ -168,7 +168,7 @@ section:first-child {
     .menu__btn {
         position: fixed;
         top: 2.7em;
-        right: 2.5em;
+        right: .5em;
         width: 2em;
         height: 1em;
         cursor: pointer;

@@ -63,6 +63,7 @@ let btnChatMobile = document.querySelector('.bi-chat-square-dots-fill')
 if(window.screen.width < 1024) { // Para adicionar "display: none" na div chat quando o tamanho da tela for menor que 1024.
     chat.style.display = 'none'
 }
+
 function exibirChatMobile () { // Função para exibir o chat mobile ao clicar no botão
     if(chat.style.display === 'none') {
         chat.style.display = 'inherit'
