@@ -120,15 +120,26 @@ header div {
     }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 768px){
     /* Configurações para o header em telas de dispositivos móveis */
     header {
         background-image: linear-gradient(to right, #231773 30%, #acb0f2 70%);
     }
 
+    .barra-pesquisar{
+        margin-right: 2rem;
+    }
+}
+
+@media screen and (max-width: 640px){
+    /* Configurações para o header em telas de dispositivos móveis */
     header div {
         padding-right: .8rem;
         margin-right: .4rem;
+    }
+
+    .logo{
+        margin-right: 1rem;
     }
 
     .btnIcon{
