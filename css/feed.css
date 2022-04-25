@@ -30,7 +30,7 @@
 /* Definição do texto dos posts */
 .contentPost1 p, .contentPost2 p {
     font-size: 1.2em;
-    line-height: 2em;
+    line-height: 1.5em;
     transform: translateY(-10px);
     text-align: justify;
 }
