@@ -26,7 +26,7 @@ let mensagens = {
 
 function exibirMensagens () {
     for (let i = 0; i < mensagens.userMessages.length; i++) {
-        containerChat.innerHTML += `<div class="msg"> <img src="imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar"> <p>${mensagens.userMessages[i]}</p> <span class="time-right">11:20</span> </div>`
+        containerChat.innerHTML += `<div class="msg"> <img src="front-end/imagens/chester-wade-msnyz9L6gs4-unsplash.jpg" alt="Avatar"> <p>${mensagens.userMessages[i]}</p> <span class="time-right">11:20</span> </div>`
         divChat.scrollTop = divChat.scrollHeight // Para colocar o scroll na última mensagem adicionada
     }
 }
