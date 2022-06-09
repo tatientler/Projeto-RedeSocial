@@ -46,7 +46,6 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
 
             .then(response => response.json())
             .then(user => {
-                console.log(user)
                 if(user.token) {
                     setIsLoggedIn(true)
                     setError(false)
@@ -68,12 +67,57 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
     if(isLoggedIn && !error) {
         return <Navigate to="/feed" />
     }
+
+    function signUp(event) {
+
+        event.preventDefault();
+        
+        const userName = event.target.signUpName.value
+        const userEmail = event.target.signUpEmail.value
+        const userPassword = event.target.signUpPassword.value
+
+        if(userName && userEmail && userPassword) {
+                
+                setLoading(true)
+
+                fetch('http://localhost:3030/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',                        
+                    },
+                    body: JSON.stringify({
+                        name: userName,
+                        email: userEmail,
+                        password: userPassword
+                    }),
+                    credentials: "same-origin"
+                })
+                .then(response => response.json())
+                .then(user => {
+
+                    if(user.token){
+                        setError(false)
+                        localStorage.setItem('token', user.token)
+                        localStorage.setItem('user', user.savedUser._id)
+                        setLoading(false)
+                        setIsLoggedIn(true)
+                        return;
+                    }
+
+                    setError(true)
+                    setLoading(false)    
+                })
+        }
+        else {
+            setEmptyForm(false)
+        }
+    }
     
     return (
         <div className="login__page">
             <div className={`container ${transition ? 'right-panel-active' : ''}`} id="login__container">
                 <div className="formulario-container criar-conta-container">
-                    <form action="#">
+                    <form action="#" onSubmit={signUp}>
                         <h1>Criar conta</h1>
                         <div className="rede-social-container">
                             <Link to="/" className="rede-social"><img src={logoFacebook} alt="Logo Facebook que irá te direcionar para efetuar o login com a sua conta."/></Link>
@@ -82,10 +126,15 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                             <Link to="/" className="rede-social"><img src={logoLinkedIn} alt="Logo LinkedIn que irá te direcionar para efetuar o login com a sua conta."/></Link>
                         </div>
                         <span>ou use seu e-mail para se registrar</span>
-                        <input type="text" placeholder="Nome" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Senha" />
-                        <button className="entrar" type="submit"><Link to="/feed">Entrar</Link></button>
+                        <input onFocus={() => {setError(false)}} onClick={() => {setEmptyForm(true)}} type="text" placeholder="Nome" name="signUpName" />
+                        <input onFocus={() => {setError(false)}} onClick={() => {setEmptyForm(true)}} type="email" placeholder="Email" name="signUpEmail" />
+                        <input onFocus={() => {setError(false)}} onClick={() => {setEmptyForm(true)}} type="password" placeholder="Senha" name="signUpPassword" />
+                        <button className={`entrar ${loading ? 'login-carregando' : '' }`} type="submit">{loading ? <Spin /> : 'Registrar'}</button>
+
+                        {error && <span className="login__message">Email já cadastrado</span>}
+
+                        {!emptyForm && <span className="login__message">Preencha todos os campos</span>}
+
                         <p>Já possui uma conta? <span onClick={() => signUpTransition(false)}><b>Faça login</b></span></p>
 
                     </form>
