@@ -5,7 +5,7 @@ import AuthController from "../controllers/authController.js";
 const router = express.Router()
 
 router
-    .get('/users', /*AuthController.checkToken,*/ UserController.listarUsuarios)
+    .get('/users', AuthController.checkToken, UserController.listarUsuarios)
     .get('/users/:id', UserController.listarUsuariosPorId)
     .post('/users', UserController.criarUsuario)
     .put('/users/:id', UserController.atualizarUsuario)

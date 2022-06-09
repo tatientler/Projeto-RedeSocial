@@ -4,7 +4,11 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
     {
-        id: {type: String},
+        postID: {type: mongoose.Schema.Types.ObjectId},
+        userID: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }],
         text: {type: String, required: true}
     }
 )

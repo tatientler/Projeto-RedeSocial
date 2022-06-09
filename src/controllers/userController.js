@@ -1,9 +1,11 @@
 import users from "../models/userSchema.js";
 import bcrypt from "bcrypt"
+import profile from '../models/profileSchema.js'
 
 class UserController {
     static listarUsuarios = (req, res) => {
         users.find()
+        .populate('profile', '-user')
             .exec((err, login) => {
                 res.status(200).json(login)
             })
@@ -29,27 +31,38 @@ class UserController {
       
         // acessar as informações para criar nova usuária
         const newUser = new users(req.body)
+        const newProfile = new profile(req.body)
       
         try{
           // todo o código que precisa ser executado
       
           // salvar essas informações da nova usuária no banco de dados
           const savedUser = await newUser.save()
+          const savedProfile = await newProfile.save()
+          users.findOneAndUpdate(
+            {_id: savedUser._id}, {$push: {profile: savedProfile}}
+            ).exec()
+          profile.findOneAndUpdate({_id: savedProfile._id}, {$push: {user: savedUser}}).exec()
       
           // enviar uma resposta da requisição
           res.status(200).send({
             "message": "User adicionado com sucesso",
-            savedUser
+            savedUser,
+            savedProfile
           })
       
         }catch(err) {
           res.status(500).send({
-            "message": err
+            "message": err.message
           })
         }
       }
 
       static atualizarUsuario = (req, res) => {
+        
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+        req.body.password = hashedPassword
+
         const id = req.params.id
 
         users.findByIdAndUpdate(id, {$set: req.body}, (err) => {
