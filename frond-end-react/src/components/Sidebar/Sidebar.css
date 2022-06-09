@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Perfil do usuário ativo */
+
+/* Definição do container dessa section */
+section:first-child {
+    background-color: #ebedf2;
+    border-start-end-radius: 10px;
+    border-end-end-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    width: 350px;
+}
+
+/* Definição da imagem do usuário ativo */
+.secUser img {
+    border-radius: 100%;
+    border: 2px solid #6e30f2;
+    padding: 3px;
+    width: 100px;
+    margin: 3px
+}
+
+/* Definição do nome do usuário ativo */
+.secUser p {
+    color: #231773;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Estilização dos botões do usuário */
+.btnsUser {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.btnUser {
+    background-color: #231773;
+    border: none;
+    border-radius: 100px;
+    color: #fefefe;
+    cursor: pointer;
+    font-size: 14px;
+    height: 50px;
+    width: 85px;
+}
+
+.btnUser:hover{
+    background-color: #6e30f2;
+}
+
+.secUser div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.secUser div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Classes de botões de dispositivos móveis */
+.btnIconUser, .btnIconExit{
+    display: none;
+}
+
+.mobile{
+    display: none;
+}
+
+/* Definição do botão de logout */
+.btn-exit {
+    background-color: #231773;
+    border: none;
+    border-radius: 100px;
+    color: #fefefe;
+    cursor: pointer;
+    height: 30px;
+    width: 85px;
+}
+
+.btn-exit a{
+    text-decoration: none;
+}
+
+.btn-exit:hover{
+    background-color: #6e30f2;
+    font-weight: bold;
+}
+
+/* Media query para alteração dos botões em telas menores */
+@media screen and (max-width: 1024px){
+    /* Configuração da section do usuário ativo */
+    section:first-child {
+        justify-content: space-around;
+        padding: 0;
+        width: 120px;
+    }
+
+    .btnsUser .user:nth-child(2) a:last-child{
+        display: none;
+    }
+
+    /* Tamanho da imagem do usuário ativo em telas menores */
+    .secUser img {
+        padding: .12em;
+        width: 5em;
+    }
+
+    /* Botões com escritas */
+    .btnUser, .btn-exit{
+        display: none;
+    }
+
+    /* Definição dos botões com ícones */
+    .btnIconUser, .btnIconExit{
+        background-color: #231773;
+        border: none;
+        border-radius: 3em;
+        color: #fefefe;
+        cursor: pointer;
+        display: block;
+        height: 2.5em;
+        width: 2.5em;
+    }
+
+    /* Tamanho dos ícones */
+
+    .btnIconUser:hover{
+        background-color: #6e30f2;
+    }
+
+    .btnIconExit:hover{
+        background-color: #6e30f2;
+        font-weight: bold;
+    }
+
+}
+
+/* Alteração para celulares - colocando os botões do usuário em um menu superior no canto direito no formato hamburguer */
+@media screen and (max-width: 770px){
+    /* Configuração do menu hamburguer para dispositivos móveis*/
+   .mobile{
+        display: block;
+    }
+
+    /* Definição do menu hamburguer aberto*/
+    #menu__toggle {
+        opacity: 0;
+    }
+    
+    #menu__toggle:checked ~ .menu__box {
+        right: 0;
+        opacity: 1;
+    }
+    
+    .menu__btn {
+        position: fixed;
+        top: 2.7em;
+        right: .5em;
+        width: 2em;
+        height: 1em;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .menu__btn > span,
+    .menu__btn > span::before,
+    .menu__btn > span::after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: .2em;
+        background-color: #231773;
+        transition-duration: .25s;
+        z-index: 1;
+    }
+
+    .menu__btn > span::before {
+        content: '';
+        top: -.5em;
+    }
+      
+    .menu__btn > span::after {
+        content: '';
+        top: .5em;
+    }
+
+    .menu__box {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 15em;
+        height: 100%;
+        margin: 0;
+        padding: 80px 0;
+        list-style: none;
+        background-color: #ebedf2;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+        transition-duration: .25s;
+        z-index: 10000;
+    }
+    
+    .menu__item {
+        display: block;
+        padding: 12px 24px;
+        color: #231773;
+        font-size: 20px;
+        font-weight: 500;
+        text-decoration: none;
+        transition-duration: .25s;
+    }
+
+    .menu__item:hover {
+        background-color: #6e30f2;
+        color: #fefefe;
+    }
+    
+    /* Encondendo a section do perfil do usuário */
+    section:first-child {
+        display: none;
+    }
+
+}

@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+.modal__container {
+    position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: all 0.5s;
+    
+}
+
+body.modal-open .modal__container {
+    visibility: visible;
+    opacity: 1;
+
+    transition: all 0.5s;
+}
+
+.modal__box {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+
+    background-color: #fefefe;
+    border: 5px solid #231773;
+    border-radius: 20px;
+
+    width: 40%;
+    padding: 40px;
+}
+
+.modal__header {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    width: 100%;
+    padding: 1rem;
+}
+
+.modal__header h2 {
+    font-weight: bold;
+}
+
+.modal__header button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.modal__header button img {
+    width: 50px;
+}
+
+.modal__input {
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
+
+    height: 100px;
+    width: 100%;
+    
+    font-size: 20px;
+}
+
+.modal__input input {
+    border: none;
+    outline: none;
+
+    width: 100%;
+    height: 40px;
+}
+
+.modal__button {
+    border: none;
+    border-top: 1px solid #dee2e6;
+
+    color: #fefefe;
+
+    width: 100%;
+
+    padding: .75rem;
+}
+
+.modal__button button {
+    background-color: #231773;
+
+    border: none;
+    border-radius: 10px;
+
+    color: #fefefe;
+    
+    height: 40px;
+    width: 100%;
+}
