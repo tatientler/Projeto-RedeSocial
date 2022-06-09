@@ -1,6 +1,9 @@
 import users from "../models/userSchema.js";
 import bcrypt from "bcrypt"
 import profile from '../models/profileSchema.js'
+import jwt from "jsonwebtoken"
+
+const SECRET = (process.env.SECRET)
 
 class UserController {
     static listarUsuarios = (req, res) => {
@@ -26,16 +29,24 @@ class UserController {
 
     static criarUsuario = async (req, res) => {
 
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-        req.body.password = hashedPassword
-      
         // acessar as informações para criar nova usuária
-        const newUser = new users(req.body)
-        const newProfile = new profile(req.body)
-      
+  
         try{
           // todo o código que precisa ser executado
-      
+          const userExists = await users.findOne({email: req.body.email})
+
+          if(userExists) {
+            return res.status(422).json({
+                message: 'Email já cadastrado'
+            })
+        }
+
+          const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+
+          req.body.password = hashedPassword
+          const newUser = new users(req.body)
+          const newProfile = new profile(req.body)
+
           // salvar essas informações da nova usuária no banco de dados
           const savedUser = await newUser.save()
           const savedProfile = await newProfile.save()
@@ -44,11 +55,14 @@ class UserController {
             ).exec()
           profile.findOneAndUpdate({_id: savedProfile._id}, {$push: {user: savedUser}}).exec()
       
+            const token = jwt.sign({ email: req.body.email }, SECRET)
+
           // enviar uma resposta da requisição
           res.status(200).send({
             "message": "User adicionado com sucesso",
             savedUser,
-            savedProfile
+            savedProfile,
+            token
           })
       
         }catch(err) {
