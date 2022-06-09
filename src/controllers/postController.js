@@ -1,11 +1,10 @@
 import post from "../models/postSchema.js";
 import user from "../models/userSchema.js";
 import profile from "../models/profileSchema.js";
-import UserController from "./userController.js";
 
 class PostController {
     static listarPostagens = (req, res) => {
-        post.find().populate('userID', '-password -createdAt')
+        post.find().populate('userID', '-password -createdAt -profile')
             .exec((err, post) => {
                 res.status(200).json(post)
             })
@@ -32,6 +31,10 @@ class PostController {
         const currentUser = await user.findById(req.userId)
         let postagem = new post({text: req.body.text, userID: currentUser._id})
         const savedPost = await postagem.save()
+
+        profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
+
+        console.log([{_id: currentUser._id}])
 
         res.status(200).send({
             "message": "Postagem criada com sucesso",
