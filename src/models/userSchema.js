@@ -4,10 +4,14 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-        id: {type: String},
+        id: {type: mongoose.Schema.Types.ObjectId},
         name: {type: String, required: true},
         email: {type: String, required: true},
         password: {type: String, required: false},
+        profile: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'usuarios'
+        }],
         createdAt: {type: Date, default: new Date()}
     }
 )

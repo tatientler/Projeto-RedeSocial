@@ -1,8 +1,10 @@
 import post from "../models/postSchema.js";
+import user from "../models/userSchema.js";
+import profile from "../models/profileSchema.js";
 
 class PostController {
     static listarPostagens = (req, res) => {
-        post.find()
+        post.find().populate('userID', '-password -createdAt -profile')
             .exec((err, post) => {
                 res.status(200).json(post)
             })
@@ -21,16 +23,27 @@ class PostController {
             })
     }
 
-    static cadastrarPost = (req, res) => {
-        let postagem = new post(req.body)
+    static cadastrarPost = async (req, res) => {
 
-        postagem.save((err) => {
-            if(err) {
-                res.status(500).send({message: `${err.message} - Falha ao cadastrar o post`})
-            } else {
-                res.status(200).send(postagem.toJSON())
-            }
+        try {
+        console.log(req.userId)
+
+        const currentUser = await user.findById(req.userId)
+        let postagem = new post({text: req.body.text, userID: currentUser._id})
+        const savedPost = await postagem.save()
+
+        profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
+
+        console.log([{_id: currentUser._id}])
+
+        res.status(200).send({
+            "message": "Postagem criada com sucesso",
+            savedPost
         })
+
+        }catch(error) {
+            res.status(500).send({message: `${error.message} - Falha ao cadastrar postagem`})
+        } 
     }
 
     static atualizarPost = (req, res) => {

@@ -4,14 +4,19 @@ import mongoose from "mongoose";
 
 const profileSchema = new mongoose.Schema(
     {
-        id: {type: String},
+        user: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }],
         name: {type: String, required: true},
-        post: {type: mongoose.Schema.Types.ObjectId, ref: 'postagens'},
-        image: {type: String, required: true} //Aqui o arquivo correto será uma imagem. Coloquei String apenas para teste no banco de dados
+        post: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'postagens'
+        }],
+        image: {type: String} //Aqui o arquivo correto será uma imagem. Coloquei String apenas para teste no banco de dados
     }
 )
 
 const profile = mongoose.model('usuarios', profileSchema)
-
 
 export default profile

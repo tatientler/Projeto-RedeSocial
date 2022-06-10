@@ -3,6 +3,7 @@ import profile from "../models/profileSchema.js";
 class ProfileController {
     static listarUsuarios = (req, res) => {
         profile.find()
+            .populate('user', '-password -createdAt -profile')
             .populate('post')
             .exec((erro, profile) => {
             res.status(200).json(profile)
