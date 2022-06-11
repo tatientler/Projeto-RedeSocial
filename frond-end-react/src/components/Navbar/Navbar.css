@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Cabeçalho / Navbar */
+
+/* Caixa principal para definição da estilização do header */
+header {
+    background-image: linear-gradient(to right, #231773 10%, #acb0f2 90%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* Definição da disposição das divs do header */
+header div {
+    display: flex;
+    padding-right: 1rem;
+    margin-right: .4rem;
+}
+
+/* Fundo e borda da barra de pesquisa */
+.barra-pesquisar {
+    background-color: #fefefe;
+    border: 2px solid #6e30f2;
+    border-radius: 3em;  
+}
+
+/* Tamanho do ícone de pesquisa */
+.search{
+    padding: .2em;
+}
+
+/* Configuração do input de pesquisa */
+.pesquisar{
+    border: none;
+    outline: none;
+}
+
+/* Logo */
+.logo{
+    height: 4.5em;
+}
+
+/* Definição do link nos botões do header */
+.btnLink{
+    position: relative;
+}
+
+/* Botão com ícone - apenas para dispositivos menores */
+.btnIcon{
+    display: none;
+}
+
+/* Características dos botões do header */
+.btnHeader {
+    background-color: #fefefe;
+    border: none;
+    border-radius: 100px;
+    color: #231773;
+    font-size: 14px;
+    font-weight: bold;
+    height: 2.3rem;
+    width: 7rem;
+}
+
+.btnHeader:hover{
+    background-color: #231773;
+    color: #fefefe;
+    cursor: pointer;
+}
+
+/* Ícone da quantidade de notificações dos botões do header */
+.qtdNotificacao{
+    background-color: red;
+    border-radius: 3em;
+    color: #fefefe;
+    padding: 5px 13px;
+    position: absolute;
+    top: 10px;
+}
+
+/* Característica do botão de mensagem - utilizado somente para dispositivos menores */
+.invisivel{
+    display: none;
+}
+
+@media screen and (max-width: 1024px){
+    /* Característica dos botões do header com ícones */
+
+    .bi{
+        font-size: 1.3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btnIcon{
+        background-color: #fefefe;
+        border: none;
+        border-radius: 100px;
+        color: #231773;
+        display: block;
+        font-weight: bold;
+        height: 35px;
+        min-width: 40px; 
+    }
+
+    .btnIcon:hover {
+        background-color: #231773;
+        color: #fefefe;
+        cursor: pointer;
+    }
+
+    /* Botões do header com escrita */
+    .btnHeader{
+        display: none;
+    }
+
+    /* Largura da barra de pesquisar para dispositivos menores */
+    .pesquisar{
+        width: 5.5em;
+    }
+
+    /* Botão de mensagem - visível somente para dispositivos menores */
+    .invisivel {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px){
+    /* Configurações para o header em telas de dispositivos móveis */
+    header {
+        background-image: linear-gradient(to right, #231773 30%, #acb0f2 70%);
+    }
+
+    .barra-pesquisar{
+        margin-right: 2rem;
+    }
+
+}
+
+@media screen and (max-width: 640px){
+    /* Configurações para o header em telas de dispositivos móveis */
+    header div {
+        margin-right: .4rem;
+    }
+
+    .logo{
+        margin-right: 1rem;
+    }
+
+    .btnIcon{
+        height: 30px;
+        min-width: 30px; 
+    }
+
+    .qtdNotificacao{
+        background-color: red;
+        border-radius: 3em;
+        color: #fefefe;
+        padding: 1px 5px;
+        position: absolute;
+        top: 10px;
+    }
+
+    /* Barra de pesquisa em dispositivos móveis*/
+    .esconder{
+        display: none;
+    }
+
+    /* Definição da barra de pesquisa do menu hamburguer*/
+    .barra-pesquisar {
+        background-color: #fefefe;
+        border: 2px solid #6e30f2;
+        border-radius: 3em;
+        width: 10em;  
+    }
+    
+    .pesquisar{
+        border: none;
+        outline: none;
+    }
+
+}
+
