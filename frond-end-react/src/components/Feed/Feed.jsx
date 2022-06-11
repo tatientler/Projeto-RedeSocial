@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 import { Spin } from 'antd';
 
+import decode from 'jwt-decode';
+
 import './Feed.css'
 import { Navbar } from '../Navbar'
 import { Sidebar } from '../Sidebar'
@@ -22,8 +24,16 @@ export function Feed() {
     const [statusModal, setStatusModal] = useState(false)
     const location = useLocation()
 
+    const token = decode(localStorage.getItem('token'))
+
     useEffect(() => {
-        fetch(`http://localhost:3030/post`)
+        fetch(`http://localhost:3030/post`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 setPosts(data);
