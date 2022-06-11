@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import decode from 'jwt-decode';
+
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -15,18 +17,16 @@ import './Sidebar.css';
 
 export function Sidebar({currentUserImage, currentUserName, modalOpen=() => {}}, modal) {
 
-    const [estaLogado, setLogado] = useState(false);
 	const [user, setUser] = useState({});
     const location = useLocation();
 
 	useEffect(() => {
 
-        const userID = localStorage.getItem('user');
+        const userID = decode(localStorage.getItem('user'))
 
 		fetch(`http://localhost:3030/users/${userID}`)
 			.then(response => response.json())
 			.then(data => {
-                console.log(data)
                 setUser(data)
 			})
 	}, [location.pathname]);
