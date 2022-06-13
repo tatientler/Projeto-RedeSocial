@@ -20,9 +20,7 @@ export function Navbar() {
 
     const [open, setOpen] = useState(false)
 
-    {
         open ? document.body.classList.add('chat-extended') :  document.body.classList.remove('chat-extended')
-    }
 
     return (
         <>

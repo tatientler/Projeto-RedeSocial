@@ -68,6 +68,10 @@ body.modal-open .modal__container {
     width: 50px;
 }
 
+.modal__box form {
+    width: 100%;
+}
+
 .modal__input {
     display: flex;
     align-items: center;
@@ -97,6 +101,12 @@ body.modal-open .modal__container {
     width: 100%;
 
     padding: .75rem;
+}
+
+.modal__button p {
+    font-weight: bold;
+    color: red;
+    text-align: center;
 }
 
 .modal__button button {
