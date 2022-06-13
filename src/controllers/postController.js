@@ -29,12 +29,13 @@ class PostController {
         console.log(req.userId)
 
         const currentUser = await user.findById(req.userId)
+        console.log(currentUser)
         let postagem = new post({text: req.body.text, userID: currentUser._id})
         const savedPost = await postagem.save()
 
-        profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
+        profile.findOneAndUpdate({user: {_id: currentUser._id}}, {$push: {post: savedPost}}).exec()
 
-        console.log([{_id: currentUser._id}])
+        console.log(currentUser._id)
 
         res.status(200).send({
             "message": "Postagem criada com sucesso",
