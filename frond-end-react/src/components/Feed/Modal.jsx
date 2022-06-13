@@ -10,8 +10,9 @@ export function Modal({modal=false, modalClose = () => {}}) {
     const [emptyForm, setEmptyForm] = useState()
     
         const post = (event) => {
-            const token = decode(localStorage.getItem('token'))
+            const token = localStorage.getItem('token')
             const postContent = event.target.postContent.value
+            console.log(postContent)
 
             if(postContent) {
                 setEmptyForm(false)

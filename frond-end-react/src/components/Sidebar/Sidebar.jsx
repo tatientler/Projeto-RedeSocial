@@ -23,7 +23,7 @@ export function Sidebar({currentUserImage, currentUserName, modalOpen=() => {}},
 
 	useEffect(() => {
 
-        const userID = decode(localStorage.getItem('user'))
+        const userID = localStorage.getItem('user')
 
 		fetch(`http://localhost:3030/users/${userID}`)
 			.then(response => response.json())

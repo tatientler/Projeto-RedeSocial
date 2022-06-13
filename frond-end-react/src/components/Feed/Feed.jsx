@@ -25,7 +25,7 @@ export function Feed() {
     const location = useLocation()
 
     useEffect(() => {
-        const token = decode(localStorage.getItem('token'))
+        const token = localStorage.getItem('token')
         fetch(`http://localhost:3030/post`, {
             method: 'GET',
             headers: {

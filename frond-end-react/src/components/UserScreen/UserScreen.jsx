@@ -18,8 +18,8 @@ export function UserScreen () {
     const location = useLocation()
 
     useEffect(() => {
-        const token = decode(localStorage.getItem('token'))
-        const userID = decode(localStorage.getItem('user'))
+        const token = localStorage.getItem('token')
+        const userID = localStorage.getItem('user')
         fetch(`http://localhost:3030/users/${userID}`, {
             method: 'GET',
             headers: {
@@ -34,8 +34,8 @@ export function UserScreen () {
     }, [location.pathname])
 
     useEffect(() => {
-        const token = decode(localStorage.getItem('token'))
-        const profileID = decode(localStorage.getItem('profile'))
+        const token = localStorage.getItem('token')
+        const profileID = localStorage.getItem('profile')
         fetch(`http://localhost:3030/usuarios/${profileID}`, {
             method: 'GET',
             headers: {
