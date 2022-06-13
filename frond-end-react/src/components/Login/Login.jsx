@@ -47,9 +47,9 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                     setIsLoggedIn(true)
                     setError(false)
                     console.log(user)
-                    const criptId = encode(user.userID, secretId)
-                    const criptToken = encode(user.token, secretToken)
-                    const userProfile = encode(user.profile, secretToken)
+                    const criptId = user.userID
+                    const criptToken = user.token
+                    const userProfile = user.profile
                     localStorage.setItem('token', criptToken)
                     localStorage.setItem('user', criptId)
                     localStorage.setItem('profile', userProfile)
@@ -95,11 +95,17 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 })
                 .then(response => response.json())
                 .then(user => {
-
+                    
                     if(user.token){
+                        console.log(user.savedUser._id)
                         setError(false)
-                        localStorage.setItem('token', user.token)
-                        localStorage.setItem('user', user.savedUser._id)
+                        const criptId = user.savedUser._id
+                        const criptToken = user.token
+                        const userProfile = user.savedProfile._id
+                        localStorage.setItem('token', criptToken)
+                        localStorage.setItem('user', criptId)
+                        localStorage.setItem('profile', userProfile)
+                        
                         setLoading(false)
                         setIsLoggedIn(true)
                         return;
