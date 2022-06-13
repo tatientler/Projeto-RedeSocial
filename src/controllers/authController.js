@@ -22,12 +22,14 @@ class AuthController {
                 })
             }
             const userID = user._id
+            const profile = user.profile[0]
             const token = jwt.sign({ id: userID }, SECRET)
     
             res.status(200).send({
                 "message": "Login autorizado",
                 token,
-                userID
+                userID,
+                profile
             })
         })
     }
