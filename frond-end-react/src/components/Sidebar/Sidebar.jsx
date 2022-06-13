@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import decode from 'jwt-decode';
 
@@ -31,52 +32,55 @@ export function Sidebar({currentUserImage, currentUserName, modalOpen=() => {}},
 			})
 	}, [location.pathname]);
 
+    const logOut = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
+
     return (
-        <>
-                <section className="secUser">
+            <section className="secUser">
 
-                    <div>
-                        <img src={currentUserImage} alt="Perfil do usuário logado" />
-                        <p>{user.name}</p>
+                <div>
+                    <img src={currentUserImage} alt="Perfil do usuário logado" />
+                    <p>{user.name}</p>
+                </div>
+                    
+                <div className="btnsUser">
+                    <div className="user">
+                        <Link to="/profile"><button className="btnIconUser"><i className="bi bi-pencil-square"><img src={box} alt="" /></i></button></Link>
+                        <Link to="/profile"><button className="btnUser">Perfil</button></Link>
+                    </div>
+
+                    <div className="user">
+                        <button className="btnIconUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {modalOpen(true); document.body.classList.add('modal-open')}}><i className="bi bi-plus-circle-fill"><img src={circle} alt="" /></i></button>
+                        <button className="btnUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {modalOpen(true); document.body.classList.add('modal-open')}}>Publicar</button>
+                    </div>
+
+                    <div className="user">
+                        <Link to="" /><button className="btnIconUser"><i className="bi bi-people-fill"><img src={group} alt="" /></i></button>
+                        <Link to="" /><button className="btnUser">Amigos</button>
+                    </div>
+
+                    <div className="user">
+                        <Link to="" /><button className="btnIconUser"><i className="bi bi-file-earmark-code-fill"><img src={file} alt="" /></i></button>
+                        <Link to="" /><button className="btnUser">Códigos</button>
+                    </div>
+
+                    <div className="user">
+                        <Link to="" /><button className="btnIconUser"><i className="bi bi-bag-check-fill"><img src={bag} alt="" /></i></button>
+                        <Link to="" /><button className="btnUser">Market</button>
+                    </div>
+
+                    <div className="user">
+                        <Link to="" /><button className="btnIconUser"><i className="bi bi-calendar-event"><img src={calendar} alt="" /></i></button>
+                        <Link to="" /><button className="btnUser">Eventos</button>
+                    </div>
                     </div>
                     
-                    <div className="btnsUser">
-                        <div className="user">
-                            <Link to="" /><button className="btnIconUser"><i className="bi bi-pencil-square"><img src={box} alt="" /></i></button>
-                            <Link to="" /><button className="btnUser">Perfil</button>
-                        </div>
-
-                        <div className="user">
-                            <button className="btnIconUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {modalOpen(true); document.body.classList.add('modal-open')}}><i className="bi bi-plus-circle-fill"><img src={circle} alt="" /></i></button>
-                            <button className="btnUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {modalOpen(true); document.body.classList.add('modal-open')}}>Publicar</button>
-                        </div>
-
-                        <div className="user">
-                            <Link to="" /><button className="btnIconUser"><i className="bi bi-people-fill"><img src={group} alt="" /></i></button>
-                            <Link to="" /><button className="btnUser">Amigos</button>
-                        </div>
-
-                        <div className="user">
-                            <Link to="" /><button className="btnIconUser"><i className="bi bi-file-earmark-code-fill"><img src={file} alt="" /></i></button>
-                            <Link to="" /><button className="btnUser">Códigos</button>
-                        </div>
-
-                        <div className="user">
-                            <Link to="" /><button className="btnIconUser"><i className="bi bi-bag-check-fill"><img src={bag} alt="" /></i></button>
-                            <Link to="" /><button className="btnUser">Market</button>
-                        </div>
-
-                        <div className="user">
-                            <Link to="" /><button className="btnIconUser"><i className="bi bi-calendar-event"><img src={calendar} alt="" /></i></button>
-                            <Link to="" /><button className="btnUser">Eventos</button>
-                        </div>
-                    </div>
-                    
                     <div>
-                        <Link to="/" /><button className="btn-exit btnIconExit"><i className="bi bi-box-arrow-left"><img src={exit} alt="" /></i></button>
-                        <Link to="/" /><button className="btn-exit">Sair</button>
+                        <Link to="/"><button onClick={() => {logOut()}} className="btn-exit btnIconExit"><i className="bi bi-box-arrow-left"><img src={exit} alt="" /></i></button></Link>
+                        <Link to="/"><button onClick={() => {logOut()}} className="btn-exit">Sair</button></Link>
                     </div>
-                </section>
-        </>
+            </section>
     )
 }

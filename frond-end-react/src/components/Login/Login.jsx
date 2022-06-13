@@ -24,9 +24,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
         event.preventDefault();
         const userEmail = event.target.email.value
         const userPassword = event.target.senha.value
-
-        console.log(userEmail, userPassword)
-
+        
         if(userEmail && userPassword) {
 
             setLoading(true)
@@ -48,10 +46,13 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 if(user.token) {
                     setIsLoggedIn(true)
                     setError(false)
+                    console.log(user)
                     const criptId = encode(user.userID, secretId)
                     const criptToken = encode(user.token, secretToken)
+                    const userProfile = encode(user.profile, secretToken)
                     localStorage.setItem('token', criptToken)
                     localStorage.setItem('user', criptId)
+                    localStorage.setItem('profile', userProfile)
                     return;
                 }
 
