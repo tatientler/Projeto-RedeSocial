@@ -29,6 +29,7 @@ export function UserScreen () {
         })
         .then(response => response.json())
         .then(user => {
+            console.log(user)
             setUser(user);
         })
     }, [location.pathname])

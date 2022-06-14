@@ -46,7 +46,6 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 if(user.token) {
                     setIsLoggedIn(true)
                     setError(false)
-                    console.log(user)
                     const criptId = user.userID
                     const criptToken = user.token
                     const userProfile = user.profile
@@ -97,7 +96,6 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 .then(user => {
                     
                     if(user.token){
-                        console.log(user.savedUser._id)
                         setError(false)
                         const criptId = user.savedUser._id
                         const criptToken = user.token
