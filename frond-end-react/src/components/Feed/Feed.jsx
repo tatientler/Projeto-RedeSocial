@@ -50,7 +50,7 @@ export function Feed() {
                     {
                     loading ? 
                     <Spin /> : 
-                    posts.map(post => <Post key={post._id} username={post.userID[0].name} contentPost={post.text} imgUser={userImage2} />)
+                    posts.map(post => <Post key={post._id} username={post.userID[0]?.name} contentPost={post.text} imgUser={userImage2} />)
                     }
                     <Post username={"John Doe"} imgUser={userImage1} contentPost={`Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos." - Isaac Newton`} />
                 </section>

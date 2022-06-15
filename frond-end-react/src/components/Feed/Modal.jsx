@@ -10,6 +10,7 @@ export function Modal({modal=false, modalClose = () => {}}) {
     const [emptyForm, setEmptyForm] = useState()
     
         const post = (event) => {
+            event.preventDefault()
             const token = localStorage.getItem('token')
             const postContent = event.target.postContent.value
             console.log(postContent)
@@ -20,10 +21,12 @@ export function Modal({modal=false, modalClose = () => {}}) {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + token,
+                    user: localStorage.getItem('user')
                 },
                 body: JSON.stringify({
-                    text: postContent
+                    text: postContent,
+                    user: localStorage.getItem('user')
             }),
                 credentials: "same-origin"
             })
