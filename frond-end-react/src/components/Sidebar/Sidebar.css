@@ -21,7 +21,27 @@ section:first-child {
     border: 2px solid #6e30f2;
     padding: 3px;
     width: 100px;
-    margin: 3px
+    height: 100px;
+    margin: 3px;
+    object-fit: cover;
+}
+
+.secUser__label {
+    cursor: pointer;
+}
+
+.secUser__img input[type="file"] {
+    display: none;
+}
+
+.secUser__img button {
+    background-color: #6e30f2;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 5px;
+    width: 100px;
 }
 
 /* Definição do nome do usuário ativo */
