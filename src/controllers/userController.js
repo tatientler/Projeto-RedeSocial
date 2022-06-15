@@ -2,6 +2,9 @@ import users from "../models/userSchema.js";
 import bcrypt from "bcrypt"
 import profile from '../models/profileSchema.js'
 import jwt from "jsonwebtoken"
+import cloudinary from '../utils/cloudinary.js'
+import upload from '../utils/multer.js' 
+import path from "path"
 
 const SECRET = (process.env.SECRET)
 
@@ -42,7 +45,6 @@ class UserController {
         }
 
           const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-
           req.body.password = hashedPassword
           const newUser = new users(req.body)
           const newProfile = new profile(req.body)
@@ -82,6 +84,20 @@ class UserController {
         users.findByIdAndUpdate(id, {$set: req.body}, (err) => {
           if(!err) {
             res.status(200).send({message: 'Usuário atualizado com sucesso'})
+          } else {
+            res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
+          }
+        })
+      }
+
+      static atualizarImagemUsuário = async (req, res) => {
+        const id = req.params.id
+        const file = req.file.path
+        const userAvatar = await cloudinary.uploader.upload(file);
+
+        users.findByIdAndUpdate(id, {$set: {avatar: userAvatar.url}}, (err) => {
+          if(!err) {
+            res.status(200).send({message: 'Imagem atualizada com sucesso'})
           } else {
             res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
           }
