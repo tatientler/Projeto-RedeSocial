@@ -7,7 +7,7 @@ const router = express.Router()
 router
     .get('/post', AuthController.checkToken, PostController.listarPostagens)
     .get('/post/:id', PostController.listarPostagensPorId)
-    .post('/post', AuthController.checkToken, PostController.cadastrarPost)
+    .post('/post', PostController.cadastrarPost)
     .put('/post/:id', AuthController.checkToken, PostController.atualizarPost)
     .delete('/post/:id', AuthController.checkToken, PostController.excluirPost)
 

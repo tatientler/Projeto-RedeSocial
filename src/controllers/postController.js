@@ -26,16 +26,12 @@ class PostController {
     static cadastrarPost = async (req, res) => {
 
         try {
-        console.log(req.userId)
 
-        const currentUser = await user.findById(req.userId)
-        console.log(currentUser)
+        const currentUser = await user.findById(req.headers.user)
         let postagem = new post({text: req.body.text, userID: currentUser._id})
         const savedPost = await postagem.save()
 
-        profile.findOneAndUpdate({user: {_id: currentUser._id}}, {$push: {post: savedPost}}).exec()
-
-        console.log(currentUser._id)
+        profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
         res.status(200).send({
             "message": "Postagem criada com sucesso",
