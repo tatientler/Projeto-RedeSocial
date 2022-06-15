@@ -57,7 +57,7 @@ export function UserScreen () {
 
             <div className="userScreen_content">
                 <div className="userScreen__header">
-                    <img src={userImage} alt="" />
+                    <img src={user.avatar} alt="" />
                     <h2>{user.name}</h2>
                 </div>
 
@@ -78,7 +78,7 @@ export function UserScreen () {
                 <div className="userScreen__posts">
                     <h3>Suas publicações</h3>
                     {
-                        posts.map(post => <Post key={post._id} username={user.name} imgUser={userImage} contentPost={post.text}/>)
+                        posts.map(post => <Post key={post._id} username={user.name} imgUser={user.avatar} contentPost={post.text}/>)
                     }
                 </div>
             </div>
