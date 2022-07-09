@@ -23,9 +23,10 @@
 }
 
 .contentPost {
+    position: relative;
     height: 100%;
     margin-left: 10%;
-    padding-right: 3.5rem ;
+    padding-right: 3.5rem;
 }
 
 /* Definição do texto dos posts */
@@ -37,7 +38,9 @@
 }
 
 .contentPost img {
-    width: 100%;
+    width: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Borda post*/
@@ -138,6 +141,8 @@ button:active {
     transition: 80ms;
 }
 
+
+
 @media screen and (min-width: 1024px) {
     .btnsUser .user:nth-child(2) a:first-child{
         display: none;
@@ -191,6 +196,12 @@ button:active {
 
     .btnInteracoes .btnAction{
         display: none;
+    }
+
+    .contentPost img {
+        width: 100%;
+        margin-left: 0;
+        transform: translateX(0);
     }
 }
 
@@ -252,5 +263,11 @@ button:active {
     .reacoes{
         margin-left: 1.3rem;
         width: 325px;
+    }
+
+    .contentPost img {
+        width: 100%;
+        margin-left: 0;
+        transform: translateX(0);
     }
 }

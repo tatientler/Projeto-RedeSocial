@@ -15,7 +15,9 @@ export function Post({ username, contentPost, imgPost, imgUser}) {
 
                 <div className="contentPost">
                     <p>{contentPost}</p>
-                    {/* <img src={imgPost} alt="Postagem do usuário" /> */}
+                    {
+                        imgPost && <img src={imgPost} alt="Imagem do post" />
+                    }
                 </div>
 
                 <div className="reacoes desativar d-flex align-items-center">
