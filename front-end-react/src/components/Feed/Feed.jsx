@@ -18,13 +18,18 @@ import userImage3 from './img/img3.jpg'
 
 export function Feed() {
 
+    const [newPost, setNewPost] = useState(false);
+
     const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(true);
     const [openChat, setOpenChat] = useState(false)
     const [statusModal, setStatusModal] = useState(false)
     const location = useLocation()
 
-    useEffect(() => {
+    !statusModal ? document.body.classList.remove('modal-open') : document.body.classList.add('modal-open')
+
+
+    const getPosts = () => {
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3030/post`, {
             method: 'GET',
@@ -33,16 +38,26 @@ export function Feed() {
                 'Authorization': 'Bearer ' + token
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                setPosts(data);
-				setLoading(false);
-            })
+        .then(response => response.json())
+        .then(data => {
+            setPosts(data);
+			setLoading(false);
+            console.log(data)
+        })
+    }
 
+    useEffect(() => {
+        getPosts()
     }, [location.pathname])
+
+    useEffect(() => {
+        getPosts()
+        setNewPost(false)
+    }, [newPost])
 
     return (
         <div className='feed_content'>
+
             <Navbar />
             <main className="container justify-content-center">
                 <Sidebar currentUserImage={userImage1} modalOpen={setStatusModal}/>
@@ -50,13 +65,13 @@ export function Feed() {
                     {
                     loading ? 
                     <Spin /> : 
-                    posts.map(post => <Post key={post._id} username={post.userID[0]?.name} contentPost={post.text} imgUser={post.userID[0]?.avatar} />)
+                    posts.map(post => <Post key={post._id} username={post.userID[0]?.name} contentPost={post.text != undefined ? post.text : ''} imgPost={post.image != undefined ? post.image : false}imgUser={post.userID[0]?.avatar} />).reverse()
                     }
                     <Post username={"John Doe"} imgUser={userImage1} contentPost={`Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos." - Isaac Newton`} />
                 </section>
                 <Chat openChat={setOpenChat} open={openChat} currentUserImage={userImage1} friendUserImage={userImage3}/>
             </main>
-            <Modal modalClose={setStatusModal} modal={statusModal}/>
+            <Modal postSucess={setNewPost} modalClose={setStatusModal} modal={statusModal}/>
         </div>
     )
 }
