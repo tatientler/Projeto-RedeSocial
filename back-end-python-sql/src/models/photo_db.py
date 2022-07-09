@@ -3,9 +3,10 @@
 from app_module import db, ma
 
 class Photo(db.Model):
-    __tablename__ = 'tbl_photo'
+    __tablename__ = 'tbl_cloudinary'
     id = db.Column(db.Integer, primary_key = True, unique = True)
-    photo = db.Column(db.String(256), nullable = False, unique = False)
+    photo_url = db.Column(db.String(256), nullable = False, unique = False)
+    photo_id = db.Column(db.String(256), nullable = False, unique = False)
     created_date = db.Column(db.DateTime, nullable = True)
     
 
