@@ -24,19 +24,44 @@ class PostController {
     }
 
     static cadastrarPost = async (req, res) => {
-
+        console.log(req.body)
         try {
+            const currentUser = await user.findById(req.headers.user)
+            if(req.body.text != '' && req.body.image != '') {
+                let postagem = new post({
+                    userID: currentUser._id,
+                    text: req.body.text,
+                    image: req.body.image,
+                    createdAt: new Date()
+                })
+                const savedPost = await postagem.save()
+                profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-        const currentUser = await user.findById(req.headers.user)
-        let postagem = new post({text: req.body.text, userID: currentUser._id})
-        const savedPost = await postagem.save()
+            } else if (req.body.text != '' && req.body.image == '') {
+                let postagem = new post({
+                    userID: currentUser._id,
+                    text: req.body.text,
+                    createdAt: new Date()
+                })
+                const savedPost = await postagem.save()
+                profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-        profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
+            } else if ( req.body.text == '' && req.body.image != '') {
+                let postagem = new post({
+                    userID: currentUser._id,
+                    image: req.body.image,
+                    createdAt: new Date()
+                })
+                const savedPost = await postagem.save()
+                profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-        res.status(200).send({
-            "message": "Postagem criada com sucesso",
-            savedPost
-        })
+            } else {
+                throw new Error()
+            }
+
+            res.status(200).send({
+                "message": "Postagem criada com sucesso"
+            })
 
         }catch(error) {
             res.status(500).send({message: `${error.message} - Falha ao cadastrar postagem`})
