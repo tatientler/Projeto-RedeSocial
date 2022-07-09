@@ -1,6 +1,6 @@
 // Esse arquivo é para iniciar o servidor para que seja possível escutar uma porta
 
-import app from "./src/app.js"
+import app from "./back-end-node-mongo/src/app.js"
 
 const port = process.env.PORT || 3030
 

@@ -1,0 +1,1 @@
+'''executa as regras de negócio e devolve para a camada de apresentação'''
