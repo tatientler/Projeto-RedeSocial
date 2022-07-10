@@ -29,7 +29,6 @@ export function UserScreen () {
         })
         .then(response => response.json())
         .then(user => {
-            console.log(user)
             setUser(user);
         })
     }, [location.pathname])
@@ -68,17 +67,15 @@ export function UserScreen () {
                 <div className="userScreen__fotos">
                     <h3>Fotos</h3>
                     <div className="fotos__container">
-                        <img src={userImage} alt="" />
-                        <img src={userImage} alt="" />
-                        <img src={userImage} alt="" />
-                        <img src={userImage} alt="" />
-                        <img src={userImage} alt="" />
+                        {
+                            posts.map(post => { return post.image != undefined ? <img src={post.image} alt="" key={post._id} /> : null })
+                        }
                     </div>
                 </div>
                 <div className="userScreen__posts">
                     <h3>Suas publicações</h3>
                     {
-                        posts.map(post => <Post key={post._id} username={user.name} imgUser={user.avatar} contentPost={post.text}/>)
+                        posts.map(post => <Post key={post._id} username={user.name} imgUser={user.avatar} contentPost={post.text} imgPost={post.image} />)
                     }
                 </div>
             </div>
