@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
 /* Feed */
 .secPosts {
     display: flex;
@@ -10,7 +9,6 @@
     padding: 1rem;
     width: 100vw;
 }
-
 /* Definição de como irão aparecer os posts */
 .post {
     border: 2px solid #6e30f2;
@@ -21,32 +19,27 @@
     justify-content: space-between;
     padding: .5rem;
 }
-
 .contentPost {
     position: relative;
     height: 100%;
     margin-left: 10%;
     padding-right: 3.5rem;
 }
-
 /* Definição do texto dos posts */
 .contentPost p {
     font-size: 1.2em;
     line-height: 1.5em;
     text-align: justify;
 }
-
 .contentPost img {
     width: 50%;
     margin-left: 50%;
     transform: translateX(-50%);
 }
-
 .post-info {
     display: flex;
     justify-content: space-between;
 }
-
 /* Borda post*/
 .author {
     color: #6e30f2;
@@ -54,7 +47,6 @@
     align-items: top;
     width: 100%;
 }
-
 /* Imagem do amigo/autor do post */
 .author img {
     border-radius: 100%;
@@ -62,30 +54,25 @@
     padding: .1em;
     width: 4rem;
 }
-
 /* Nome do amigo/autor do post */
 .author p {
     font-size: 1.2em;
     font-weight: bold;
     margin-left: 1%;
 }
-
 .popover {
     position: absolute;
     right: 35px;
 }
-
 .popover p {
     text-align: center;
     margin: 0;
 }
-
 .popover-options {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 }
-
 .popover-options button {
     border: none;
     font-size: 0.9rem;
@@ -94,42 +81,34 @@
     width: 100%;
     transition: all 0.2s;
 }
-
 .popover-options button:hover {
     background-color: #6e30f2;
     color: #fefefe;
 }
-
 .post-popover {
     display: flex;
     position: relative;
 }
-
 /* Características dos ícones de contagem para curtidas, comentários e compartilhamentos */
 .reacoes{
     justify-content: space-between;
     margin-left: 5rem;
     width: 390px;
 }
-
 .ativar{
     opacity: 1;
 }
-
 .desativar{
     opacity: 0;
 }
-
 .reacoes p{
     font-size: .8em;
     color: #231773;
 }
-
 .comentario{
     width: 100px;
     justify-content: space-evenly;
 }
-
 /* Div dos botões para interação nas postagens*/
 .interacoes {
     display: flex;
@@ -137,7 +116,6 @@
     margin: 0;
     padding: 0;
 }
-
 /* Botões para reação nas postagens*/
 .btnInt {
     background-color: #6e30f2;
@@ -153,33 +131,27 @@
     padding: 10px;
     width: 250px;
 }
-
 /* Ícones dos botões de postagens*/
 .icone-interacoes{
     font-size: 1em;
     padding-right: .8em;
 }
-
 .btnInt:hover{
     background-color: #ebedf2;
     border: 2px solid #6e30f2;
     color: #6e30f2;
     font-weight: bold;
 }
-
 .btnInteracoes .btnAction{
     display: none;
 }
-
 button {
     transition: 80ms;
 }
-
 button:active {
     transform: scale(90%);
     transition: 80ms;
 }
-
 @media screen and (min-width: 1024px) {
     .btnsUser .user:nth-child(2) a:first-child{
         display: none;
@@ -210,7 +182,6 @@ button:active {
         display: none;
     }
 }
-
 @media screen and (max-width: 990px){
     .contentPost p {
         padding-top: 1rem;
@@ -232,7 +203,6 @@ button:active {
         transform: translateX(0);
     }
 }
-
 @media screen and (max-width: 640px){
     .secPosts{
         margin: 3px 0;
