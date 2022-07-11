@@ -2,20 +2,36 @@ import './Post.css'
 import like from './img/like.svg'
 import comment from './img/comment.svg'
 import share from './img/share.svg'
+import { DotsThreeVertical } from 'phosphor-react'
+import { Popover } from './Popover'
+import { useState } from 'react'
 
-export function Post({ username, contentPost, imgPost, imgUser}) {
+export function Post({ userId, postData, postId, username, contentPost, imgPost, imgIdPost, imgUser }) {
+
+    const [popoverOpen, setPopoverOpen] = useState(false);
+    const formatedDate = new Date(postData).toLocaleDateString('pt-BR')
+
     return (
         <>
             <div className="post">
 
-                <div className="author">
-                    <img src={imgUser} alt="Avatar ou imagem do perfil do amigo" />
-                    <p>{username}</p>
+                <div className='post-info'>
+                    <div className="author">
+                        <img src={imgUser} alt="Avatar ou imagem do perfil do amigo" />
+                        <p>{username}</p>
+                    </div>
+                    <div className='post-popover'>
+                        {
+                            popoverOpen && <Popover key={Math.random()} imgIdPost={imgIdPost} postId={postId} imgPost={imgPost} userId={userId} />
+                        }
+                        <DotsThreeVertical style={{cursor: "pointer"}} size={30} onClick={() => !popoverOpen ? setPopoverOpen(true) : setPopoverOpen(false)}/>
+                    </div>
                 </div>
-
                 <div className="contentPost">
                     <p>{contentPost}</p>
-                    {/* <img src={imgPost} alt="Postagem do usuário" /> */}
+                    {
+                        imgPost && <img src={imgPost} alt="Imagem do post" />
+                    }
                 </div>
 
                 <div className="reacoes desativar d-flex align-items-center">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { useModal } from '../../hooks/useModal';
 
 import logo from './img/logo.png'
 import search from './img/search-icon.svg'
@@ -17,6 +18,8 @@ import exit from './img/exit-icon.svg'
 import './Navbar.css';
 
 export function Navbar() {
+
+    const { openModal } = useModal();
 
     const [open, setOpen] = useState(false)
 

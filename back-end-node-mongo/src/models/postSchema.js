@@ -9,7 +9,9 @@ const postSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
         }],
-        text: {type: String, required: true},
+        text: {type: String},
+        image: {type: String},
+        imageId: {type: String},
         createdAt: {type: Date, default: new Date()},
     }
 )
