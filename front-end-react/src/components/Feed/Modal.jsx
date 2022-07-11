@@ -90,6 +90,7 @@ export function Modal({ postSucess = () => {}}) {
             setLoading(false)
             setTextInput('')
         })
+
         .catch(() => 
             toast.error('Erro ao adicionar post', {
                 position: "top-right",
@@ -103,6 +104,7 @@ export function Modal({ postSucess = () => {}}) {
         )
     }
         else if(textInput.length == 0 && data.image != null) {
+
             setLoading(true)
             const api = axios.create({
                 baseURL: 'http://127.0.0.1:5000/photos',
@@ -140,6 +142,7 @@ export function Modal({ postSucess = () => {}}) {
                     draggable: true,
                     progress: undefined,
                 })
+
                 setData({image: null})
                 closeModal()
                 event.target.postContent.value = ""
@@ -148,6 +151,7 @@ export function Modal({ postSucess = () => {}}) {
                 setLoading(false)
                 setTextInput('')
             })
+
             .catch(() =>
                 toast.error('Erro ao adicionar post', {
                     position: "top-right",
@@ -163,6 +167,7 @@ export function Modal({ postSucess = () => {}}) {
         else if (textInput.length > 0 && data.image != null) {
             setLoading(true)
             setEmptyForm(false)
+
             const api = axios.create({
                 baseURL: 'http://127.0.0.1:5000/photos',
                })
@@ -172,6 +177,7 @@ export function Modal({ postSucess = () => {}}) {
                     'Content-Type': 'multipart/form-data',
                 }
             })
+
             .then(async (res) => {
                 console.log(res.data)
                 await fetch("http://localhost:3030/post", {
@@ -200,6 +206,7 @@ export function Modal({ postSucess = () => {}}) {
                     draggable: true,
                     progress: undefined,
                 })
+                
                 setData({image: null})
                 closeModal()
                 setPreviewSource(undefined)
@@ -222,6 +229,7 @@ export function Modal({ postSucess = () => {}}) {
     }
     
     console.log(formData.get('image'))
+
 
     return (
         <>

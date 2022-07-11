@@ -117,3 +117,19 @@ body.modal-open .modal__container {
     height: 40px;
     width: 100%;
 }
+
+.modal__input input[type="file"] {
+    display: none;
+}
+.modal__input label {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.moda__form-imagem {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}

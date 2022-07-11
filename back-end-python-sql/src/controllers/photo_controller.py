@@ -40,11 +40,14 @@ def add():
         #print(photo_cloudinary['public_id']) # id
         #print(photo_cloudinary['url']) # url
 
+
+
         photo = Photo(photo_url = photo_cloudinary['url'], photo_id = photo_cloudinary['public_id']  , created_date = datetime.now())
         db.session.add(photo)
         db.session.commit()
 
     return jsonify(url = photo_cloudinary['url'], id = photo_cloudinary['public_id']), 201
+
 
 def read(id):
     ''' Abre uma foto '''
@@ -83,6 +86,7 @@ def deleteById(id):
     photo = Photo.query.filter_by(photo_id = id).first()
     photo_id = photo.photo_id
     cloudinary.uploader.destroy(photo_id)
+
 
     db.session.delete(photo)
     db.session.commit()
