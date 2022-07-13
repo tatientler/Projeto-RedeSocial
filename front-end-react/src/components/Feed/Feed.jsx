@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 import { Spin } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
 
 import decode from 'jwt-decode';
 
@@ -85,6 +86,9 @@ export function Feed() {
                 modalOpen &&
                 <Modal postSucess={setNewPost} />
             }
+            
+            <ToastContainer />
         </div>
+        
     )
 }

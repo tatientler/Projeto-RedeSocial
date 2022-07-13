@@ -40,8 +40,6 @@ def add():
         #print(photo_cloudinary['public_id']) # id
         #print(photo_cloudinary['url']) # url
 
-
-
         photo = Photo(photo_url = photo_cloudinary['url'], photo_id = photo_cloudinary['public_id']  , created_date = datetime.now())
         db.session.add(photo)
         db.session.commit()
@@ -71,7 +69,7 @@ def update(id):
         return jsonify({}), 200
 
 def delete(id):
-    ''' Deleta uma foto '''
+    ''' Deleta uma foto (usada somente para o SQL - no postman) '''
     photo = Photo.query.filter_by(id = id).first()
     photo_id = photo.photo_id
     cloudinary.uploader.destroy(photo_id)
@@ -81,8 +79,8 @@ def delete(id):
 
     return jsonify({'mensagem': 'Deletado com sucesso!'}), 204
 
-def deleteById(id):
-    ''' Deleta uma foto '''
+def deletePhotoById(id):
+    ''' Deleta a foto do cloudinary '''
     photo = Photo.query.filter_by(photo_id = id).first()
     photo_id = photo.photo_id
     cloudinary.uploader.destroy(photo_id)

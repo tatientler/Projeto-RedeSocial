@@ -4,7 +4,7 @@ import { Image } from 'phosphor-react';
 import close from './img/close-icon.svg'
 import axios from 'axios';
 import { Spin } from 'antd';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import './Modal.css'
 import { useModal } from '../../hooks/useModal';
@@ -252,7 +252,6 @@ export function Modal({ postSucess = () => {}}) {
                     </form>
                 </div>
             </div>
-            <ToastContainer />
         </>
     )
 }
