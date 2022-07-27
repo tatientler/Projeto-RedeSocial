@@ -39,17 +39,18 @@ export function Feed() {
 
     const getPosts = () => {
         const token = localStorage.getItem('token')
-        fetch(`http://localhost:3030/post`, {
+        fetch(`https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            setPosts(data);
-			setLoading(false);
+        .then(async response => {
+            const data = await response.json()
+            console.log(data)
+            setPosts(data.body);
+            setLoading(false);
         })
     }
 

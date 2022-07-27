@@ -22,7 +22,7 @@ export function Post({ userId, postData, postId, username, contentPost, imgPost,
                     </div>
                     <div className='post-popover'>
                         {
-                            popoverOpen && <Popover key={Math.random()} imgIdPost={imgIdPost} postId={postId} imgPost={imgPost} userId={userId} />
+                            popoverOpen && <Popover key={imgIdPost} imgIdPost={imgIdPost} postId={postId} imgPost={imgPost} userId={userId} />
                         }
                         <DotsThreeVertical style={{cursor: "pointer"}} size={30} onClick={() => !popoverOpen ? setPopoverOpen(true) : setPopoverOpen(false)}/>
                     </div>

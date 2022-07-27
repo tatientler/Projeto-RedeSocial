@@ -11,6 +11,7 @@ import imgUser from './img/user-placeholder.png'
 import './Sidebar.css';
 import { Plus, SignOut, User, Users } from 'phosphor-react';
 import { useModal } from '../../hooks/useModal';
+import axios from 'axios';
 
 export function Sidebar({ currentUserImage, currentUserName }, modal) {
 
@@ -68,10 +69,11 @@ export function Sidebar({ currentUserImage, currentUserName }, modal) {
 
         const userID = localStorage.getItem('user')
 
-        fetch(`http://localhost:3030/users/${userID}`)
-            .then(response => response.json())
-            .then(data => {
-                setUser(data)
+        fetch(`https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user/${userID}`)
+            .then(async response => {
+                const { user } = await response.json()
+                setUser(user)
+                console.log(user)
             })
     }, [location.pathname]);
 
