@@ -16,8 +16,9 @@ import bag from './img/shopping-bag-icon.svg'
 import exit from './img/exit-icon.svg'
 
 import './Navbar.css';
+import { memo } from 'react';
 
-export function Navbar() {
+function NavbarComponent() {
 
     const { openModal } = useModal();
 
@@ -125,3 +126,5 @@ export function Navbar() {
     </>
     )
 }
+
+export const Navbar = memo(NavbarComponent)

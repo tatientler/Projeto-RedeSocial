@@ -4,9 +4,9 @@ import comment from './img/comment.svg'
 import share from './img/share.svg'
 import { DotsThreeVertical } from 'phosphor-react'
 import { Popover } from './Popover'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
-export function Post({ userId, postData, postId, username, contentPost, imgPost, imgIdPost, imgUser }) {
+function PostComponent({ userId, postData, postId, username, contentPost, imgPost, imgIdPost, imgUser }) {
 
     const [popoverOpen, setPopoverOpen] = useState(false);
     const formatedDate = new Date(postData).toLocaleDateString('pt-BR')
@@ -22,7 +22,7 @@ export function Post({ userId, postData, postId, username, contentPost, imgPost,
                     </div>
                     <div className='post-popover'>
                         {
-                            popoverOpen && <Popover key={imgIdPost} imgIdPost={imgIdPost} postId={postId} imgPost={imgPost} userId={userId} />
+                           popoverOpen && <Popover key={Math.random( 100 * postId)} imgIdPost={imgIdPost} postId={postId} imgPost={imgPost} userId={userId} />
                         }
                         <DotsThreeVertical style={{cursor: "pointer"}} size={30} onClick={() => !popoverOpen ? setPopoverOpen(true) : setPopoverOpen(false)}/>
                     </div>
@@ -57,3 +57,6 @@ export function Post({ userId, postData, postId, username, contentPost, imgPost,
         </>
     )
 }
+export const Post = memo(PostComponent, (prevProps, nextProps) => {
+    return prevProps.postId === nextProps.postId
+})
