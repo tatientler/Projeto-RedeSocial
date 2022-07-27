@@ -59,7 +59,7 @@ export function Modal({ postSucess = () => {}}) {
 
         if(textInput.length > 0 && data.image == null) {
             setLoading(true)
-            await fetch("http://localhost:3030/post", {
+            await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export function Modal({ postSucess = () => {}}) {
 
             .then(async (res) => {
                 console.log(res.data)
-                await fetch("http://localhost:3030/post", {
+                await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -180,7 +180,7 @@ export function Modal({ postSucess = () => {}}) {
 
             .then(async (res) => {
                 console.log(res.data)
-                await fetch("http://localhost:3030/post", {
+                await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',

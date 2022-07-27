@@ -29,7 +29,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
 
             setLoading(true)
 
-            fetch('http://localhost:3030/login', {
+            fetch('https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,8 +41,9 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 credentials: "same-origin"
             })
 
-            .then(response => response.json())
-            .then(user => {
+            .then(async response => {
+                const data = await response.json();
+                const user = data.body;
                 if(user.token) {
                     setIsLoggedIn(true)
                     setError(false)
@@ -80,7 +81,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 
                 setLoading(true)
 
-                fetch('http://localhost:3030/users', {
+                fetch('https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',                        
@@ -92,9 +93,9 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                     }),
                     credentials: "same-origin"
                 })
-                .then(response => response.json())
-                .then(user => {
-                    
+                .then(async response => {
+                    const data = await response.json()
+                    const user = data.body
                     if(user.token){
                         setError(false)
                         const criptId = user.savedUser._id
@@ -108,7 +109,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                         setIsLoggedIn(true)
                         return;
                     }
-
+    
                     setError(true)
                     setLoading(false)    
                 })

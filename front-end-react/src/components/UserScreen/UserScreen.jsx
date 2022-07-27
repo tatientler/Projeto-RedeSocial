@@ -23,33 +23,33 @@ export function UserScreen () {
     useEffect(() => {
         const token = localStorage.getItem('token')
         const userID = localStorage.getItem('user')
-        fetch(`http://localhost:3030/users/${userID}`, {
+        fetch(`https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user/${userID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
         })
-        .then(response => response.json())
-        .then(user => {
-            setUser(user);
-        })
+        .then(async response => {
+            const data = await response.json()
+            setUser(data.user)})
     }, [location.pathname])
 
     const getPosts = () => {
         const token = localStorage.getItem('token')
         const profileID = localStorage.getItem('profile')
-        fetch(`http://localhost:3030/usuarios/${profileID}`, {
+        fetch(`https://1cl6abhbve.execute-api.us-east-1.amazonaws.com/dev/profile/${profileID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
         })
-        .then(response => response.json())
-        .then(profile => {
-            setProfile(profile);
-            setPosts(profile.post)
+        .then(async response => {
+            const data = await response.json()
+            console.log(data.findProfile)
+            setProfile(data.findProfile);
+            setPosts(data.findProfile.post)
         })
     }
 
