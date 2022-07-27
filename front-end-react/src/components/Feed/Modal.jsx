@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 import './Modal.css'
 import { useModal } from '../../hooks/useModal';
+import { useMemo } from 'react';
+import { memo } from 'react';
 
 export function Modal({ postSucess = () => {}}) {
 
@@ -57,14 +59,15 @@ export function Modal({ postSucess = () => {}}) {
         event.preventDefault()
         const token = localStorage.getItem('token')
 
+        const URL_POSTS = process.env.REACT_APP_URL_POSTS
+
         if(textInput.length > 0 && data.image == null) {
             setLoading(true)
-            await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
+            await fetch(URL_POSTS, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
-                user: localStorage.getItem('user')
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
                 text: textInput,
@@ -102,32 +105,33 @@ export function Modal({ postSucess = () => {}}) {
                 progress: undefined,
             })
         )
+        .finally(() => setLoading(false))
     }
         else if(textInput.length == 0 && data.image != null) {
 
             setLoading(true)
             const api = axios.create({
-                baseURL: 'http://127.0.0.1:5000/photos',
+                baseURL: process.env.REACT_APP_URL_PYTHON,
                })
 
-            await api.post('/', {user_id: localStorage.getItem('user'), uploadedFile: formData.get('image')}, {
+            await api.post('/photos', {uploadedFile: formData.get('image')}, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'multipart/form-data'
                 }
             })
 
             .then(async (res) => {
                 console.log(res.data)
-                await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
+                await fetch(URL_POSTS, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token,
-                        user: localStorage.getItem('user')
+                        'Authorization': 'Bearer ' + token
                     },
                     body: JSON.stringify({
                         image: res.data.url,
                         imageId: res.data.id,
+                        user: localStorage.getItem('user')
                     })
                 })
             })
@@ -163,16 +167,17 @@ export function Modal({ postSucess = () => {}}) {
                     progress: undefined,
                 })
             )
+            .finally(() => setLoading(false))
         }
         else if (textInput.length > 0 && data.image != null) {
             setLoading(true)
             setEmptyForm(false)
 
             const api = axios.create({
-                baseURL: 'http://127.0.0.1:5000/photos',
+                baseURL: process.env.REACT_APP_URL_PYTHON,
                })
 
-            await api.post('/', {uploadedFile: formData.get('image')}, {
+            await api.post('/photos', {uploadedFile: formData.get('image')}, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }
@@ -180,12 +185,11 @@ export function Modal({ postSucess = () => {}}) {
 
             .then(async (res) => {
                 console.log(res.data)
-                await fetch("https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts", {
+                await fetch(URL_POSTS, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token,
-                        user: localStorage.getItem('user')
+                        'Authorization': 'Bearer ' + token
                     },
                     body: JSON.stringify({
                         text: textInput,
@@ -225,6 +229,7 @@ export function Modal({ postSucess = () => {}}) {
                     progress: undefined,
                 })
             )
+            .finally(() => setLoading(false))
         }
     }
     

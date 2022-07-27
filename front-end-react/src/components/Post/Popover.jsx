@@ -2,11 +2,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { postUpdate } from "../../redux/action";
+import { useState } from "react";
+import { Spin } from "antd";
 
 export const Popover = ({ userId, postId, imgIdPost }) => {
+    console.log(postId)
 
     const updatePost = useSelector(state => state);
     console.log(updatePost)
+
+    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -14,14 +19,13 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
         baseURL: `http://127.0.0.1:5000/photos`
     })
 
-    function postDelete() {
-
+    async function postDelete() {
+        setLoading(true)
         const token = localStorage.getItem('token')
 
-        fetch(`http://localhost:3030/post/${postId}`, {
+        await fetch(`https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts/${postId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
         })
@@ -63,29 +67,35 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
                 });
                 dispatch(postUpdate(true));
             }
-        }
-        )
+            setLoading(false)
+        })
     }
 
-    const buttons = {
-        All: [
-            <button type='button'>Editar post</button>,
-            <button type='button' onClick={() => postDelete()}>Excluir post</button>,
+    const allButtons = [
+        <div key={postId + userId} className='popover-options'>
+            <button type='button'>Editar post</button>
+            <button
+                className={`popover_option-delete ${loading ? 'disabled' : ''}`}
+                type='button'
+                onClick={() => postDelete()}>
+                    {loading ? <Spin /> : "Excluir post"}
+            </button>
             <button type='button'>Compartilhar</button>
-        ],
-        notAll: [
+        </div>
+    ]
+
+    const noAllButtons = [
+        <div key={postId + userId} className='popover-options'>
             <button type='button'>Compartilhar</button>
-        ]
-    }
+        </div>
+    ]
+
+    const buttons = userId == localStorage.getItem('user') ? allButtons : noAllButtons
 
     return (
         <div className='popover'>
             <p>Opções</p>
-            <div className='popover-options'>
-                {
-                    userId === localStorage.getItem('user') ? buttons.All : buttons.notAll
-                }
-            </div>
+            {buttons}
         </div>
     )
 }

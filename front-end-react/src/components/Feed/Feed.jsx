@@ -18,7 +18,7 @@ import userImage2 from './img/img2.jpg'
 import userImage3 from './img/img3.jpg'
 import { postUpdate } from '../../redux/action';
 import { useModal } from '../../hooks/useModal';
-
+import { useMemo } from 'react';
 
 export function Feed() {
 
@@ -37,9 +37,12 @@ export function Feed() {
 
     !statusModal ? document.body.classList.remove('modal-open') : document.body.classList.add('modal-open')
 
-    const getPosts = () => {
+    const getPosts = async () => {
+
+        const URL_POSTS = process.env.REACT_APP_URL_POSTS
+
         const token = localStorage.getItem('token')
-        fetch(`https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts`, {
+        await fetch(URL_POSTS, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +80,17 @@ export function Feed() {
                     {
                     loading ? 
                     <Spin /> : 
-                    posts.map(post => <Post key={post._id} postData={post.createdAt} imgIdPost={post.imageId} userId={post.userID[0]._id} postId={post._id} username={post.userID[0]?.name} contentPost={post.text != undefined ? post.text : ''} imgPost={post.image != undefined ? post.image : false} imgUser={post.userID[0]?.avatar} />).reverse()
+                    posts.map(post =>
+                    <Post
+                        key={post._id}
+                        postData={post.createdAt}
+                        imgIdPost={post.imageId}
+                        userId={post.userID[0]._id}
+                        postId={post._id}
+                        username={post.userID[0]?.name}
+                        contentPost={post.text != undefined ? post.text : ''}
+                        imgPost={post.image != undefined ? post.image : false}
+                        imgUser={post.userID[0]?.avatar} />).reverse()
                     }
                     <Post username={"John Doe"} imgUser={userImage1} contentPost={`Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos." - Isaac Newton`} />
                 </section>

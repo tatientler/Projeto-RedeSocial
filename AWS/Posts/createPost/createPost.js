@@ -11,13 +11,13 @@ db.once('open', () => {
 
 module.exports.index = async (event, context) => {
 
-    const body = JSON.parse(event.body);
+    const body = event;
     const currentUser = await userSchema.findById(body.user)
             
     if(body.text !== null && body.image == null) {
         try {
             const post = new postSchema({
-                userID: 1,
+                userID: currentUser._id,
                 text: body.text,
                 createdAt: new Date()
             })
@@ -41,7 +41,7 @@ module.exports.index = async (event, context) => {
     else if (body.text == null && body.image !== null) {
         try {
                 const post = new postSchema({
-                userID: 1,
+                userID: currentUser._id,
                 image: body.image,
                 imageId: body.imageId,
                 createdAt: new Date()
@@ -65,7 +65,7 @@ module.exports.index = async (event, context) => {
     } else if (body.text !== null && body.image !== null) {
         try {
             const post = new postSchema({
-                userID: currentUser,
+                userID: currentUser._id,
                 text: body.text,
                 image: body.image,
                 imageId: body.imageId,

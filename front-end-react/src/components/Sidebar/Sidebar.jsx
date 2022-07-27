@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 import decode from 'jwt-decode';
 
@@ -13,7 +13,7 @@ import { Plus, SignOut, User, Users } from 'phosphor-react';
 import { useModal } from '../../hooks/useModal';
 import axios from 'axios';
 
-export function Sidebar({ currentUserImage, currentUserName }, modal) {
+function SidebarComponent({ currentUserImage, currentUserName }, modal) {
 
     const { openModal } = useModal();
 
@@ -135,3 +135,5 @@ export function Sidebar({ currentUserImage, currentUserName }, modal) {
         </section>
     )
 }
+
+export const Sidebar = memo(SidebarComponent);
