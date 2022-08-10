@@ -4,26 +4,35 @@ import { useLocation } from 'react-router-dom'
 import { Navbar } from "../Navbar"
 import { Post } from "../Post"
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import decode from 'jwt-decode';
 
 import "./UserScreen.css";
 import { ToastContainer } from "react-toastify";
+import { Modal } from "../Feed/Modal";
+import { useModal } from "../../hooks/useModal";
+import { postUpdate } from "../../redux/action";
 
 export function UserScreen () {
-
+    const { modalOpen } = useModal()
     const [user, setUser] = useState([]);
     const [profile, setProfile] = useState([]);
     const [posts, setPosts] = useState([]);
     const location = useLocation()
-
+    const [postSucess, setPostSucess] = useState(false)
+    
     const updatePost = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    const URL_USERS = process.env.REACT_APP_URL_USERS;
+    const URL_POSTS = process.env.REACT_APP_URL_POSTS;
+    const URL_PROFILE = process.env.REACT_APP_URL_PROFILE;
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         const userID = localStorage.getItem('user')
-        fetch(`https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user/${userID}`, {
+        fetch(`${URL_USERS}/${userID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,13 +41,13 @@ export function UserScreen () {
         })
         .then(async response => {
             const data = await response.json()
-            setUser(data.user)})
+            setUser(data)})
     }, [location.pathname])
 
-    const getPosts = () => {
+    const getPosts = async () => {
         const token = localStorage.getItem('token')
         const profileID = localStorage.getItem('profile')
-        fetch(`https://1cl6abhbve.execute-api.us-east-1.amazonaws.com/dev/profile/${profileID}`, {
+        await fetch(`${URL_PROFILE}/${profileID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,20 +56,24 @@ export function UserScreen () {
         })
         .then(async response => {
             const data = await response.json()
-            console.log(data.findProfile)
-            setProfile(data.findProfile);
-            setPosts(data.findProfile.post)
+            setProfile(data);
+            setPosts(data.post)
+            console.log(data.post)
         })
     }
 
     useEffect(() => {
         getPosts()
-    }, [updatePost])
+        setPostSucess(false)
+    }, [postSucess])
 
     return (
         <>  
+            {
+                modalOpen &&
+                <Modal postSucess={setPostSucess} />
+            }
             <Navbar />
-
             <div className="userScreen_content">
                 <div className="userScreen__header">
                     <img src={user.avatar} alt="" />
@@ -82,7 +95,18 @@ export function UserScreen () {
                 <div className="userScreen__posts">
                     <h3>Suas publicações</h3>
                     {
-                        posts.map(post => <Post key={post._id} imgIdPost={post.imageId} userId={localStorage.getItem('user')} postId={post._id} username={user.name} imgUser={user.avatar} contentPost={post.text} imgPost={post.image} />)
+                        posts.map(post =>
+                            <Post
+                                key={post._id}
+                                imgIdPost={post.imageId}
+                                userId={localStorage.getItem('user')}
+                                postId={post._id}
+                                username={user.name}
+                                imgUser={user.avatar}
+                                contentPost={post.text}
+                                imgPost={post.image}
+                            />
+                        )
                     }
                 </div>
             </div>

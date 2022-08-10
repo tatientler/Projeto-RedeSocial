@@ -4,26 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { postUpdate } from "../../redux/action";
 import { useState } from "react";
 import { Spin } from "antd";
+import { useModal } from "../../hooks/useModal";
 
 export const Popover = ({ userId, postId, imgIdPost }) => {
+
+    const { openModal, modalType, setModalType, setPostId } = useModal();
     console.log(postId)
 
-    const updatePost = useSelector(state => state);
-    console.log(updatePost)
+    const URL_POSTS = process.env.REACT_APP_URL_POSTS;
 
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
     const api = axios.create({
-        baseURL: `http://127.0.0.1:5000/photos`
+        baseURL: `https://back-end-python-tera.herokuapp.com`
     })
 
     async function postDelete() {
         setLoading(true)
         const token = localStorage.getItem('token')
 
-        await fetch(`https://wtmfgciejg.execute-api.us-east-1.amazonaws.com/dev/posts/${postId}`, {
+        await fetch(`${URL_POSTS}/${postId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -31,7 +33,7 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
         })
         .then(() => {
             if(imgIdPost != null) {
-                api.delete(`/photo/${imgIdPost}`)
+                api.delete(`/photos/photo/${imgIdPost}`)
                 .then(() => {
                     toast.success('Post excluído com sucesso!', {
                         position: "top-right",
@@ -73,7 +75,10 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
 
     const allButtons = [
         <div key={postId + userId} className='popover-options'>
-            <button type='button'>Editar post</button>
+            <button
+                type='button'
+                onClick={() => {setModalType("edit"); setPostId(postId); openModal()}}
+            >Editar post</button>
             <button
                 className={`popover_option-delete ${loading ? 'disabled' : ''}`}
                 type='button'

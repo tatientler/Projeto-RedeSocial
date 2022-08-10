@@ -1,5 +1,6 @@
 ''' Controller para o módulo de fotos '''
 from flask import request, jsonify
+from flask_cors import cross_origin
 from app_module import create_app, db
 from models.photo_db import Photo, Photo_Schema
 from datetime import datetime
@@ -31,6 +32,7 @@ def index():
     photos = Photo.query.order_by(Photo.created_date).all()
     return jsonify(photos_schema.dump(photos)), 200
 
+@cross_origin()
 def add():
     ''' Adiciona foto '''
     if request.files:
