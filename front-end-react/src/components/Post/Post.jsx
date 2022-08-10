@@ -58,5 +58,5 @@ function PostComponent({ userId, postData, postId, username, contentPost, imgPos
     )
 }
 export const Post = memo(PostComponent, (prevProps, nextProps) => {
-    return prevProps.postId === nextProps.postId
+    return prevProps.contentPost === nextProps.contentPost
 })

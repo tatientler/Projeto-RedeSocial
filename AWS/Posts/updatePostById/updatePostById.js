@@ -10,19 +10,26 @@ db.once('open', () => {
 module.exports.index = async (event, context) => {
     
     const paramsId = event.pathParameters?.id
-    const body = JSON.parse(event.body)
+    const body = event
 
     try {
         if(paramsId !== null) {
-            const post = await postSchema.findByIdAndUpdate(paramsId, {$set: body}).exec()
-            profile.findOneAndUpdate({post: [{_id: paramsId}]}, {post: post}).exec()
+            const postUpdate = await postSchema.findByIdAndUpdate(paramsId, {$set: {text: body.text}}).exec()
+            await profile.findOneAndUpdate({post: [{_id: paramsId}]}, {post: post}).exec()
 
             return {
                 statusCode: 200,
                 body: JSON.stringify({
                     message: 'Post atualizado com sucesso',
-                    post
-                })
+                    postUpdate
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
+                    'Access-Control-Allow-Credentials': true,
+                }
             }        
         } else {
             throw new Error('Post não encontrado')
@@ -31,7 +38,7 @@ module.exports.index = async (event, context) => {
         return {
             statusCode: 400,
             body: JSON.stringify({
-                message: 'Falha ao atualizar post',
+                message: error.message,
                 error
             })
         }

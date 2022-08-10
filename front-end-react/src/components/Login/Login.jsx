@@ -20,6 +20,9 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
 	const [error, setError] = useState(false);
     const [emptyForm, setEmptyForm] = useState(true)
 
+    const URL_LOGIN = process.env.REACT_APP_URL_LOGIN;
+    const URL_USERS = process.env.REACT_APP_URL_USERS;
+
     function login(event) {
         event.preventDefault();
         const userEmail = event.target.email.value
@@ -29,7 +32,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
 
             setLoading(true)
 
-            fetch('https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/login', {
+            fetch(URL_LOGIN, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -43,13 +46,12 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
 
             .then(async response => {
                 const data = await response.json();
-                const user = data.body;
-                if(user.token) {
+                if(data.token) {
                     setIsLoggedIn(true)
                     setError(false)
-                    const criptId = user.userID
-                    const criptToken = user.token
-                    const userProfile = user.profile
+                    const criptId = data.userID
+                    const criptToken = data.token
+                    const userProfile = data.profile
                     localStorage.setItem('token', criptToken)
                     localStorage.setItem('user', criptId)
                     localStorage.setItem('profile', userProfile)
@@ -81,7 +83,7 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 
                 setLoading(true)
 
-                fetch('https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user', {
+                fetch(URL_USERS, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',                        
@@ -95,12 +97,11 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 })
                 .then(async response => {
                     const data = await response.json()
-                    const user = data.body
-                    if(user.token){
+                    if(data.token){
                         setError(false)
-                        const criptId = user.savedUser._id
-                        const criptToken = user.token
-                        const userProfile = user.savedProfile._id
+                        const criptId = data.savedUser._id
+                        const criptToken = data.token
+                        const userProfile = data.savedProfile._id
                         localStorage.setItem('token', criptToken)
                         localStorage.setItem('user', criptId)
                         localStorage.setItem('profile', userProfile)

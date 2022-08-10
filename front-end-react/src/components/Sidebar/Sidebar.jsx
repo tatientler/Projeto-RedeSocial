@@ -15,7 +15,7 @@ import axios from 'axios';
 
 function SidebarComponent({ currentUserImage, currentUserName }, modal) {
 
-    const { openModal } = useModal();
+    const { openModal, setModalType } = useModal();
 
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
@@ -45,11 +45,14 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
         }	// reader.onloadend
     }
 
+    const URL_POSTS = process.env.REACT_APP_URL_POSTS;
+    const URL_USERS = process.env.REACT_APP_URL_USERS;
+
     const handleSubmit = async () => {
         setLoading(true)
         const userID = localStorage.getItem('user');
         try {
-            await fetch(`http://localhost:3030/users/${userID}`, {
+            await fetch(`${URL_USERS}/${userID}`, {
                 method: "PATCH",
                 body: formData
             })
@@ -69,11 +72,10 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
 
         const userID = localStorage.getItem('user')
 
-        fetch(`https://e2l89ma0ai.execute-api.us-east-1.amazonaws.com/dev/user/${userID}`)
+        fetch(`${URL_USERS}/${userID}`)
             .then(async response => {
-                const { user } = await response.json()
-                setUser(user)
-                console.log(user)
+                const data = await response.json()
+                setUser(data)
             })
     }, [location.pathname]);
 
@@ -84,11 +86,11 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
     }
 
     const currentUserImg = () => {
-        if (user.avatar) {
-            return user.avatar
-        }
-        else if (previewSource) {
+        if (previewSource) {
             return previewSource
+        }
+        else if (user.avatar) {
+            return user.avatar
 
         } else {
             return imgUser
@@ -112,8 +114,8 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
                 </div>
 
                 <div className="user">
-                    <button className="btnIconUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => { openModal() }}><Plus size={32} /></button>
-                    <button className="btnUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {openModal()}}>Publicar</button>
+                    <button className="btnIconUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {openModal(); setModalType('new')}}><Plus size={32} /></button>
+                    <button className="btnUser" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => {openModal(); setModalType('new')}}>Publicar</button>
                 </div>
 
                 <div className="user">

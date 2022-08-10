@@ -39,7 +39,7 @@ export function Feed() {
 
     const getPosts = async () => {
 
-        const URL_POSTS = process.env.REACT_APP_URL_POSTS
+        const URL_POSTS = process.env.REACT_APP_URL_POSTS;
 
         const token = localStorage.getItem('token')
         await fetch(URL_POSTS, {
@@ -52,7 +52,7 @@ export function Feed() {
         .then(async response => {
             const data = await response.json()
             console.log(data)
-            setPosts(data.body);
+            setPosts(data);
             setLoading(false);
         })
     }
