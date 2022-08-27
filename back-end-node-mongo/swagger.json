@@ -1,0 +1,883 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Rede Social - Tera",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/post": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Lista todos os posts",
+                "description": "Lista todos os posts",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de autorização",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de posts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "postID": {
+                                            "type": "string",
+                                            "description": "ID do post"
+                                        },
+                                        "userID": {
+                                            "type": "array",
+                                            "description": "Dados do usuário",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "_id": {
+                                                        "type": "string",
+                                                        "description": "ID do usuário"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string",
+                                                        "description": "Avatar do usuário"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "Nome do usuário"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "description": "Email do usuário"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "description": "Texto do post"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "description": "Imagem do post"
+                                        },
+                                        "imageId": {
+                                            "type": "string",
+                                            "description": "ID da imagem do post. O id é recebido da cloudinary"
+                                        },
+                                        "usersLike": {
+                                            "type": "array",
+                                            "description": "Usuários que curtiram o post",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "ID do usuário que curtiu o post"
+                                            }
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "description": "Comentários do post",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "ID do comentário"
+                                                    },
+                                                    "user": {
+                                                        "type": "string",
+                                                        "description": "ID do usuário que comentou"
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "description": "Texto do comentário"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "createdAt": {
+                                            "type": "date",
+                                            "description": "Data de criação do post"
+                                        }
+                                    },
+                                    "example": {
+                                        "postID": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "userID": [
+                                            {
+                                                "_id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+                                                "name": "John Doe",
+                                                "email": "johndoe@email.com"
+                                            }
+                                        ],
+                                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus.",
+                                        "image": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+                                        "imageId": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "usersLike": [
+                                            "5e9f8f8f8f8f8f8f8f8f8f8"
+                                        ],
+                                        "comments": [
+                                            {
+                                                "id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "user": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
+                                            }
+                                        ],
+                                        "createdAt": "2020-01-01T00:00:00.000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro ao listar postagens"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Criar post",
+                "description": "Criar post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "postID": {
+                                        "type": "string",
+                                        "description": "ID do post"
+                                    },
+                                    "userID": {
+                                        "type": "string",
+                                        "description": "ID do usuário autor do post"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto do post"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "description": "Imagem do post"
+                                    },
+                                    "imageId": {
+                                        "type": "string",
+                                        "description": "ID da imagem do post. O id é recebido da cloudinary"
+                                    },
+                                    "usersLike": {
+                                        "type": "array",
+                                        "description": "Usuários que curtiram o post",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "ID do usuário que curtiu o post"
+                                        }
+                                    },
+                                    "comments": {
+                                        "type": "array",
+                                        "description": "Comentários do post",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "ID do comentário"
+                                                },
+                                                "user": {
+                                                    "type": "string",
+                                                    "description": "ID do usuário que comentou"
+                                                },
+                                                "text": {
+                                                    "type": "string",
+                                                    "description": "Texto do comentário"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "createdAt": {
+                                        "type": "date",
+                                        "description": "Data de criação do post"
+                                    }
+                                },
+                                "example": {
+                                    "text": "Texto do post",
+                                    "image": "https://image.com/image.jpg",
+                                    "imageId": "5e9f8f8f-f8f8-f8f8-f8f8-f8f8f8f8f8f8"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Postagem criada com sucesso"    
+                    },
+                    "500": {
+                        "description": "Erro ao cadastrar postagem"
+                    }
+                }
+            }
+        },
+        "/post/{id}": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Buscar post",
+                "description": "Buscar post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ID do post"
+                                        },
+                                        "userID": {
+                                            "type": "string",
+                                            "description": "ID do usuário autor do post"
+                                        },
+                                        "text": {
+                                            "type": "string",
+                                            "description": "Texto do post"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "description": "Imagem do post"
+                                        },
+                                        "imageId": {
+                                            "type": "string",
+                                            "description": "ID da imagem do post. O id é recebido da cloudinary"
+                                        },
+                                        "usersLike": {
+                                            "type": "array",
+                                            "description": "Usuários que curtiram o post",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "ID do usuário que curtiu o post"
+                                            }
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "description": "Comentários do post",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "ID do comentário"
+                                                    },
+                                                    "user": {
+                                                        "type": "string",
+                                                        "description": "ID do usuário que comentou"
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "description": "Texto do comentário"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "createdAt": {
+                                            "type": "date",
+                                            "description": "Data de criação do post"
+                                        }
+                                    },
+                                    "example": {
+                                        "postID": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "userID": [
+                                            {
+                                                "_id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+                                                "name": "John Doe",
+                                                "email": "johndoe@email.com"
+                                            }
+                                        ],
+                                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus.",
+                                        "image": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+                                        "imageId": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "usersLike": [
+                                            "5e9f8f8f8f8f8f8f8f8f8f8"
+                                        ],
+                                        "comments": [
+                                            {
+                                                "id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "user": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
+                                            }
+                                        ],
+                                        "createdAt": "2020-01-01T00:00:00.000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Post não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Atualizar post",
+                "description": "Atualizar post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto do post"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "description": "Imagem do post"
+                                    }
+                                },
+                                "example": {
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus.",
+                                    "image": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post atualizado com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post atualizado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao atualizar post"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Falha ao atualizar post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }  
+            },
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Deletar post",
+                "description": "Deletar post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post excluído com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post excluído com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao deletar post"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro - Falha ao excluir post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/{id}/like": {
+            "patch": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Curtir ou descurtir post",
+                "description": "Curtir post caso o usuário ainda não tenha curtido, ou descurtir caso o usuário já tenha curtido",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {                        
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Curtida removida com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Curtida removida com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Curtida adicionada com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Curtida adicionada com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao curtir post"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao curtir post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/{id}/comment": {
+            "patch": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Adicionar comentário",
+                "description": "Adicionar comentário",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto do comentário"
+                                    }
+                                },
+                                "example": {
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Comentário adicionado com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Comentário adicionado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao comentar post"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao comentar post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/{id}/comment/{comment_id}/edit": {
+            "patch": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Editar comentário",
+                "description": "Editar comentário",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto do comentário"
+                                    }
+                                },
+                                "example": {
+                                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Comentário editado com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Comentário editado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comentário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Comentário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Comentário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao editar comentário"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao editar comentário"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/{id}/comment/{comment_id}/delete": {
+            "patch": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Deletar comentário",
+                "description": "Deletar comentário",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token de acesso",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "user",
+                        "description": "ID do usuário logado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Comentário excluído com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Comentário excluído com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comentário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Comentário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Comentário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao excluir comentário"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao excluir comentário"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -12,6 +12,8 @@ const postSchema = new mongoose.Schema(
         text: {type: String},
         image: {type: String},
         imageId: {type: String},
+        usersLike: {type: Array},
+        comments: {type: Array},
         createdAt: {type: Date, default: new Date()},
     }
 )
