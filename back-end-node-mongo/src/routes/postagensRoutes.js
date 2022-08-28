@@ -6,7 +6,7 @@ const router = express.Router()
 
 router
     .get('/post', AuthController.checkToken, PostController.listarPostagens)
-    .get('/post/:id', PostController.listarPostagensPorId)
+    .get('/post/:id', AuthController.checkToken, PostController.listarPostagensPorId)
     .post('/post', AuthController.checkToken, PostController.cadastrarPost)
     .put('/post/:id', AuthController.checkToken, PostController.atualizarPost)
     .patch('/post/:id/like', AuthController.checkToken, PostController.curtirPost)

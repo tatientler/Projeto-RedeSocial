@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Rede Social - Tera",
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "paths": {
         "/post": {
@@ -168,12 +168,6 @@
                         "name": "authorization",
                         "description": "Token de acesso",
                         "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
-                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -247,10 +241,42 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Postagem criada com sucesso"    
+                        "description": "Postagem criada com sucesso" ,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Postagem criada com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Postagem criada com sucesso"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Erro ao cadastrar postagem"
+                        "description": "Erro ao cadastrar postagem",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Erro ao cadastrar postagem"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro ao cadastrar postagem"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -267,12 +293,6 @@
                         "in": "header",
                         "name": "authorization",
                         "description": "Token de acesso",
-                        "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
                         "required": true
                     }
                 ],
@@ -400,12 +420,6 @@
                         "name": "authorization",
                         "description": "Token de acesso",
                         "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
-                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -484,12 +498,6 @@
                         "name": "authorization",
                         "description": "Token de acesso",
                         "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
-                        "required": true
                     }
                 ],
                 "responses": {
@@ -546,12 +554,6 @@
                         "in": "header",
                         "name": "authorization",
                         "description": "Token de acesso",
-                        "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
                         "required": true
                     }
                 ],
@@ -629,12 +631,6 @@
                         "name": "authorization",
                         "description": "Token de acesso",
                         "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
-                        "required": true
                     }
                 ],
                 "requestBody": {
@@ -709,12 +705,6 @@
                         "in": "header",
                         "name": "authorization",
                         "description": "Token de acesso",
-                        "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
                         "required": true
                     }
                 ],
@@ -809,12 +799,6 @@
                         "in": "header",
                         "name": "authorization",
                         "description": "Token de acesso",
-                        "required": true
-                    },
-                    {
-                        "in": "header",
-                        "name": "user",
-                        "description": "ID do usuário logado",
                         "required": true
                     }
                 ],
