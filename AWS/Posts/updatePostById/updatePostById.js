@@ -15,7 +15,7 @@ module.exports.index = async (event, context) => {
     try {
         if(paramsId !== null) {
             const postUpdate = await postSchema.findByIdAndUpdate(paramsId, {$set: {text: body.text}}).exec()
-            await profile.findOneAndUpdate({post: [{_id: paramsId}]}, {post: post}).exec()
+            await profile.findOneAndUpdate({post: [{_id: paramsId}]}, {post: postUpdate}).exec()
 
             return {
                 statusCode: 200,

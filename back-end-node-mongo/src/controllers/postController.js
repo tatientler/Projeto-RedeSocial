@@ -8,17 +8,17 @@ class PostController {
         post.find()
         .populate('userID', '-password -createdAt -profile')
             .exec((error, post) => {
-                if (!error) {
-                    res.status(200).json(post)
+                if (error) {
+                    res.status(500).json({
+                        message: "Erro ao listar postagens",
+                    })
                 }
-                res.status(500).json({
-                    message: "Erro ao listar postagens",
-                })
+                res.status(200).json(post);
             })
     }
 
     static listarPostagensPorId = (req, res) => {
-        const id = req.params.id
+        const { id } = req.params
 
         post.findById(id)
             .exec((err, post) => {
@@ -32,10 +32,13 @@ class PostController {
 
     static cadastrarPost = async (req, res) => {
 
+        const { userId } = req
+        const { text, image, imageId } = req.body
+
         try {
+            const currentUser = await user.findById(userId)
 
-            const currentUser = await user.findById(req.headers.user)
-            if(req.body.text != '' && req.body.image != '') {
+            if(text != '' && image != '') {
                 let postagem = new post({
                     userID: currentUser._id,
                     text: req.body.text,
@@ -46,20 +49,20 @@ class PostController {
                 const savedPost = await postagem.save()
                 profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-            } else if (req.body.text != '' && req.body.image == '') {
+            } else if (text != '' && image == '') {
                 let postagem = new post({
                     userID: currentUser._id,
-                    text: req.body.text,
+                    text: text,
                     createdAt: new Date()
                 })
                 const savedPost = await postagem.save()
                 profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-            } else if ( req.body.text == '' && req.body.image != '') {
+            } else if ( text == '' && image != '') {
                 let postagem = new post({
                     userID: currentUser._id,
-                    image: req.body.image,
-                    imageId: req.body.imageId,
+                    image: image,
+                    imageId: imageId,
                     createdAt: new Date()
                 })
                 const savedPost = await postagem.save()
@@ -79,7 +82,7 @@ class PostController {
     }
 
     static atualizarPost = (req, res) => {
-        const id = req.params.id
+        const { id } = req.params.id
 
         post.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (!err) {
@@ -91,7 +94,7 @@ class PostController {
     }
 
     static excluirPost = async (req, res) => {
-        const id = req.params.id
+        const { id } = req.params
 
         await profile.findOneAndUpdate({post: [{_id: id}]}, {$pull: {post: id}}).exec()
 
@@ -106,8 +109,8 @@ class PostController {
 
     static curtirPost = async (req, res) => {
         const { id } = req.params
-        const { user } = req.headers
-        const currentUser = await user.findById(user)
+        const { userId } = req
+        const currentUser = await user.findById(userId)
 
         post.findById(id)
         .exec((error, post) => {
@@ -127,14 +130,15 @@ class PostController {
 
     static adicionarComentário = async (req, res) => {
         const { id } = req.params
-        const { user } = req.headers
+        const { userId } = req
+        const { text } = req.body
 
-        const currentUser = await user.findById(user)
+        const currentUser = await user.findById(userId)
         const commentId = new mongoose.Types.ObjectId()
 
         post.findById(id).exec((error, post) => {
             if(!error) {
-                post.updateOne({$push: {comments: {id: commentId, user: currentUser._id, text: req.body.text}}}).exec()
+                post.updateOne({$push: {comments: {id: commentId, user: currentUser._id, text: text}}}).exec()
                 res.status(201).send({message: 'Comentário adicionado com sucesso'})
             } else {
                 res.status(500).send({message: `${error.message} - Falha ao adicionar comentário`})
@@ -146,12 +150,12 @@ class PostController {
     static editarComentario = async (req, res) => {
         const { id, comment_id } = req.params
         const { text } = req.body
-        const { user } = req.headers
+        const { userId } = req
 
         post.findById(id).exec((error, post) => {
             const { comments } = post
             
-            const findComment = comments.map(comment => comment).find(comment => comment.id == comment_id && comment.user == user)
+            const findComment = comments.map(comment => comment).find(comment => comment.id == comment_id && comment.user == userId)
             const commentEdit = {...findComment, text: text}
 
             if(!error) {
@@ -169,14 +173,14 @@ class PostController {
 
     static excluirComentario = async (req, res) => {
         const { id, comment_id } = req.params
-        const { user } = req.headers
+        const { userId } = req
         
         post.findById(id).exec((error, post) => {
             const { comments } = post
             const findComment = comments.map(comment => comment).find(comment => comment.id == comment_id)
 
             if(!error) {
-                if(findComment != undefined && post.userID[0]._id == user || findComment.user == user) {
+                if(findComment != undefined && post.userID[0]._id == userId || findComment.user == userId) {
                     post.updateOne({$pull: {comments: findComment}}).exec()
                     res.status(200).send({message: 'Comentário excluído com sucesso'})
                 } else {

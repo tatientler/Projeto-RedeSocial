@@ -11,7 +11,7 @@ class ProfileController {
     }
 
     static listarUsuariosPorId = (req, res) => {
-        const id = req.params.id
+        const { id } = req.params
 
         profile.findById(id)
             .populate('post')
@@ -37,7 +37,7 @@ class ProfileController {
     }
 
     static atualizarUsuario = (req, res) => {
-        const id = req.params.id
+        const { id } = req.params
 
         profile.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if(!err) {
@@ -49,7 +49,7 @@ class ProfileController {
     }
 
     static excluirUsuario = (req, res) => {
-        const id = req.params.id
+        const { id } = req.params
 
         profile.findByIdAndDelete(id, (err) => {
             if(!err) {

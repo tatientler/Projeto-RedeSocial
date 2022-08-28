@@ -18,14 +18,14 @@ class UserController {
     }
 
     static listarUsuariosPorId = (req, res) => {
-      const id = req.params.id  
+      const { id } = req.params
       
       users.findById(id)
         .exec((err, users) => {
           if(err) {
             res.status(400).send({message: `${err.message} - Usuário não localizado`})
           } else {
-            res.status(200).send(users)
+            res.status(200).json(users)
           }
         })
     }
