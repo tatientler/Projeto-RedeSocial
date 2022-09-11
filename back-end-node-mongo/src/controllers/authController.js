@@ -8,7 +8,7 @@ class AuthController {
     static login = (req, res) => {
         users.findOne({ email: req.body.email }, (error, user) => {
             if(!user) {
-                return res.status(401).send({
+                return res.status(404).send({
                     message: "Usuário não encontrado",
                     email: `${req.body.email}`
                 })
