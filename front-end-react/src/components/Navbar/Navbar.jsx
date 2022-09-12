@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useModal } from '../../hooks/useModal';
 
 import logo from './img/logo.png'
@@ -20,8 +20,6 @@ import { memo } from 'react';
 
 function NavbarComponent() {
 
-    const { openModal } = useModal();
-
     const [open, setOpen] = useState(false)
 
         open ? document.body.classList.add('chat-extended') :  document.body.classList.remove('chat-extended')
@@ -30,7 +28,9 @@ function NavbarComponent() {
         <>
         <header className="navbar container-fluid">
 
-            <img className="logo" src={logo} alt="logo da Rede Social que é a sombra de um notebook branco e há tres círculos a sua volta." />
+            <Link to="/feed" className="navbar__logo">
+                <img className="logo" src={logo} alt="logo da Rede Social que é a sombra de um notebook branco e há tres círculos a sua volta." />
+            </Link>
 
             <div className="mobile">
 

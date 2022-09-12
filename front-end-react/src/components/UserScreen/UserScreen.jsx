@@ -3,30 +3,21 @@ import { useLocation } from 'react-router-dom'
 
 import { Navbar } from "../Navbar"
 import { Post } from "../Post"
-
-import { useDispatch, useSelector } from "react-redux";
-
-import decode from 'jwt-decode';
-
-import "./UserScreen.css";
 import { ToastContainer } from "react-toastify";
 import { Modal } from "../Feed/Modal";
 import { useModal } from "../../hooks/useModal";
-import { postUpdate } from "../../redux/action";
+
+import "./UserScreen.css";
 
 export function UserScreen () {
     const { modalOpen } = useModal()
     const [user, setUser] = useState([]);
-    const [profile, setProfile] = useState([]);
     const [posts, setPosts] = useState([]);
-    const location = useLocation()
     const [postSucess, setPostSucess] = useState(false)
-    
-    const updatePost = useSelector(state => state);
-    const dispatch = useDispatch();
+
+    const location = useLocation()
 
     const URL_USERS = process.env.REACT_APP_URL_USERS;
-    const URL_POSTS = process.env.REACT_APP_URL_POSTS;
     const URL_PROFILE = process.env.REACT_APP_URL_PROFILE;
 
     useEffect(() => {
@@ -56,9 +47,7 @@ export function UserScreen () {
         })
         .then(async response => {
             const data = await response.json()
-            setProfile(data);
             setPosts(data.post)
-            console.log(data.post)
         })
     }
 
@@ -66,6 +55,11 @@ export function UserScreen () {
         getPosts()
         setPostSucess(false)
     }, [postSucess])
+
+    useEffect(() => {
+        getPosts()
+    }, [location.pathname])
+
 
     return (
         <>  
@@ -101,6 +95,7 @@ export function UserScreen () {
                                 imgIdPost={post.imageId}
                                 userId={localStorage.getItem('user')}
                                 postId={post._id}
+                                usersLike={post.usersLike}
                                 username={user.name}
                                 imgUser={user.avatar}
                                 contentPost={post.text}

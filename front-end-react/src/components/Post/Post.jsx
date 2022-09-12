@@ -1,15 +1,37 @@
 import './Post.css'
-import like from './img/like.svg'
 import comment from './img/comment.svg'
 import share from './img/share.svg'
-import { DotsThreeVertical } from 'phosphor-react'
+import { DotsThreeVertical, ThumbsUp } from 'phosphor-react'
 import { Popover } from './Popover'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
-function PostComponent({ userId, postData, postId, username, contentPost, imgPost, imgIdPost, imgUser }) {
+export function Post({ userId, postData, postId, usersLike, username, contentPost, imgPost, imgIdPost, imgUser }) {
 
     const [popoverOpen, setPopoverOpen] = useState(false);
-    const formatedDate = new Date(postData).toLocaleDateString('pt-BR')
+    const [likePost, setLikePost] = useState(false)
+
+    const URL_POSTS = "https://back-end-node-rede-social-tera.herokuapp.com"
+    const token = localStorage.getItem('token')
+    
+    let userLike = usersLike?.find(id => id === userId)
+
+    const changeLike = async () => {
+        await fetch(`${URL_POSTS}/post/${postId}/like`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        }).then(async response => {
+            response.status === 201 ? setLikePost(true) : setLikePost(false);
+        })
+    }
+
+    if(likePost) {
+        userLike = userId
+    } else {
+        userLike = undefined
+    }
 
     return (
         <>
@@ -43,13 +65,13 @@ function PostComponent({ userId, postData, postId, username, contentPost, imgPos
                 </div>
 
                 <div className="interacoes container">
-                    <button className="btnInt" id="reagir"><i className="material-icons icone-interacoes"><img src={like} alt="ícone curtir" /></i>Reagir</button>
+                    <button className={`btnInt ${userLike !== undefined || likePost ? 'like' : ''}`} id="reagir" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i>Reagir</button>
                     <button className="btnInt" id="comentar"><i className="material-icons icone-interacoes"><img src={comment} alt="ícone comentar" /></i>Comentar</button>
                     <button className="btnInt" id="compartilhar"><i className="material-icons icone-interacoes"><img src={share} alt="ícone compartilhar" /></i>Compartilhar</button>
                 </div>
                     
                 <div className="btnInteracoes d-flex align-items-center">
-                    <button className="btnAction" id="reagir-mobile"><i className="material-icons icone-interacoes"><img src={like} alt="ícone curtir" /></i></button>
+                    <button className={`btnAction ${userLike !== undefined || likePost ? 'like' : ''}`} id="reagir-mobile" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i></button>
                     <button className="btnAction" id="comentar-mobile"><i className="material-icons icone-interacoes"><img src={comment} alt="ícone comentar" /></i></button>
                     <button className="btnAction" id="compartilhar-mobile"><i className="material-icons icone-interacoes"><img src={share} alt="ícone compartilhar" /></i></button>
                 </div>
@@ -57,6 +79,3 @@ function PostComponent({ userId, postData, postId, username, contentPost, imgPos
         </>
     )
 }
-export const Post = memo(PostComponent, (prevProps, nextProps) => {
-    return prevProps.contentPost === nextProps.contentPost
-})

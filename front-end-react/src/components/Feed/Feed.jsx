@@ -4,8 +4,6 @@ import { Spin } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 
-import decode from 'jwt-decode';
-
 import './Feed.css'
 import { Navbar } from '../Navbar'
 import { Sidebar } from '../Sidebar'
@@ -14,11 +12,9 @@ import { Chat } from '../Chat'
 import { Modal } from './Modal'
 
 import userImage1 from './img/img1.jpg'
-import userImage2 from './img/img2.jpg'
 import userImage3 from './img/img3.jpg'
 import { postUpdate } from '../../redux/action';
 import { useModal } from '../../hooks/useModal';
-import { useMemo } from 'react';
 
 export function Feed() {
 
@@ -51,7 +47,6 @@ export function Feed() {
         })
         .then(async response => {
             const data = await response.json()
-            console.log(data)
             setPosts(data);
             setLoading(false);
         })
@@ -62,14 +57,18 @@ export function Feed() {
     }, [location.pathname])
 
     useEffect(() => {
-        getPosts()
-        setNewPost(false)
-    }, [newPost])
+        if(newPost) {
+            getPosts()
+            setNewPost(false)
+        }
+    }, [newPost === true])
 
     useEffect(() => {
-        getPosts()
-        dispatch(postUpdate(false))
-    }, [updatePost])
+        if(updatePost) {
+            getPosts()
+            dispatch(postUpdate(false))
+        }
+    }, [updatePost === true])
 
     return (
         <div className='feed_content'>
@@ -84,6 +83,7 @@ export function Feed() {
                     <Post
                         key={post._id}
                         postData={post.createdAt}
+                        usersLike={post.usersLike}
                         imgIdPost={post.imageId}
                         userId={post.userID[0]._id}
                         postId={post._id}

@@ -1,17 +1,15 @@
 import { useState, useEffect, memo } from 'react';
 
-import decode from 'jwt-decode';
-
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Spin } from 'antd';
 
 import imgUser from './img/user-placeholder.png'
 
-import './Sidebar.css';
 import { Plus, SignOut, User, Users } from 'phosphor-react';
 import { useModal } from '../../hooks/useModal';
-import axios from 'axios';
+
+import './Sidebar.css';
 
 function SidebarComponent({ currentUserImage, currentUserName }, modal) {
 
@@ -45,7 +43,6 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
         }	// reader.onloadend
     }
 
-    const URL_POSTS = process.env.REACT_APP_URL_POSTS;
     const URL_USERS = process.env.REACT_APP_URL_USERS;
 
     const handleSubmit = async () => {
@@ -64,14 +61,12 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
                     }
                 })
         } catch (error) {
-            console.log(error);
+            return;
         }
     };
 
     useEffect(() => {
-
         const userID = localStorage.getItem('user')
-
         fetch(`${URL_USERS}/${userID}`)
             .then(async response => {
                 const data = await response.json()

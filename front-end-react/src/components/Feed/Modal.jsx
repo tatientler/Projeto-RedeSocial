@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-import decode from 'jwt-decode';
 import { Image } from 'phosphor-react';
 import close from './img/close-icon.svg'
 import axios from 'axios';
 import { Spin } from 'antd';
 import { toast } from 'react-toastify';
-
-import './Modal.css'
 import { useModal } from '../../hooks/useModal';
-import { useDispatch } from 'react-redux';
+import './Modal.css'
 
 export function Modal({ postSucess = () => {}}) {
 
@@ -165,7 +162,6 @@ export function Modal({ postSucess = () => {}}) {
             })
 
             .then(async (res) => {
-                console.log(res.data)
                 await fetch(URL_POSTS, {
                     method: "POST",
                     headers: {
@@ -228,7 +224,6 @@ export function Modal({ postSucess = () => {}}) {
             })
 
             .then(async (res) => {
-                console.log(res.data)
                 await fetch(URL_POSTS, {
                     method: "POST",
                     headers: {
