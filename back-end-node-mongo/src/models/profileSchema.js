@@ -13,6 +13,18 @@ const profileSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'postagens'
         }],
+        friends: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }],
+        friendRequestsSent: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }],
+        friendRequestsReceived: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }],
         image: {type: String} //Aqui o arquivo correto será uma imagem. Coloquei String apenas para teste no banco de dados
     }
 )

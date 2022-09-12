@@ -5,6 +5,97 @@
         "version": "1.0.1"
     },
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "userID": {
+                                            "type": "string"
+                                        },
+                                        "profile": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Login autorizado",
+                                        "token": "SZ57K2ZL00000000006717212693889024",
+                                        "userID": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                        "profile": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Login não autorizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não encontrado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/post": {
             "get": {
                 "tags": [
@@ -12,15 +103,9 @@
                 ],
                 "summary": "Lista todos os posts",
                 "description": "Lista todos os posts",
-                "parameters": [
+                "security": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de autorização",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -162,12 +247,9 @@
                 ],
                 "summary": "Criar post",
                 "description": "Criar post",
-                "parameters": [
+                "security": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -290,10 +372,18 @@
                 "description": "Buscar post",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -416,10 +506,18 @@
                 "description": "Atualizar post",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -494,10 +592,18 @@
                 "description": "Deletar post",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -551,10 +657,18 @@
                 "description": "Curtir post caso o usuário ainda não tenha curtido, ou descurtir caso o usuário já tenha curtido",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -627,10 +741,18 @@
                 "description": "Adicionar comentário",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -702,10 +824,27 @@
                 "description": "Editar comentário",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "comment_id",
+                        "description": "ID do comentário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "requestBody": {
@@ -796,10 +935,27 @@
                 "description": "Deletar comentário",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token de acesso",
-                        "required": true
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "comment_id",
+                        "description": "ID do comentário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {
@@ -822,7 +978,7 @@
                             }
                         }
                     },
-                    "404": {
+                    "400": {
                         "description": "Comentário não localizado",
                         "content": {
                             "application/json": {
@@ -861,6 +1017,549 @@
                         }
                     }
                 }
+            }
+        },
+        "/usuarios/{id}/friend_request_send": {
+            "patch": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Enviar solicitação de amizade",
+                "description": "Enviar solicitação de amizade",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do usuário que receberá a solicitação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade enviada com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade enviada com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitação de amizade já enviada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade já enviada"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade já enviada"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Usuário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Você não pode enviar uma solicitação de amizade para você mesmo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Você não pode enviar uma solicitação de amizade para você mesmo"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Você não pode enviar uma solicitação de amizade para você mesmo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao enviar solicitação"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao enviar solicitação"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}/friend_request_accept": {
+            "patch": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Aceitar solicitação de amizade",
+                "description": "Aceitar solicitação de amizade",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do usuário que enviou a solicitação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação aceita com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação aceita com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitação de amizade já enviada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade já enviada"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade já enviada"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Usuário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao aceitar solicitação"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao aceitar solicitação"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}/friend_request_reject": {
+            "patch": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Rejeitar solicitação de amizade",
+                "description": "Rejeitar solicitação de amizade",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do usuário que enviou a solicitação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação rejeitada com Sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação rejeitada com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitação de amizade já enviada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade já enviada"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade já enviada"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Usuário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao rejeitar solicitação"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao rejeitar solicitação"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}/friend_request_cancel": {
+            "patch": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Cancelar solicitação de amizade",
+                "description": "Cancelar solicitação de amizade",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do usuário que recebeu a solicitação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade cancelada com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade cancelada com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitação de amizade não localizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Solicitação de amizade não localizada"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Solicitação de amizade não localizada"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Usuário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao cancelar solicitação"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao cancelar solicitação"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}/friend_remove": {
+            "patch": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Remover amigo",
+                "description": "Remover amigo",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do usuário que será removido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Amigo removido com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Amigo removido com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Amigo não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Amigo não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Amigo não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Usuário não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao remover amigo"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao remover amigo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
