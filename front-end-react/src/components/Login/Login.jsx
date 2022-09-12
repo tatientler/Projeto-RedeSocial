@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import encode from 'jwt-encode'
 import { Navigate } from "react-router-dom";
 import { Spin } from 'antd';
 
@@ -11,9 +10,6 @@ import logoGoogle from './img/logos/google.svg'
 import logoLinkedIn from './img/logos/linkedin.svg'
 
 export function Login({loginTransition = () => {}, transition = false, signUpTransition = () => {}}) {
-
-    const secretId = '#' + Math.floor(Math.random() * 0x1000000).toString(16).padStart(16, '0');
-    const secretToken = '#' + Math.floor(Math.random() * 0x1000000).toString(16).padStart(16, '0');
 
     const [loading, setLoading] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);

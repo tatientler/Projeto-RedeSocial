@@ -8,8 +8,7 @@ import { useModal } from "../../hooks/useModal";
 
 export const Popover = ({ userId, postId, imgIdPost }) => {
 
-    const { openModal, modalType, setModalType, setPostId } = useModal();
-    console.log(postId)
+    const { openModal, setModalType, setPostId } = useModal();
 
     const URL_POSTS = process.env.REACT_APP_URL_POSTS;
 
