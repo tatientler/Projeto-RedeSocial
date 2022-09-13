@@ -96,7 +96,7 @@ class PostController {
     static excluirPost = async (req, res) => {
         const { id } = req.params
 
-        await profile.findOneAndUpdate({post: [{_id: id}]}, {$pull: {post: id}}).exec()
+        await profile.findOneAndUpdate({post: id}, {$pull: {post: id}}).exec()
 
         post.findByIdAndDelete(id, (err) => {
             if(!err) {
