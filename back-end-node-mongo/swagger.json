@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Rede Social - Tera",
-        "version": "1.0.1"
+        "version": "1.1.0"
     },
     "paths": {
         "/login": {
@@ -1032,6 +1032,526 @@
                                     "example": {
                                         "message": "Error - Falha ao excluir comentário"
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Listar perfil dos usuários",
+                "description": "Listar perfil dos usuários",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "ID do usuário"
+                                                    },
+                                                    "user": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "description": "ID do usuário"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "description": "Nome do usuário"
+                                                                },
+                                                                "email": {
+                                                                    "type": "string",
+                                                                    "description": "Email do usuário"
+                                                                },
+                                                                "avatar": {
+                                                                    "type": "string",
+                                                                    "description": "Avatar do usuário"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "Nome do usuário"
+                                                    },
+                                                    "post": [
+                                                        {
+                                                            "type": "array",
+                                                            "description": "Posts do usuário"
+                                                        }
+                                                    ],
+                                                    "friends": [
+                                                        {
+                                                            "type": "array",
+                                                            "description": "Amigos do usuário"
+                                                        }
+                                                    ],
+                                                    "friendsRequestsReceived": [
+                                                        {
+                                                            "type": "array",
+                                                            "description": "Solicitações de amizade recebidas"
+                                                        }
+                                                    ],
+                                                    "friendsRequestsSent": [
+                                                        {
+                                                            "type": "array",
+                                                            "description": "Solicitações de amizade enviadas"
+                                                        }
+                                                    ],
+                                                    "shared_posts": [
+                                                        {
+                                                            "type": "array",
+                                                            "description": "Posts compartilhados"
+                                                        }
+                                                    ],
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "description": "Data de criação do usuário"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "example": {
+                                        "users": [
+                                            {
+                                                "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                                "user": {
+                                                    "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                                    "name": "John Doe",
+                                                    "email": "johndoe@email.com",
+                                                    "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                                                },
+                                                "name": "John Doe",
+                                                "post": [
+                                                    {
+                                                        "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                                        "user": "37d14113-f65c-5561-aadc-416bd13431d9",
+                                                        "text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus.",
+                                                        "usersLike": [
+                                                            "c9f6b022-91b7-564f-8cd8-00ce5e2decda"
+                                                        ],
+                                                        "comments": [],
+                                                        "is_shared": false,
+                                                        "shared_from": null,
+                                                        "created_at": "2020-11-01T00:00:00.000Z"
+                                                    }
+                                                ],
+                                                "friends": [
+                                                    {
+                                                        "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                                        "user": "37d14113-f65c-5561-aadc-416bd13431d9",
+                                                        "name": "John Doe",
+                                                        "email": "johndoe@email.com",
+                                                        "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                                                    }
+                                                ],
+                                                "friendsRequestsReceived": [],
+                                                "friendsRequestsSent": [],
+                                                "shared_posts": [],
+                                                "created_at": "2020-11-01T00:00:00.000Z"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Nenhum perfil encontrado"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Erro interno do servidor"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Cadastrar perfil para o usuário",
+                "description": "Cadastrar perfil para o usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do usuário"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email do usuário"
+                                    },
+                                    "user": {
+                                        "type": "string",
+                                        "description": "ID do usuário"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "John Doe",
+                                "email": "johndoe@email.com",
+                                "user": "5f9f1b9b9b9b9b9b9b9b9b9b"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de sucesso"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Usuário cadastrado com sucesso"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Erro interno do servidor"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}": {
+            "get": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Buscar o perfil do usuário pelo ID",
+                "description": "Buscar o perfil do usuário pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "ID do usuário"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "Nome do usuário"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "description": "Email do usuário"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "description": "Avatar do usuário"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+
+                                    "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                    "user": {
+                                        "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                        "name": "John Doe",
+                                        "email": "johndoe@email.com",
+                                        "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                                    },
+                                    "name": "John Doe",
+                                    "post": [
+                                        {
+                                            "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                            "user": "37d14113-f65c-5561-aadc-416bd13431d9",
+                                            "text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus.",
+                                            "usersLike": [
+                                                "c9f6b022-91b7-564f-8cd8-00ce5e2decda"
+                                            ],
+                                            "comments": [],
+                                            "is_shared": false,
+                                            "shared_from": null,
+                                            "created_at": "2020-11-01T00:00:00.000Z"
+                                        }
+                                    ],
+                                    "friends": [
+                                        {
+                                            "id": "5f9f1b9b9b9b9b9b9b9b9b9b",
+                                            "user": "37d14113-f65c-5561-aadc-416bd13431d9",
+                                            "name": "John Doe",
+                                            "email": "johndoe@email.com",
+                                            "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                                        }
+                                    ],
+                                    "friendsRequestsReceived": [],
+                                    "friendsRequestsSent": [],
+                                    "shared_posts": [],
+                                    "created_at": "2020-11-01T00:00:00.000Z"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Usuário não localizado"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Erro interno do servidor"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Atualizar o perfil do usuário",
+                "description": "Atualizar o perfil do usuário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do usuário"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "John Doe"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de sucesso"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Perfil do usuário atualizado com sucesso"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Error - Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Error - Perfil não localizado"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Deletar o perfil do usuário",
+                "description": "Deletar o perfil do usuário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucess",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de sucesso"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Perfil do usuário excluído com sucesso"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Error - Mensagem de erro"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "message": "Error - Perfil não localizado"
                                 }
                             }
                         }

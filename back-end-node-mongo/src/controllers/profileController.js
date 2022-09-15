@@ -37,15 +37,24 @@ class ProfileController {
     static listarUsuariosPorId = (req, res) => {
         const { id } = req.params
 
-        profile.findById(id)
-            .populate('post')
-            .exec((err, profile) => {
-                if(err) {
-                    res.status(400).send({message: `${err.message} - ID do usuário não localizado`})
-                } else {
-                    res.status(200).send(profile)
-                }
-            })
+        try {
+            profile.findById(id)
+                .populate('post')
+                .populate('user', '-password -createdAt -profile')
+                .populate('friends', '-password -createdAt -profile')
+                .populate('friendRequestsSent', '-password -createdAt -profile')
+                .populate('friendRequestsReceived', '-password -createdAt -profile')
+                .exec((err, profile) => {
+                    if(err) {
+                        res.status(404).send({message: `${err.message} - Usuário não localizado`})
+                    } else {
+                        res.status(200).send(profile)
+                    }
+                })
+        } catch (error) {
+            res.status(500).send({message: error.message})
+        }
+
     }
 
     static cadastrarUsuario = (req, res) => {
@@ -55,7 +64,7 @@ class ProfileController {
             if(err) {
                 res.status(500).send({message: `${err.message} - Falha ao cadastrar usuário`})
             } else {
-                res.status(201).send(usuario.toJSON())
+                res.status(201).send({message: "Usuário cadastrado com sucesso"})
             }
         })
     }
@@ -65,9 +74,9 @@ class ProfileController {
 
         profile.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if(!err) {
-                res.status(200).send({message: 'Usuário atualizado com sucesso'})
+                res.status(200).send({message: 'Perfil do usuário atualizado com sucesso'})
             } else {
-                res.status(400).send({message: `${err.message} - ID do usuário não localizado`})
+                res.status(404).send({message: `${err.message} - Perfil não localizado`})
             }
         })
     }
@@ -196,9 +205,9 @@ class ProfileController {
 
         profile.findByIdAndDelete(id, (err) => {
             if(!err) {
-                res.status(200).send({message: 'Usuário excluído com sucesso'})
+                res.status(200).send({message: 'Perfil do usuário excluído com sucesso'})
             } else {
-                res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
+                res.status(404).send({message: `${err.message} - Perfil não localizado`})
             }
         })
     }
