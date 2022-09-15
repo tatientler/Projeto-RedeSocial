@@ -4,10 +4,10 @@ import mongoose from "mongoose";
 
 const profileSchema = new mongoose.Schema(
     {
-        user: [{
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
-        }],
+        },
         name: {type: String, required: true},
         post: [{
             type: mongoose.Schema.Types.ObjectId,
