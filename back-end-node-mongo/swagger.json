@@ -40,7 +40,7 @@
                                         "token": {
                                             "type": "string"
                                         },
-                                        "userID": {
+                                        "user": {
                                             "type": "string"
                                         },
                                         "profile": {
@@ -50,7 +50,7 @@
                                     "example": {
                                         "message": "Login autorizado",
                                         "token": "SZ57K2ZL00000000006717212693889024",
-                                        "userID": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                        "user": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
                                         "profile": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921"
                                     }
                                 }
@@ -116,11 +116,11 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "postID": {
+                                        "id": {
                                             "type": "string",
                                             "description": "ID do post"
                                         },
-                                        "userID": {
+                                        "user": {
                                             "type": "array",
                                             "description": "Dados do usuário",
                                             "items": {
@@ -186,14 +186,22 @@
                                                 }
                                             }
                                         },
+                                        "is_shared": {
+                                            "type": "boolean",
+                                            "description": "Indica se o post é compartilhado"
+                                        },
+                                        "shared_from": {
+                                            "type": "object",
+                                            "description": "Dados do post compartilhado"
+                                        },
                                         "createdAt": {
                                             "type": "date",
                                             "description": "Data de criação do post"
                                         }
                                     },
                                     "example": {
-                                        "postID": "5e9f8f8f8f8f8f8f8f8f8f8",
-                                        "userID": [
+                                        "id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "user": [
                                             {
                                                 "_id": "5e9f8f8f8f8f8f8f8f8f8f8",
                                                 "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
@@ -214,6 +222,8 @@
                                                 "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
                                             }
                                         ],
+                                        "is_shared": false,
+                                        "shared_from": null,
                                         "createdAt": "2020-01-01T00:00:00.000Z"
                                     }
                                 }
@@ -262,7 +272,7 @@
                                         "type": "string",
                                         "description": "ID do post"
                                     },
-                                    "userID": {
+                                    "user": {
                                         "type": "string",
                                         "description": "ID do usuário autor do post"
                                     },
@@ -398,7 +408,7 @@
                                             "type": "string",
                                             "description": "ID do post"
                                         },
-                                        "userID": {
+                                        "user": {
                                             "type": "string",
                                             "description": "ID do usuário autor do post"
                                         },
@@ -443,14 +453,22 @@
                                                 }
                                             }
                                         },
+                                        "is_shared": {
+                                            "type": "boolean",
+                                            "description": "Indica se o post foi compartilhado"
+                                        },
+                                        "shared_from": {
+                                            "type": "object",
+                                            "description": "Dados do post compartilhado"
+                                        },
                                         "createdAt": {
                                             "type": "date",
                                             "description": "Data de criação do post"
                                         }
                                     },
                                     "example": {
-                                        "postID": "5e9f8f8f8f8f8f8f8f8f8f8",
-                                        "userID": [
+                                        "id": "5e9f8f8f8f8f8f8f8f8f8f8",
+                                        "user": [
                                             {
                                                 "_id": "5e9f8f8f8f8f8f8f8f8f8f8",
                                                 "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
@@ -471,6 +489,8 @@
                                                 "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod nisi eu nisl finibus, euismod euismod nisi eu nisl finibus."
                                             }
                                         ],
+                                        "is_shared": false,
+                                        "shared_from": null,
                                         "createdAt": "2020-01-01T00:00:00.000Z"
                                     }
                                 }
@@ -1545,6 +1565,288 @@
                                     },
                                     "example": {
                                         "message": "Error - Falha ao remover amigo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/{id}/shared": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Compartilhar post",
+                "description": "Compartilhar post",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do post que será compartilhado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto para o post compartilhado",
+                                        "example": "Texto de exemplo",
+                                        "required": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post compartilhado com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post compartilhado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao compartilhar post"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao compartilhar post"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Editar compartilhamento",
+                "description": "Editar compartilhamento",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do compartilhamento que será editado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "description": "Texto para o post compartilhado",
+                                        "example": "Texto de exemplo",
+                                        "required": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Compartilhamento editado com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Compartilhamento editado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao editar compartilhamento"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao editar compartilhamento"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Remover compartilhamento",
+                "description": "Remover compartilhamento",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID do compartilhamento que será removido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Compartilhamento excluído com sucesso"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Compartilhamento excluído com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não localizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Post não localizado"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Post não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Falha ao excluir compartilhamento"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Error - Falha ao excluir compartilhamento"
                                     }
                                 }
                             }

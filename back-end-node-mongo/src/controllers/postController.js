@@ -6,7 +6,8 @@ import mongoose from "mongoose";
 class PostController {
     static listarPostagens = (req, res) => {
         post.find()
-        .populate('userID', '-password -createdAt -profile')
+        .populate('user', '-password -createdAt -profile')
+        .populate('shared_from')
             .exec((error, post) => {
                 if (error) {
                     res.status(500).json({
@@ -40,7 +41,7 @@ class PostController {
 
             if(text != '' && image != '') {
                 let postagem = new post({
-                    userID: currentUser._id,
+                    user: currentUser._id,
                     text: req.body.text,
                     image: req.body.image,
                     imageId: req.body.imageId,
@@ -51,7 +52,7 @@ class PostController {
 
             } else if (text != '' && image == '') {
                 let postagem = new post({
-                    userID: currentUser._id,
+                    user: currentUser._id,
                     text: text,
                     createdAt: new Date()
                 })
@@ -60,7 +61,7 @@ class PostController {
 
             } else if ( text == '' && image != '') {
                 let postagem = new post({
-                    userID: currentUser._id,
+                    user: currentUser._id,
                     image: image,
                     imageId: imageId,
                     createdAt: new Date()
@@ -82,7 +83,7 @@ class PostController {
     }
 
     static atualizarPost = (req, res) => {
-        const { id } = req.params.id
+        const { id } = req.params
 
         post.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (!err) {
@@ -180,7 +181,7 @@ class PostController {
             const findComment = comments.map(comment => comment).find(comment => comment.id == comment_id)
 
             if(!error) {
-                if(findComment != undefined && post.userID[0]._id == userId || findComment.user == userId) {
+                if(findComment != undefined && post.user._id == userId || findComment?.user == userId) {
                     post.updateOne({$pull: {comments: findComment}}).exec()
                     res.status(200).send({message: 'Comentário excluído com sucesso'})
                 } else {
@@ -190,6 +191,74 @@ class PostController {
                 res.status(500).send({message: `${error.message} - Falha ao excluir comentário`})
             }
         })
+    }
+
+    static compartilharPost = async (req, res) => {
+        const { id } = req.params
+        const { userId: currentUser } = req
+        const { text } = req.body
+
+        try {
+            const getPost = await post.findById(id)
+            
+            if(!getPost) {
+                res.status(404).send({message: 'Post não localizado'})
+            }
+            
+            new post({
+                user: currentUser,
+                text: text ?? null,
+                is_shared: true,
+                shared_from: getPost._id,
+                createdAt: new Date()
+            }).save()
+
+            profile.findOneAndUpdate({user: currentUser}, {$push: {shared_posts: getPost._id}}).exec()
+
+            res.status(201).send({message: 'Post compartilhado com sucesso'})
+        } catch (error) {
+            res.status(500).send({message: `${error.message} - Falha ao compartilhar post`})
+        }
+    }
+
+    static excluirCompartilhamento = async (req, res) => {
+        const { id } = req.params
+        const { userId: currentUser } = req
+
+        try {
+            const getPost = await post.findById(id)
+
+            if(!getPost) {
+                res.status(404).send({message: 'Post não localizado'})
+            }
+
+            await post.findByIdAndDelete(id)
+
+            profile.findOneAndUpdate({user: currentUser}, {$pull: {shared_posts: getPost.shared_from._id}}).exec()
+
+            res.status(200).send({message: 'Compartilhamento excluído com sucesso'})
+        } catch (error) {
+            res.status(500).send({message: `${error.message} - Falha ao excluir compartilhamento`})
+        }
+    }
+
+    static editarCompartilhamento = async (req, res) => {
+        const { id } = req.params
+        const { text } = req.body
+
+        try {
+            const getPost = await post.findById(id)
+
+            if(!getPost) {
+                res.status(404).send({message: 'Post não localizado'})
+            }
+
+            await post.findByIdAndUpdate(id, {text: text})
+
+            res.status(200).send({message: 'Compartilhamento editado com sucesso'})
+        } catch (error) {
+            res.status(500).send({message: `${error.message} - Falha ao editar compartilhamento`})
+        }
     }
 }
 

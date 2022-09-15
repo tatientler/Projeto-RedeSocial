@@ -4,16 +4,18 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
     {
-        postID: {type: mongoose.Schema.Types.ObjectId},
-        userID: [{
+        id: {type: mongoose.Schema.Types.ObjectId},
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
-        }],
+        },
         text: {type: String},
         image: {type: String},
         imageId: {type: String},
         usersLike: {type: Array},
         comments: {type: Array},
+        is_shared: {type: Boolean, default: false},
+        shared_from: {type: Object, ref: 'postagens', default: null},
         createdAt: {type: Date, default: new Date()},
     }
 )

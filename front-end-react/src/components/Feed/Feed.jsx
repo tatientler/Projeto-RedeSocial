@@ -85,12 +85,12 @@ export function Feed() {
                         postData={post.createdAt}
                         usersLike={post.usersLike}
                         imgIdPost={post.imageId}
-                        userId={post.userID[0]._id}
+                        userId={post.user?._id}
                         postId={post._id}
-                        username={post.userID[0]?.name}
+                        username={post.user?.name}
                         contentPost={post.text != undefined ? post.text : ''}
                         imgPost={post.image != undefined ? post.image : false}
-                        imgUser={post.userID[0]?.avatar} />).reverse()
+                        imgUser={post.user?.avatar} />).reverse()
                     }
                     <Post username={"John Doe"} imgUser={userImage1} contentPost={`Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos." - Isaac Newton`} />
                 </section>
