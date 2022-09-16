@@ -9,15 +9,14 @@ const userSchema = new mongoose.Schema(
         name: {type: String, required: true},
         email: {type: String, required: true},
         password: {type: String, required: false},
-        profile: [{
+        profile: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'usuarios'
-        }],
-        createdAt: {type: Date, default: new Date()}
+        },
+        created_at: {type: Date, default: new Date()}
     }
 )
 
 const users = mongoose.model('users', userSchema)
-
 
 export default users
