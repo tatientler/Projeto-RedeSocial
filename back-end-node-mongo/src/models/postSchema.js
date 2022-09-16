@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema(
         comments: {type: Array},
         is_shared: {type: Boolean, default: false},
         shared_from: {type: Object, ref: 'postagens', default: null},
-        createdAt: {type: Date, default: new Date()},
+        created_at: {type: Date, default: new Date()},
     }
 )
 

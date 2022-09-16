@@ -96,6 +96,590 @@
                 }
             }
         },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Listar usuários",
+                "description": "Listar usuários",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listagem de usuários",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "profile": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "example":
+                                    [
+                                        {
+                                            "id": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                            "avatar": "http://localhost:3333/files/5ad28698-058c-5cf5-ac2c-1f089b9ad2d4.jpg",
+                                            "name": "John Doe",
+                                            "email": "johndoe@email.com",
+                                            "profile": 
+                                                {
+                                                    "id": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921",
+                                                    "name": "John Doe",
+                                                    "post": [],
+                                                    "friendsRequestsReceived": [],
+                                                    "friendsRequestsSent": [],
+                                                    "friends": [],
+                                                    "shared_posts": [],
+                                                    "created_at": "2020-05-06T20:00:00.000Z"
+                                                },
+                                            "created_t": "2020-05-06T20:00:00.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro interno do servidor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Criar usuário",
+                "description": "Criar usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "avatar": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "profile": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "post": {
+                                                    "type": "array"
+                                                },
+                                                "friendsRequestsReceived": {
+                                                    "type": "array"
+                                                },
+                                                "friendsRequestsSent": {
+                                                    "type": "array"
+                                                },
+                                                "friends": {
+                                                    "type": "array"
+                                                },
+                                                "shared_posts": {
+                                                    "type": "array"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário criado com sucesso",
+                                        "user": {
+                                            "id": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                            "name": "John Doe",
+                                            "email": "johndoe@email.com",
+                                            "avatar": "http://localhost:3333/files/5ad28698-058c-5cf5-ac2c-1f089b9ad2d4.jpg"
+                                        },
+                                        "profile": {
+                                            "id": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921",
+                                            "name": "John Doe",
+                                            "post": [],
+                                            "friendsRequestsReceived": [],
+                                            "friendsRequestsSent": [],
+                                            "friends": [],
+                                            "shared_posts": [],
+                                            "created_at": "2020-05-06T20:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Email já cadastrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Email já cadastrado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro interno do servidor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Buscar usuário por id",
+                "description": "Buscar usuário por id",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "avatar": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "date"
+                                                }
+                                            }
+                                        },
+                                        "profile": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "post": {
+                                                    "type": "array"
+                                                },
+                                                "friendsRequestsReceived": {
+                                                    "type": "array"
+                                                },
+                                                "friendsRequestsSent": {
+                                                    "type": "array"
+                                                },
+                                                "friends": {
+                                                    "type": "array"
+                                                },
+                                                "shared_posts": {
+                                                    "type": "array"
+                                                },
+                                                "created_at": {
+                                                    "type": "date"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "example": {
+                                        "user": {
+                                            "id": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                            "name": "John Doe",
+                                            "email": "johndoe@email.com",
+                                            "avatar": "http://localhost:3333/files/5ad28698-058c-5cf5-ac2c-1f089b9ad2d4.jpg",
+                                            "created_at": "2020-05-06T20:00:00.000Z"
+                                        },
+                                        "profile": {
+                                            "id": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921",
+                                            "name": "John Doe",
+                                            "post": [],
+                                            "friendsRequestsReceived": [],
+                                            "friendsRequestsSent": [],
+                                            "friends": [],
+                                            "shared_posts": [],
+                                            "created_at": "2020-05-06T20:00:00.000Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Atualizar usuário",
+                "description": "Atualizar usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário atualizado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Atualizar avatar do usuário",
+                "description": "Atualizar avatar do usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Avatar atualizado com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deletar usuário",
+                "description": "Deletar usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário excluído com sucesso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/post": {
             "get": {
                 "tags": [
@@ -1301,6 +1885,11 @@
                 ],
                 "summary": "Buscar o perfil do usuário pelo ID",
                 "description": "Buscar o perfil do usuário pelo ID",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -1430,6 +2019,11 @@
                 ],
                 "summary": "Atualizar o perfil do usuário",
                 "description": "Atualizar o perfil do usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -1506,6 +2100,11 @@
                 ],
                 "summary": "Deletar o perfil do usuário",
                 "description": "Deletar o perfil do usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",

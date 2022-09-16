@@ -11,9 +11,14 @@ const SECRET = (process.env.SECRET)
 class UserController {
     static listarUsuarios = (req, res) => {
         users.find()
+        .select('-password')
         .populate('profile', '-user')
             .exec((err, login) => {
-                res.status(200).json(login)
+                if (!err) {
+                    res.status(200).json(login)
+                } else {
+                    res.status(500).json({ message: err.message })
+                }
             })
     }
 
@@ -21,9 +26,11 @@ class UserController {
       const { id } = req.params
       
       users.findById(id)
+        .select('-password')
+        .populate('profile', '-user')
         .exec((err, users) => {
           if(err) {
-            res.status(400).send({message: `${err.message} - Usuário não localizado`})
+            res.status(404).send({message: `${err.message} - Usuário não localizado`})
           } else {
             res.status(200).json(users)
           }
@@ -52,18 +59,26 @@ class UserController {
           // salvar essas informações da nova usuária no banco de dados
           const savedUser = await newUser.save()
           const savedProfile = await newProfile.save()
+
           users.findOneAndUpdate(
             {_id: savedUser._id}, {$push: {profile: savedProfile}}
             ).exec()
           profile.findOneAndUpdate({_id: savedProfile._id}, {$push: {user: savedUser}}).exec()
       
-            const token = jwt.sign({ email: req.body.email }, SECRET)
+          const token = jwt.sign({ email: req.body.email }, SECRET)
+
+          const userMapper = {
+            _id: savedUser._id,
+            name: savedUser.name,
+            email: savedUser.email,
+            avatar: savedUser.avatar,
+          }
 
           // enviar uma resposta da requisição
-          res.status(200).send({
+          res.status(201).send({
             "message": "User adicionado com sucesso",
-            savedUser,
-            savedProfile,
+            user: userMapper,
+            profile: savedProfile,
             token
           })
       
@@ -85,7 +100,7 @@ class UserController {
           if(!err) {
             res.status(200).send({message: 'Usuário atualizado com sucesso'})
           } else {
-            res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
+            res.status(404).send({message: `${err.message} - Usuário não localizado`})
           }
         })
       }
@@ -97,9 +112,9 @@ class UserController {
 
         users.findByIdAndUpdate(id, {$set: {avatar: userAvatar.url}}, (err) => {
           if(!err) {
-            res.status(200).send({message: 'Imagem atualizada com sucesso'})
+            res.status(200).send({message: 'Avatar atualizado com sucesso'})
           } else {
-            res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
+            res.status(404).send({message: `${err.message} - Usuário não localizado`})
           }
         })
       }
@@ -111,7 +126,7 @@ class UserController {
           if(!err) {
             res.status(200).send({message: 'Usuário excluído com sucesso'})
           } else {
-            res.status(500).send({message: `${err.message} - ID do usuário não localizado`})
+            res.status(404).send({message: `${err.message} - Usuário não localizado`})
           }
         })
       }
