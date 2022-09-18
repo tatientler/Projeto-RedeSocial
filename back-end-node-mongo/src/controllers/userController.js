@@ -1,10 +1,9 @@
 import users from "../models/userSchema.js";
-import bcrypt from "bcrypt"
+import post from "../models/postSchema.js";
 import profile from '../models/profileSchema.js'
+import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import cloudinary from '../utils/cloudinary.js'
-import upload from '../utils/multer.js' 
-import path from "path"
 
 const SECRET = (process.env.SECRET)
 
@@ -119,16 +118,24 @@ class UserController {
         })
       }
 
-      static excluirUsuario = (req, res) => {
-        const id = req.params.id
+      static excluirUsuario = async (req, res) => {
+        const { id } = req.params
 
-        users.findByIdAndDelete(id, (err) => {
-          if(!err) {
-            res.status(200).send({message: 'Usuário excluído com sucesso'})
-          } else {
-            res.status(404).send({message: `${err.message} - Usuário não localizado`})
+        try {
+          const userExists = await users.findById(id)
+
+          if(!userExists) {
+            return res.status(404).send({message: 'Usuário não localizado'})
           }
-        })
+
+          await users.findByIdAndDelete(id)
+          await profile.findOneAndDelete({user: id})
+          await post.deleteMany({user: id})
+
+          res.status(200).send({message: 'Usuário excluído com sucesso'})
+        } catch (error) {
+          res.status(500).send({message: error.message})
+        }
       }
 }
 

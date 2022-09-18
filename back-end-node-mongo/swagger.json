@@ -40,7 +40,7 @@
                                         "token": {
                                             "type": "string"
                                         },
-                                        "user": {
+                                        "userID": {
                                             "type": "string"
                                         },
                                         "profile": {
@@ -50,7 +50,7 @@
                                     "example": {
                                         "message": "Login autorizado",
                                         "token": "SZ57K2ZL00000000006717212693889024",
-                                        "user": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
+                                        "userID": "5ad28698-058c-5cf5-ac2c-1f089b9ad2d4",
                                         "profile": "9ffcfd13-2e27-50f8-81ac-f55a62bc4921"
                                     }
                                 }
@@ -672,6 +672,24 @@
                                     },
                                     "example": {
                                         "message": "Usuário não localizado"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Erro ao excluir usuário"
                                     }
                                 }
                             }

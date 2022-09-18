@@ -8,6 +8,10 @@ const profileSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
         },
+        bio: {
+            type: String,
+            default: ''
+        },
         name: {type: String, required: true},
         post: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -29,8 +33,8 @@ const profileSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'postagens'
         }],
-        created_at: {type: Date, default: new Date()},
-        image: {type: String} //Aqui o arquivo correto será uma imagem. Coloquei String apenas para teste no banco de dados
+        image: {type: String}, //Aqui o arquivo correto será uma imagem. Coloquei String apenas para teste no banco de dados
+        created_at: {type: Date, default: new Date()}
     }
 )
 
