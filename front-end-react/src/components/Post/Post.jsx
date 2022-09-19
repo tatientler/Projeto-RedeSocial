@@ -1,22 +1,24 @@
-import './Post.css'
-import comment from './img/comment.svg'
-import share from './img/share.svg'
 import { DotsThreeVertical, ThumbsUp } from 'phosphor-react'
 import { Popover } from './Popover'
 import { useState } from 'react'
 
-export function Post({ userId, postData, postId, usersLike, username, contentPost, imgPost, imgIdPost, imgUser }) {
+import comment from './img/comment.svg'
+import share from './img/share.svg'
+
+import './Post.css'
+
+export function Post({ userId, postId, usersLike, username, contentPost, imgPost, imgIdPost, imgUser }) {
 
     const [popoverOpen, setPopoverOpen] = useState(false);
     const [likePost, setLikePost] = useState(false)
 
-    const URL_POSTS = "https://back-end-node-rede-social-tera.herokuapp.com"
+    const URL_POSTS = process.env.REACT_APP_URL_POSTS
     const token = localStorage.getItem('token')
     
     let userLike = usersLike?.find(id => id === userId)
 
     const changeLike = async () => {
-        await fetch(`${URL_POSTS}/post/${postId}/like`, {
+        await fetch(`${URL_POSTS}/${postId}/like`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

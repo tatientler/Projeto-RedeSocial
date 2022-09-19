@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Image } from 'phosphor-react';
-import close from './img/close-icon.svg'
-import axios from 'axios';
 import { Spin } from 'antd';
+import { Image } from 'phosphor-react';
 import { toast } from 'react-toastify';
 import { useModal } from '../../hooks/useModal';
+
+import axios from 'axios';
+import close from './img/close-icon.svg'
+
 import './Modal.css'
 
-export function Modal({ postSucess = () => {}}) {
+export function Modal({ postSuccess = () => {}}) {
 
     const { modalType, postId } = useModal();
 
@@ -78,7 +80,7 @@ export function Modal({ postSucess = () => {}}) {
             });
 
             closeModal()
-            postSucess(true)
+            postSuccess(true)
             setLoading(false)
             setTextInput('')
         })
@@ -126,7 +128,7 @@ export function Modal({ postSucess = () => {}}) {
                 setData({image: null})
                 closeModal()
                 setPreviewSource(undefined)
-                postSucess(true)
+                postSuccess(true)
                 setLoading(false)
                 setTextInput('')
             })
@@ -171,7 +173,7 @@ export function Modal({ postSucess = () => {}}) {
                 setData({image: null})
                 closeModal()
                 setPreviewSource(undefined)
-                postSucess(true)
+                postSuccess(true)
                 setLoading(false)
                 setTextInput('')
             })
@@ -217,7 +219,7 @@ export function Modal({ postSucess = () => {}}) {
                 setData({image: null})
                 closeModal()
                 setPreviewSource(undefined)
-                postSucess(true)
+                postSuccess(true)
                 setLoading(false)
                 setTextInput('')
             })

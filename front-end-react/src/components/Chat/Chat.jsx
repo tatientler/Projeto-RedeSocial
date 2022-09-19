@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import './Chat.css';
 
 import Arrow from './img/arrow-icon.svg';

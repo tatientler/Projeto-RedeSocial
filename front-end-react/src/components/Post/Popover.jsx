@@ -1,20 +1,17 @@
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { postUpdate } from "../../redux/action";
-import { useState } from "react";
 import { Spin } from "antd";
+import { postUpdate } from "../../redux/action";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../hooks/useModal";
+import { useState } from "react";
 
-export const Popover = ({ userId, postId, imgIdPost }) => {
+export const Popover = ({ userId, postId }) => {
 
     const { openModal, setModalType, setPostId } = useModal();
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const URL_POSTS = process.env.REACT_APP_URL_POSTS;
-
-    const [loading, setLoading] = useState(false);
-
-    const dispatch = useDispatch();
 
     async function postDelete() {
         setLoading(true)
@@ -36,8 +33,8 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
                 draggable: true,
                 progress: undefined,
         });
-        setLoading(false)
-        dispatch(postUpdate(true))
+            setLoading(false)
+            dispatch(postUpdate(true))
         })
         .catch(() => {
             toast.error('Erro ao deletar post', {
@@ -49,7 +46,7 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
                 draggable: true,
                 progress: undefined,
         });
-        setLoading(false)
+            setLoading(false)
         })
     }
 
@@ -57,8 +54,13 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
         <div key={postId + userId} className='popover-options'>
             <button
                 type='button'
-                onClick={() => {setModalType("edit"); setPostId(postId); openModal()}}
-            >Editar post</button>
+                onClick={() => {
+                    setModalType("edit");
+                    setPostId(postId);
+                    openModal()
+                }}
+            >Editar post
+            </button>
             <button
                 className={`popover_option-delete ${loading ? 'disabled' : ''}`}
                 type='button'
@@ -75,7 +77,7 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
         </div>
     ]
 
-    const buttons = userId == localStorage.getItem('user') ? allButtons : noAllButtons
+    const buttons = userId === localStorage.getItem('user') ? allButtons : noAllButtons
 
     return (
         <div className='popover'>

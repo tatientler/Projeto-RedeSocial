@@ -15,10 +15,10 @@ export function UserScreen () {
     const { modalOpen } = useModal()
     const [user, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [postSucess, setPostSucess] = useState(false)
-    const [editBio, setEditBio] = useState(false)
     const [bioInput, setBioInput] = useState('')
+    const [editBio, setEditBio] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [postSucess, setPostSucess] = useState(false)
 
     const location = useLocation()
 
@@ -124,7 +124,7 @@ export function UserScreen () {
         <>  
             {
                 modalOpen &&
-                <Modal postSucess={setPostSucess} />
+                <Modal postSuccess={setPostSucess} />
             }
             <Navbar />
             <div className="userScreen_content">
