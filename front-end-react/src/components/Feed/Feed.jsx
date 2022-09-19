@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'
-import { Spin } from 'antd';
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer } from 'react-toastify';
-
-import './Feed.css'
-import { Navbar } from '../Navbar'
-import { Sidebar } from '../Sidebar'
-import { Post } from '../Post'
 import { Chat } from '../Chat'
 import { Modal } from './Modal'
+import { Navbar } from '../Navbar'
+import { Post } from '../Post'
+import { Sidebar } from '../Sidebar'
+import { Spin } from 'antd';
+import { ToastContainer } from 'react-toastify';
+import { postUpdate } from '../../redux/action';
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom'
+import { useModal } from '../../hooks/useModal';
+import { useState, useEffect } from 'react';
 
 import userImage1 from './img/img1.jpg'
 import userImage3 from './img/img3.jpg'
-import { postUpdate } from '../../redux/action';
-import { useModal } from '../../hooks/useModal';
+
+import './Feed.css'
 
 export function Feed() {
 
@@ -23,7 +23,7 @@ export function Feed() {
 
     const [newPost, setNewPost] = useState(false);
 
-    const { modalOpen, openModal } = useModal();
+    const { modalOpen } = useModal();
 
     const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -88,8 +88,8 @@ export function Feed() {
                         userId={post.user?._id}
                         postId={post._id}
                         username={post.user?.name}
-                        contentPost={post.text != undefined ? post.text : ''}
-                        imgPost={post.image != undefined ? post.image : false}
+                        contentPost={post.text !== undefined ? post.text : ''}
+                        imgPost={post.image !== undefined ? post.image : false}
                         imgUser={post.user?.avatar} />).reverse()
                     }
                     <Post username={"John Doe"} imgUser={userImage1} contentPost={`Tenho a impressão de ter sido uma criança brincando à beira-mar, divertindo-me em descobrir uma pedrinha mais lisa ou uma concha mais bonita que as outras, enquanto o imenso oceano da verdade continua misterioso diante de meus olhos." - Isaac Newton`} />
@@ -98,7 +98,7 @@ export function Feed() {
             </main>
             {
                 modalOpen &&
-                <Modal postSucess={setNewPost} />
+                <Modal postSuccess={setNewPost} />
             }
             
             <ToastContainer />

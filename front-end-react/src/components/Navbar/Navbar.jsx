@@ -1,7 +1,6 @@
+import { memo } from 'react';
 import { useState } from 'react';
-
-import { Link, Navigate } from 'react-router-dom';
-import { useModal } from '../../hooks/useModal';
+import { Link } from 'react-router-dom';
 
 import logo from './img/logo.png'
 import search from './img/search-icon.svg'
@@ -9,20 +8,18 @@ import notification from './img/notification-icon.svg'
 import circle from './img/circle-icon.svg'
 import group from './img/group-icon.svg'
 import message from './img/message-icon.svg'
-
 import calendar from './img/calendar-icon.svg'
 import file from './img/file-code-icon.svg'
 import bag from './img/shopping-bag-icon.svg'
 import exit from './img/exit-icon.svg'
 
 import './Navbar.css';
-import { memo } from 'react';
 
 function NavbarComponent() {
 
     const [open, setOpen] = useState(false)
 
-        open ? document.body.classList.add('chat-extended') :  document.body.classList.remove('chat-extended')
+    open ? document.body.classList.add('chat-extended') : document.body.classList.remove('chat-extended')
 
     return (
         <>

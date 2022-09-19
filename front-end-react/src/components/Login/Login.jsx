@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Navigate } from "react-router-dom";
 import { Spin } from 'antd';
 
-import './Login.css';
 import logoInstagram from './img/logos/instagram.svg'
 import logoFacebook from './img/logos/facebook.svg'
 import logoGoogle from './img/logos/google.svg'
 import logoLinkedIn from './img/logos/linkedin.svg'
+
+import './Login.css';
 
 export function Login({loginTransition = () => {}, transition = false, signUpTransition = () => {}}) {
 
@@ -45,15 +46,17 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                 if(data.token) {
                     setIsLoggedIn(true)
                     setError(false)
-                    const criptId = data.userID
-                    const criptToken = data.token
-                    const userProfile = data.profile
-                    localStorage.setItem('token', criptToken)
-                    localStorage.setItem('user', criptId)
-                    localStorage.setItem('profile', userProfile)
+                    
+                    const user_id = data.userID
+                    const user_token = data.token
+                    const user_profile = data.profile
+
+                    localStorage.setItem('token', user_token)
+                    localStorage.setItem('user', user_id)
+                    localStorage.setItem('profile', user_profile)
+
                     return;
                 }
-
                 setError(true)
                 setLoading(false)
             })
@@ -95,15 +98,17 @@ export function Login({loginTransition = () => {}, transition = false, signUpTra
                     const data = await response.json()
                     if(data.token){
                         setError(false)
-                        const criptId = data.savedUser._id
-                        const criptToken = data.token
-                        const userProfile = data.savedProfile._id
-                        localStorage.setItem('token', criptToken)
-                        localStorage.setItem('user', criptId)
-                        localStorage.setItem('profile', userProfile)
+                        const user_id = data.savedUser._id
+                        const user_token = data.token
+                        const user_profile = data.savedProfile._id
+
+                        localStorage.setItem('user', user_id)
+                        localStorage.setItem('token', user_token)
+                        localStorage.setItem('profile', user_profile)
                         
                         setLoading(false)
                         setIsLoggedIn(true)
+                        
                         return;
                     }
     

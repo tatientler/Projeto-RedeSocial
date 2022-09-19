@@ -11,20 +11,18 @@ import { useModal } from '../../hooks/useModal';
 
 import './Sidebar.css';
 
-function SidebarComponent({ currentUserImage, currentUserName }, modal) {
+function SidebarComponent() {
 
-    const { openModal, setModalType } = useModal();
-
+    const [previewSource, setPreviewSource] = useState();
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
-    const location = useLocation();
-
     const [data, setData] = useState({
         name: "",
         image: ""
     });
 
-    const [previewSource, setPreviewSource] = useState();
+    const { openModal, setModalType } = useModal();
+    const location = useLocation();
 
     const handleChange = (name) => (e) => {
         const value = name === "image" ? e.target.files[0] : e.target.value;
@@ -40,7 +38,7 @@ function SidebarComponent({ currentUserImage, currentUserName }, modal) {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setPreviewSource(reader.result);
-        }	// reader.onloadend
+        }
     }
 
     const URL_USERS = process.env.REACT_APP_URL_USERS;
