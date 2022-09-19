@@ -6,6 +6,7 @@ import comment from './img/comment.svg'
 import share from './img/share.svg'
 
 import './Post.css'
+import { useEffect } from 'react'
 
 export function Post({ userId, postId, usersLike, username, contentPost, imgPost, imgIdPost, imgUser }) {
 
@@ -14,8 +15,9 @@ export function Post({ userId, postId, usersLike, username, contentPost, imgPost
 
     const URL_POSTS = process.env.REACT_APP_URL_POSTS
     const token = localStorage.getItem('token')
+    const currentUser = localStorage.getItem('user')
     
-    let userLike = usersLike?.find(id => id === userId)
+    let userLike = usersLike?.find(id => id === currentUser)
 
     const changeLike = async () => {
         await fetch(`${URL_POSTS}/${postId}/like`, {
@@ -27,12 +29,6 @@ export function Post({ userId, postId, usersLike, username, contentPost, imgPost
         }).then(async response => {
             response.status === 201 ? setLikePost(true) : setLikePost(false);
         })
-    }
-
-    if(likePost) {
-        userLike = userId
-    } else {
-        userLike = undefined
     }
 
     return (
@@ -67,13 +63,13 @@ export function Post({ userId, postId, usersLike, username, contentPost, imgPost
                 </div>
 
                 <div className="interacoes container">
-                    <button className={`btnInt ${userLike !== undefined || likePost ? 'like' : ''}`} id="reagir" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i>Reagir</button>
+                    <button className={`btnInt ${userLike === currentUser || likePost ? 'like' : ''}`} id="reagir" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i>Reagir</button>
                     <button className="btnInt" id="comentar"><i className="material-icons icone-interacoes"><img src={comment} alt="ícone comentar" /></i>Comentar</button>
                     <button className="btnInt" id="compartilhar"><i className="material-icons icone-interacoes"><img src={share} alt="ícone compartilhar" /></i>Compartilhar</button>
                 </div>
                     
                 <div className="btnInteracoes d-flex align-items-center">
-                    <button className={`btnAction ${userLike !== undefined || likePost ? 'like' : ''}`} id="reagir-mobile" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i></button>
+                    <button className={`btnAction ${userLike === currentUser || likePost ? 'like' : ''}`} id="reagir-mobile" onClick={() => changeLike()} ><i className="material-icons icone-interacoes"><ThumbsUp size={28} weight="fill" /></i></button>
                     <button className="btnAction" id="comentar-mobile"><i className="material-icons icone-interacoes"><img src={comment} alt="ícone comentar" /></i></button>
                     <button className="btnAction" id="compartilhar-mobile"><i className="material-icons icone-interacoes"><img src={share} alt="ícone compartilhar" /></i></button>
                 </div>
