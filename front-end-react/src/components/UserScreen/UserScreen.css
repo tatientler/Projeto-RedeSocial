@@ -35,8 +35,8 @@
 
 .userScreen__bio {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 2rem;
 
     height: 103px;
     
@@ -45,9 +45,40 @@
     border: 2px solid #6E30F2;
 }
 
+.userScreen__bio h3,
+.userScreen__fotos h3,
+.userScreen__posts h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #221772;
+}
+
+.userScreen__bio__edit {
+    flex-grow: 1;
+}
+.userScreen__bio__edit textarea {
+
+    width: 90%;
+
+    border: none;
+    border-bottom: 2px solid #6E30F2;
+    outline: none;
+}
+
+.userScreen__bio__edit__button {
+    width: 70px;
+    border: none;
+    border-radius: 10px;
+    background-color: #6E30F2;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
 .userScreen__bio p {
     font-size: 20px;
-
+    flex-grow: 1;
     margin: 0;
 }
 
@@ -59,11 +90,6 @@
     padding: 15px;
     
     border: 2px solid #6E30F2;
-}
-
-.userScreen__fotos h3 {
-    font-size: 20px;
-    color: #221772;
 }
 
 .fotos__container {
@@ -88,11 +114,6 @@
     padding: 15px;
     
     border: 2px solid #6E30F2;
-}
-
-.userScreen__posts h3 {
-    font-size: 20px;
-    color: #221772;
 }
 
 @media screen and (max-width: 800px) {

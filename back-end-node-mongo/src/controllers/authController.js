@@ -22,7 +22,7 @@ class AuthController {
                 })
             }
             const userID = user._id
-            const profile = user.profile[0]
+            const profile = user.profile
             const token = jwt.sign({ id: userID }, SECRET)
     
             res.status(200).send({

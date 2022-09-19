@@ -16,10 +16,6 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
 
     const dispatch = useDispatch();
 
-    const api = axios.create({
-        baseURL: `https://back-end-python-tera.herokuapp.com`
-    })
-
     async function postDelete() {
         setLoading(true)
         const token = localStorage.getItem('token')
@@ -31,44 +27,29 @@ export const Popover = ({ userId, postId, imgIdPost }) => {
             }
         })
         .then(() => {
-            if(imgIdPost != null) {
-                api.delete(`/photos/photo/${imgIdPost}`)
-                .then(() => {
-                    toast.success('Post excluído com sucesso!', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                    dispatch(postUpdate(true));
-                })
-                .catch(() => {
-                    toast.error('Erro ao excluir post!', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                })
-            } else {
-                toast.success('Post excluído com sucesso!', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                dispatch(postUpdate(true));
-            }
-            setLoading(false)
+            toast.success('Post deletado com sucesso!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+        });
+        setLoading(false)
+        dispatch(postUpdate(true))
+        })
+        .catch(() => {
+            toast.error('Erro ao deletar post', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+        });
+        setLoading(false)
         })
     }
 

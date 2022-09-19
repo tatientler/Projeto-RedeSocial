@@ -12,6 +12,7 @@ export function Modal({ postSucess = () => {}}) {
     const { modalType, postId } = useModal();
 
     const [data, setData] = useState({
+        name: "",
         image: null
       });
 
@@ -32,19 +33,16 @@ export function Modal({ postSucess = () => {}}) {
       setData({ ...data, [name]: value });
     };
 
-    let formData = new FormData();
-    formData.append("image", data.image);
-
     const previewFile = (file) => {
       const reader = new FileReader();
-      reader.readAsDataURL_POSTS(file);
+      reader.readAsDataURL(file);
       reader.onloadend = () => {
         setPreviewSource(reader.result);
       }
     }
 
     useEffect(() => {
-        if(textInput == '' && data.image == null) {
+        if(textInput === '' && data.image == null) {
             setEmptyForm(true);
         } else {
             setEmptyForm(false);
@@ -104,76 +102,59 @@ export function Modal({ postSucess = () => {}}) {
 
         if(textInput.length > 0 && data.image == null) {
             setLoading(true)
-            await fetch(URL_POSTS, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
-                'user': localStorage.getItem('user')
-            },
-            body: JSON.stringify({
+            
+            await axios.post(`${URL_POSTS}`, {
                 text: textInput
-        }),
-            credentials: "same-origin"
-        })
-        .then(() => {
-            toast.success('Post adicionado com sucesso!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-
-            setData({image: null})
-            closeModal()
-            setPreviewSource(undefined)
-            postSucess(true)
-            setLoading(false)
-            setTextInput('')
-        })
-
-        .catch(() => 
-            toast.error('Erro ao adicionar post', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
             })
-        )
-        .finally(() => setLoading(false))
-    }
-        else if(textInput.length == 0 && data.image != null) {
+
+            .then(() => {
+                toast.success('Post adicionado com sucesso!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                setData({image: null})
+                closeModal()
+                setPreviewSource(undefined)
+                postSucess(true)
+                setLoading(false)
+                setTextInput('')
+            })
+
+            .catch(() => 
+                toast.error('Erro ao adicionar post', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            )
+            .finally(() => setLoading(false))
+        }
+        else if(textInput.length === 0 && data.image != null) {
 
             setLoading(true)
-            const api = axios.create({
-                baseURL_POSTS: "https://back-end-python-tera.herokuapp.com",
-               })
 
-            await api.post('/photos', {uploadedFile: formData.get('image')}, {
+            await axios.post(URL_POSTS, {
+                image: data.image
+            }, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + token,
                 }
-            })
-
-            .then(async (res) => {
-                await fetch(URL_POSTS, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({
-                        image: res.data.URL_POSTS,
-                        imageId: res.data.id,
-                        user: localStorage.getItem('user')
-                    })
-                })
             })
 
             .then(() => {
@@ -189,7 +170,6 @@ export function Modal({ postSucess = () => {}}) {
 
                 setData({image: null})
                 closeModal()
-                event.target.postContent.value = ""
                 setPreviewSource(undefined)
                 postSucess(true)
                 setLoading(false)
@@ -213,32 +193,16 @@ export function Modal({ postSucess = () => {}}) {
             setLoading(true)
             setEmptyForm(false)
 
-            const api = axios.create({
-                baseURL_POSTS: "https://back-end-python-tera.herokuapp.com",
-               })
-
-            await api.post('/photos', {uploadedFile: formData.get('image')}, {
+            await axios.post(URL_POSTS, {
+                text: textInput,
+                image: data.image
+            }, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'multipart/form-data'
                 }
             })
 
-            .then(async (res) => {
-                await fetch(URL_POSTS, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({
-                        text: textInput,
-                        image: res.data.URL_POSTS,
-                        imageId: res.data.id,
-                        user: localStorage.getItem('user')
-                    }),
-                    credentials: "same-origin"
-                })
-            })
             .then(() => {
                 toast.success('Post adicionado com sucesso!', {
                     position: "top-right",
@@ -289,7 +253,7 @@ export function Modal({ postSucess = () => {}}) {
                         <div className='modal__input'>
                             <input value={textInput} onChange={inputChange} name="postContent" type="text" placeholder='No que está pensando?' />
                             <label htmlFor="photo"> <Image size={32} /> </label>
-                            <input type="file" accept='image/*' name="uploadedFile" id="photo" onChange={handleChange('image')} />
+                            <input type="file" accept='image/*' name="image" id="photo" onChange={handleChange('image')} />
                         </div>
                             {previewSource && <img className='moda__form-imagem' src={previewSource} alt="imagem selecionada" />}
                         <div className='modal__button'>

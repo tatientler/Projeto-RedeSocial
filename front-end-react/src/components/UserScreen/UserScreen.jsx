@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { useLocation } from 'react-router-dom'
+import { Spin } from 'antd';
 
-import { Navbar } from "../Navbar"
 import { Post } from "../Post"
-import { ToastContainer } from "react-toastify";
+import { Navbar } from "../Navbar"
 import { Modal } from "../Feed/Modal";
+import { PencilSimple } from "phosphor-react";
 import { useModal } from "../../hooks/useModal";
+import { toast, ToastContainer } from "react-toastify";
 
 import "./UserScreen.css";
 
@@ -14,6 +16,9 @@ export function UserScreen () {
     const [user, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [postSucess, setPostSucess] = useState(false)
+    const [editBio, setEditBio] = useState(false)
+    const [bioInput, setBioInput] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const location = useLocation()
 
@@ -23,6 +28,7 @@ export function UserScreen () {
     useEffect(() => {
         const token = localStorage.getItem('token')
         const userID = localStorage.getItem('user')
+
         fetch(`${URL_USERS}/${userID}`, {
             method: 'GET',
             headers: {
@@ -32,12 +38,15 @@ export function UserScreen () {
         })
         .then(async response => {
             const data = await response.json()
-            setUser(data)})
+            setUser(data)
+            setBioInput(data.profile.bio)
+        })
     }, [location.pathname])
 
     const getPosts = async () => {
         const token = localStorage.getItem('token')
         const profileID = localStorage.getItem('profile')
+
         await fetch(`${URL_PROFILE}/${profileID}`, {
             method: 'GET',
             headers: {
@@ -51,6 +60,57 @@ export function UserScreen () {
         })
     }
 
+    async function profileUpdate() {
+        const token = localStorage.getItem('token')
+        const profileID = localStorage.getItem('profile')
+
+        setLoading(true)
+
+        await fetch(`${URL_PROFILE}/${profileID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                bio: user.profile.bio !== bioInput ? bioInput : user.profile.bio
+            })
+        })
+        .then(() => {
+            toast.success('Biografia atualizada com sucesso!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setEditBio(false)
+            setUser(
+                {
+                    ...user,
+                    profile: {
+                        ...user.profile,
+                        bio: bioInput
+                    }
+                }
+            )
+        })
+        .catch(() => {
+            toast.error('Erro ao atualizar biografia', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        })
+        .finally(() => setLoading(false))
+    }
+
     useEffect(() => {
         getPosts()
         setPostSucess(false)
@@ -59,7 +119,6 @@ export function UserScreen () {
     useEffect(() => {
         getPosts()
     }, [location.pathname])
-
 
     return (
         <>  
@@ -75,7 +134,27 @@ export function UserScreen () {
                 </div>
 
                 <div className="userScreen__bio">
-                    <p>Biografia</p>
+                    <h3>Biografia</h3>
+                    {
+                        editBio ?
+                        <div className="userScreen__bio__edit">
+                            <textarea defaultValue={user.profile.bio} onChange={(event) => setBioInput(event.target.value)} type="text" placeholder="Editar biografia" />
+                        </div>
+                        : <p>{user?.profile?.bio}</p>
+                    }
+                    {
+                        editBio ? 
+                        <button
+                            className="userScreen__bio__edit__button"
+                            onClick={profileUpdate}
+                            disabled={loading}
+                        >
+                            {
+                                loading ? <Spin /> : 'Salvar'
+                            }
+                        </button>
+                        : <PencilSimple onClick={() => setEditBio(true)} cursor={"pointer"} color={"#221772"} size={25} weight="fill" /> 
+                    }
                 </div>
 
                 <div className="userScreen__fotos">

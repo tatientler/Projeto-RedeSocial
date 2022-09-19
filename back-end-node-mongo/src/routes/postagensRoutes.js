@@ -1,13 +1,14 @@
 import express from "express";
 import PostController from "../controllers/postController.js";
 import AuthController from "../controllers/authController.js";
+import upload from "../utils/multer.js";
 
 const router = express.Router()
 
 router
     .get('/post', AuthController.checkToken, PostController.listarPostagens)
     .get('/post/:id', AuthController.checkToken, PostController.listarPostagensPorId)
-    .post('/post', AuthController.checkToken, PostController.cadastrarPost)
+    .post('/post', AuthController.checkToken, upload.single("image"), PostController.cadastrarPost)
     .post('/post/:id/shared', AuthController.checkToken, PostController.compartilharPost)
     .put('/post/:id', AuthController.checkToken, PostController.atualizarPost)
     .patch('/post/:id/like', AuthController.checkToken, PostController.curtirPost)

@@ -2,6 +2,7 @@ import post from "../models/postSchema.js";
 import user from "../models/userSchema.js";
 import profile from "../models/profileSchema.js";
 import mongoose from "mongoose";
+import cloudinary from "../utils/cloudinary.js";
 
 class PostController {
     static listarPostagens = (req, res) => {
@@ -34,40 +35,54 @@ class PostController {
     static cadastrarPost = async (req, res) => {
 
         const { userId } = req
-        const { text, image, imageId } = req.body
-
+        const { text } = req.body
+        
+        console.log(req.file)
+        console.log(req.body)
+        const file = req.file?.path
+        console.log(file)
+        
         try {
             const currentUser = await user.findById(userId)
 
-            if(text != '' && image != '') {
+            if(text != '' && file != undefined) {
+
+                const postImage = await cloudinary.uploader.upload(file);
+
                 let postagem = new post({
                     user: currentUser._id,
                     text: req.body.text,
-                    image: req.body.image,
-                    imageId: req.body.imageId,
+                    image: postImage.url,
+                    imageId: postImage.public_id,
                     createdAt: new Date()
                 })
-                const savedPost = await postagem.save()
-                profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-            } else if (text != '' && image == '') {
+                const savedPost = await postagem.save()
+                profile.findOneAndUpdate({user: currentUser._id}, {$push: {post: savedPost}}).exec()
+
+            } else if (text != '' && file == undefined) {
                 let postagem = new post({
                     user: currentUser._id,
                     text: text,
                     createdAt: new Date()
                 })
+
                 const savedPost = await postagem.save()
                 profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
 
-            } else if ( text == '' && image != '') {
+            } else if ( text == '' && file != undefined) {
+                
+                const postImage = await cloudinary.uploader.upload(file);
+
                 let postagem = new post({
                     user: currentUser._id,
-                    image: image,
-                    imageId: imageId,
+                    image: postImage.url,
+                    imageId: postImage.public_id,
                     createdAt: new Date()
                 })
+
                 const savedPost = await postagem.save()
-                profile.findOneAndUpdate({user: [{_id: currentUser._id}]}, {$push: {post: savedPost}}).exec()
+                profile.findOneAndUpdate({user: currentUser._id}, {$push: {post: savedPost}}).exec()
 
             } else {
                 throw new Error()
@@ -99,13 +114,27 @@ class PostController {
 
         await profile.findOneAndUpdate({post: id}, {$pull: {post: id}}).exec()
 
-        post.findByIdAndDelete(id, (err) => {
-            if(!err) {
-                res.status(200).send({message: 'Post excluído com sucesso'})
-            } else {
-                res.status(500).send({message: `${err.message} - Falha ao excluir post`})
-            }
-        })
+        const getPost = await post.findById(id)
+
+        if(getPost.imageId != undefined) {
+            await cloudinary.uploader.destroy(getPost.imageId)
+
+            getPost.remove((err) => {
+                if (!err) {
+                    res.status(200).send({ message: "Post excluído com sucesso" })
+                } else {
+                    res.status(500).send({ message: `${err.message} - Falha ao excluir o post` })
+                }
+            })
+        } else {
+            getPost.remove((err) => {
+                if (!err) {
+                    res.status(200).send({ message: "Post excluído com sucesso" })
+                } else {
+                    res.status(500).send({ message: `${err.message} - Falha ao excluir o post` })
+                }
+            })
+        }
     }
 
     static curtirPost = async (req, res) => {
